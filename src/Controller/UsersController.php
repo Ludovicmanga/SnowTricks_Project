@@ -17,4 +17,14 @@ class UsersController extends AbstractController
             'controller_name' => 'UsersController',
         ]);
     }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login(): Response
+    {
+        return $this->render('users/login.html.twig', [
+            'controller_name' => 'UsersController',
+        ]);
+    }
 }
