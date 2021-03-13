@@ -2,19 +2,50 @@
 
 {% block title %}Hello TrickController!{% endblock %}
 
+{% block stylesheets %}
+
+#trickHero {
+    background: url(../../public/img/snowfigure.jpg); 
+    height: 1000px; 
+    border: solid black 1px;
+}
+
+#mediaSection {
+    display: flex; 
+}
+
+.media {
+    border: solid black 1px; 
+}
+
+.media img {
+    height: 180px; 
+    border: solid black 1px;
+}
+
+
+
+{% endblock %}
+
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/projetSnowTricks/src/Controller/TrickController.php'|file_link(0) }}">src/Controller/TrickController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/projetSnowTricks/templates/trick/index.html.twig'|file_link(0) }}">templates/trick/index.html.twig</a></code></li>
-    </ul>
+<div id="trickHero"></div>
+<div id="mediaSection">
+    <div class="media" id="media1"><img src="../../public/img/snowfigure.jpg"></div>
+    <div class="media" id="media2"><img src="../../public/img/snowfigure.jpg"></div>
+    <div class="media" id="media3"><img src="../../public/img/snowfigure.jpg"></div>
+    <div class="media" id="media4"><img src="../../public/img/snowfigure.jpg"></div>
+    <div class="media" id="media5"><img src="../../public/img/snowfigure.jpg"></div>
 </div>
+
+<p>
+    Le snowboard freestyle (anglicisme) ou la planche acrobatique de neige1 (ou artistique) est la pratique de la planche à neige de figures, apparue dans les années 1980 et héritière du skateboard. 
+    Cette discipline de planche acrobatique consiste pour ses pratiquants à exécuter des figures libres lors de sauts pratiqués à l'aide de structures diverses utilisées comme tremplin. 
+    Elle a principalement lieu dans des zones spéciales dédiées comme les snowparks ou en milieu urbain. Elle peut aussi être pratiquée en hors-piste (backcountry en anglais). 
+    Cette discipline est considérée comme un sport extrême.
+
+    Le snowboardeur qui pratique le snowboard freestyle est appelé freestyleur (freestyler), ou plus généralement rideur (rider). 
+    Les épreuves de snowboard freestyle disputées en Coupe du monde, aux championnats du monde et aux Jeux olympiques sont le half-pipe, le slopestyle, le big air et le snowboard-cross...
+</p>
+
 {% endblock %}
