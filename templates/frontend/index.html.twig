@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+#homeHero {
+    height: 2000px; 
+    background: url(../../public/img/homeHero.jpg); 
+    width: 100%;
+}
+
+#homeHero h1 {
+    font-size : 3em;
+    text-align : center; 
+    vertaical-align: center;  
+}
+
+.row {
+    display: flex;
+    margin-right : auto; 
+    margin-left: auto; 
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+    width : 60%;
+}
+
+.row h2 {
+    text-align: center;
+}
+
+.trick {
+    margin-left: 5px; 
+    margin-right: 5px;
+    border: solid black 2px;
+}
+
+.trick img {
+    height: 180px;
+    border: solid black 0.5px;
+}
+
+#loadMoreButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+#loadMoreButtonContainer button {
+    height: 80px;
+    width: 120px;
+    border-radius: 20px;
+}
+
+{% endblock %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+    <div id="homeHero">
+        <h1>Site communautaire Snowtricks</h1> 
+    </div>
+    <div class="row" id="row1">
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+    </div>
+     <div class="row" id="row1">
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+    </div>
+      <div class="row" id="row1">
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+        <div class="trick" id="trick1">
+            <img src="../../public/img/snowfigure.jpg">
+            <h2>Back slide</h2>
+        </div>
+    </div>
+
+    <div>
+        <div id="loadMoreButtonContainer">
+            <button>Load more</button>
+        </div>
+    </div>
+
+{% endblock %}
+

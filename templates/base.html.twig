@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        
+        <title>{% block title %}{% endblock %}</title>
+
+        {% block javascripts %}
+            
+        {% endblock %}
+
+        <style>
+        {% block stylesheets %}{% endblock %}
+
+        #mainNavBar ul {
+            list-style: none; 
+            background: #bd1e43; 
+            padding: 0; 
+            margin: 0; 
+            text-align: right; 
+        }
+
+        #mainNavBar li {
+            display: inline-block; 
+        }
+        
+        #mainNavBar a {
+            text-decoration: none; 
+            color: #fff; 
+            width: 70px; 
+            display: block; 
+            padding: 25px 20px;
+            text-transfor: uppercase;
+            font-weight: bold; 
+            font-family: arial; 
+            text-align: center;
+            font-size: 14px;
+        }
+
+        #mainNavBar a:hover {
+            background: #353640; 
+        }
+
+        </style>
+
+    </head>
+    <body>
+        <nav id="mainNavBar">
+                <ul>
+                    <li><a href=#>Home</a></li>
+                    <li><a href=#>Sign up</a></li>
+                    <li><a href=#>Log In</a></li>
+                </ul>
+        </nav>
+            {% block body %}{% endblock %}
+        <footer>
+            <p>&copy Copyright : Ludovic Manga</p>
+        </footer>
+    </body>
+</html>
