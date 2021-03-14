@@ -27,4 +27,14 @@ class UsersController extends AbstractController
             'controller_name' => 'UsersController',
         ]);
     }
+
+    /**
+     * @Route("/forgottenPassword", name="forgottenPassword")
+     */
+    public function forgottenPassword(): Response
+    {
+        return $this->render('users/forgottenPassword.html.twig', [
+            'controller_name' => 'UsersController',
+        ]);
+    }
 }
