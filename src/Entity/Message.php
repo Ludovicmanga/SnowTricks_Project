@@ -33,7 +33,7 @@ class Message
     private $messageContent;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
     private $creationDate;
 
