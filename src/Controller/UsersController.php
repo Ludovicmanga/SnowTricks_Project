@@ -37,4 +37,14 @@ class UsersController extends AbstractController
             'controller_name' => 'UsersController',
         ]);
     }
+
+    /**
+     * @Route("/resetPassword", name="resetPassword")
+     */
+    public function resetPassword(): Response
+    {
+        return $this->render('users/resetPassword.html.twig', [
+            'controller_name' => 'UsersController',
+        ]);
+    }
 }
