@@ -9,12 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class FrontendController extends AbstractController
 {
     /**
-     * @Route("/frontend", name="frontend")
+     * @Route("/home", name="home")
      */
-    public function index(): Response
+    public function home(): Response
     {
-        return $this->render('frontend/index.html.twig', [
+        return $this->render('frontend/home.html.twig', [
             'controller_name' => 'FrontendController',
         ]);
     }
+
 }
