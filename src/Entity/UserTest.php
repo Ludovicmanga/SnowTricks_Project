@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use App\Repository\UserTestRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Entity(repositoryClass=UserTestRepository::class)
  */
-class User
+class UserTest
 {
     /**
      * @ORM\Id
@@ -31,8 +31,6 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $password;
-
-    public $confirm_password;  
 
     public function getId(): ?int
     {
