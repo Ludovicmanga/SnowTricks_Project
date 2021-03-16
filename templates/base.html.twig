@@ -52,8 +52,10 @@
 
                     {% if not app.user %}
                     <li><a href=" {{ path('security_login') }}">Se connecter</a></li>
+                    
                     {% else %}
                     <li><a href=" {{ path('security_logout') }}">Se déconnecter</a></li>
+
                     {% endif %}
                 </ul>
         </nav>

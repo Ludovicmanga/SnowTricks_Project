@@ -3,39 +3,55 @@
 {% block stylesheets %}
 
 #homeHero {
-    height: 2000px; 
-    background: url(../../public/img/homeHero.jpg); 
-    width: 100%;
+    height: 1000px; 
+    background: url(img/homeHero.jpg) no-repeat center;
+    background-size: 80%;
 }
 
 #homeHero h1 {
     font-size : 3em;
     text-align : center; 
-    vertaical-align: center;  
+    vertical-align: center;  
 }
 
 .row {
     display: flex;
-    margin-right : auto; 
-    margin-left: auto; 
+    margin-right : 30px; 
+    margin-left: 30px; 
     margin-top: 10px; 
     margin-bottom: 10px; 
     width : 60%;
-}
-
-.row h2 {
-    text-align: center;
 }
 
 .trick {
     margin-left: 5px; 
     margin-right: 5px;
     border: solid black 2px;
+    border-radius: 10px;
 }
 
 .trick img {
     height: 180px;
     border: solid black 0.5px;
+}
+
+.trickContentContainer {
+    display: flex;
+    justify-content: space-between; 
+}
+
+.iconContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.titleContainer {
+    margin-left: 46px;
+}
+
+.icon {
+    margin-right: 15px;
 }
 
 #loadMoreButtonContainer {
@@ -53,65 +69,215 @@
 
 {% endblock %}
 
+{% block head %}
+
+{% endblock %}
+
 {% block title %}{% endblock %}
 
 {% block body %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 
     <div id="homeHero">
         <h1>Site communautaire Snowtricks</h1> 
     </div>
     <div class="row" id="row1">
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
      <div class="row" id="row1">
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
       <div class="row" id="row1">
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="trick" id="trick1">
-            <img src="../../public/img/snowfigure.jpg">
-            <h2>Back slide</h2>
+            <img src="img/snowfigure.jpg">
+            <div class="trickContentContainer">
+                <div class="titleContainer">
+                    <h2>Back slide</h2>
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="penIcon icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
