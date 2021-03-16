@@ -47,9 +47,14 @@
     <body>
         <nav id="mainNavBar">
                 <ul>
-                    <li><a href=#>Home</a></li>
-                    <li><a href=#>Sign up</a></li>
-                    <li><a href=#>Log In</a></li>
+                    <li><a href=#>Accueil</a></li>
+                    <li><a href=#>S'inscrire</a></li>
+
+                    {% if not app.user %}
+                    <li><a href=" {{ path('security_login') }}">Se connecter</a></li>
+                    {% else %}
+                    <li><a href=" {{ path('security_logout') }}">Se déconnecter</a></li>
+                    {% endif %}
                 </ul>
         </nav>
             {% block body %}{% endblock %}
