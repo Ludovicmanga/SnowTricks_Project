@@ -48,9 +48,10 @@
         <nav id="mainNavBar">
                 <ul>
                     <li><a href=#>Accueil</a></li>
-                    <li><a href=#>S'inscrire</a></li>
-
+                    
+                    
                     {% if not app.user %}
+                    <li><a href=" {{ path('security_registration') }}">S'inscrire</a></li>
                     <li><a href=" {{ path('security_login') }}">Se connecter</a></li>
                     
                     {% else %}
