@@ -16,9 +16,9 @@
 
 .row {
     display: flex;
-    margin-right : 30px; 
-    margin-left: 30px; 
-    margin-top: 10px; 
+    margin-right : 300px; 
+    margin-left: 550px; 
+    margin-top: 50px; 
     margin-bottom: 10px; 
     width : 60%;
 }
@@ -83,348 +83,257 @@
         <h1>Site communautaire Snowtricks</h1> 
     </div>
     <div class="row" id="row1">
+        {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-
         </div>
+        
+        
+        
+       {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-            
         </div>
+
+        {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-            
         </div>
+
+        {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-            
         </div>
     </div>
+
     <div class="row" id="row1">
+        {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-
         </div>
+        
+        
+        
+       {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-            
         </div>
+
+        {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-            
         </div>
+
+        {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-            
         </div>
     </div>
+
     <div class="row" id="row1">
+        {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-
         </div>
+        
+        
+        
+       {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-            
         </div>
+
+        {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-            
         </div>
+
+        {# foreach tricks as trick #} 
         <div class="trick" id="trick1">
-            <a href="#"><img src="img/snowfigure.jpg">
-
-            {% if not app.user %}
-
-            <div class="titleContainer">
-                    <h2>Back slide</h2>
-                </div>
-
-            {% else %}
-
+            <a href="#"><img src="img/snowfigure.jpg"></a>{# trick.image #}
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>Back slide</h2>
                 </div>
-                <div class="iconContainer">
-                    <div class="trashIcon icon">
-                        <a href="#"><i class="fas fa-trash"></i></a>
+                {% if app.user %}
+                    <div class="iconContainer">
+                        <div class="trashIcon icon">
+                            <a href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="penIcon icon">
+                            <a href="#"><i class="fas fa-pen"></i></a>
+                        </div>
                     </div>
-                    <div class="penIcon icon">
-                        <a href="#"><i class="fas fa-pen"></i></a>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-
-            {% endif %}
-            
         </div>
     </div>
-    <div>
+    
         <div id="loadMoreButtonContainer">
             <button>Load more</button>
         </div>
