@@ -20,7 +20,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/trickCreation", name="trickCreation")
+     * @Route("/trick/create", name="trickCreation")
      */
     public function createTrick(Request $request, EntityManagerInterface $manager)
      {
@@ -49,4 +49,15 @@ class TrickController extends AbstractController
              'formTrickCreation' => $form->createView()
          ]); 
      }
+
+    /**
+    * @Route("/update/trick/{id}", name="trickUpdate")
+    */
+    public function updateTrick($id) {
+        $trick = $this->getDoctrine()->getRepository(Trick::class)->find($id); 
+
+        return $this->render('trick/update.html.twig', [
+            'trick' => $trick
+        ]); 
+    }
 }
