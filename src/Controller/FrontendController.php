@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Trick;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FrontendController extends AbstractController
 {
@@ -13,8 +14,24 @@ class FrontendController extends AbstractController
      */
     public function home(): Response
     {
+        $trick = $this->getDoctrine()->getRepository(Trick::class)->findAll(); 
+
         return $this->render('frontend/home.html.twig', [
-            'controller_name' => 'FrontendController',
+            'trick' => $trick,
+            'controller_name' => 'FrontendController'
+        ]);
+    }
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function test(): Response
+    {
+        $trick = $this->getDoctrine()->getRepository(Trick::class)->findAll(); 
+
+        return $this->render('frontend/test.html.twig', [
+            'trick' => $trick,
+            'controller_name' => 'FrontendController'
         ]);
     }
 
