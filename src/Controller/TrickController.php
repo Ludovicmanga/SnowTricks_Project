@@ -60,4 +60,16 @@ class TrickController extends AbstractController
             'trick' => $trick
         ]); 
     }
+
+    /**
+    * @Route("/delete/trick/{id}", name="trick_delete")
+    */
+    public function deleteTrick(Trick $trick): RedirectResponse  
+    {
+        $em = $this->getDoctrine->getManager(); 
+        $em->remove($trick); 
+        $em->flush();
+        
+        return $this->redirectToRoute('home'); 
+    }
 }
