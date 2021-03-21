@@ -20,9 +20,7 @@ class Trick
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *          min=2, 
-     * )
+     * @Assert\Length(min=2)
      */
     private $name;
 
