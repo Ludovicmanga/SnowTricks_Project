@@ -39,7 +39,7 @@ class TrickController extends AbstractController
                 if($form->isSubmitted() && $form->isValid()) {
                     $trick->setCreationDate(new \DateTime()); 
 
-                    $manager->persist($article); 
+                    $manager->persist($trick); 
                     $manager->flush(); 
 
                     return $this->redirectToRoute('trick'); 
