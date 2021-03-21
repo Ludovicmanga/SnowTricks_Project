@@ -13,15 +13,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/trick", name="trick")
+     * @Route("show/trick/{id}", name="trick_show")
      */
-    public function displayTrick(): Response
+    public function showTrick($id): Response
     {
-        return $this->render('trick/index.html.twig');
+        $repo = $this->getDoctrine()->getRepository(Trick::class); 
+         $trick = $repo->find($id); 
+
+        return $this->render('trick/show.html.twig', [
+            'trick' => $trick
+        ]);
     }
 
     /**
-     * @Route("/trick/create", name="trickCreation")
+     * @Route("/trick/create", name="trick_create")
      */
     public function createTrick(Request $request, EntityManagerInterface $manager)
      {
@@ -55,7 +60,8 @@ class TrickController extends AbstractController
     * @Route("/update/trick/{id}", name="trick_update")
     */
     public function updateTrick($id) {
-        $trick = $this->getDoctrine()->getRepository(Trick::class)->find($id); 
+         $repo = $this->getDoctrine()->getRepository(Trick::class); 
+         $trick = $repo->find($id); 
 
         return $this->render('trick/update.html.twig', [
             'trick' => $trick
