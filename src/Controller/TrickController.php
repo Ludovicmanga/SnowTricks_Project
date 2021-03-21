@@ -66,7 +66,7 @@ class TrickController extends AbstractController
     */
     public function deleteTrick(Trick $trick): RedirectResponse  
     {
-        $em = $this->getDoctrine->getManager(); 
+        $em = $this->getDoctrine()->getManager(); 
         $em->remove($trick); 
         $em->flush();
         
