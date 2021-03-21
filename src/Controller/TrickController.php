@@ -52,7 +52,7 @@ class TrickController extends AbstractController
      }
 
     /**
-    * @Route("/update/trick/{id}", name="trickUpdate")
+    * @Route("/update/trick/{id}", name="trick_update")
     */
     public function updateTrick($id) {
         $trick = $this->getDoctrine()->getRepository(Trick::class)->find($id); 
