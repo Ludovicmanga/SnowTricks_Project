@@ -81,7 +81,7 @@
         <h1>Site communautaire Snowtricks</h1> 
     </div>
     <div class="row" id="row1">
-        {% for trick in trick %} 
+        {% for trick in trick|slice(0, 4) %} 
             <div class="trick" id="trick">
                 <a href="#"><img src="{{ trick.image }}" ></a>
                 <div class="trickContentContainer">
@@ -101,4 +101,50 @@
                 </div>
             </div>
         {% endfor %}
+    </div>
+    <div class="row" id="row1">
+        {% for trick in trick|slice(0, 4) %} 
+            <div class="trick" id="trick">
+                <a href="#"><img src="{{ trick.image }}" ></a>
+                <div class="trickContentContainer">
+                    <div class="titleContainer">
+                        <h2>{{ trick.name }}</h2>
+                    </div>
+                    {% if app.user %}
+                        <div class="iconContainer">
+                            <div class="trashIcon icon">
+                                <a onclick="return confirm('attention, cela va supprimer l\'article')" href=# class="delete"><i class="fas fa-trash"></i></a>
+                            </div>
+                            <div class="penIcon icon">
+                                <a href="#"><i class="fas fa-pen"></i></a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row" id="row1">
+        {% for trick in trick|slice(0, 4) %} 
+            <div class="trick" id="trick">
+                <a href="#"><img src="{{ trick.image }}" ></a>
+                <div class="trickContentContainer">
+                    <div class="titleContainer">
+                        <h2>{{ trick.name }}</h2>
+                    </div>
+                    {% if app.user %}
+                        <div class="iconContainer">
+                            <div class="trashIcon icon">
+                                <a onclick="return confirm('attention, cela va supprimer l\'article')" href=# class="delete"><i class="fas fa-trash"></i></a>
+                            </div>
+                            <div class="penIcon icon">
+                                <a href="#"><i class="fas fa-pen"></i></a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+        
 {% endblock %}
