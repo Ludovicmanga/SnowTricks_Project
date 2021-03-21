@@ -16,8 +16,8 @@
 
 .row {
     display: flex;
-    margin-right : 300px; 
-    margin-left: 550px; 
+    margin-right : 200px; 
+    margin-left: 200px; 
     margin-top: 50px; 
     margin-bottom: 10px; 
     width : 60%;
@@ -94,7 +94,7 @@
                                 <a onclick="return confirm('attention, cela va supprimer l\'article')" href=" {{ path('trick_delete', {"id": trick.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
                             </div>
                             <div class="penIcon icon">
-                                <a href="#"><i class="fas fa-pen"></i></a>
+                                <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
                             </div>
                         </div>
                     {% endif %}
@@ -116,7 +116,7 @@
                                 <a onclick="return confirm('attention, cela va supprimer l\'article')" href=" {{ path('trick_delete', {"id": trick.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
                             </div>
                             <div class="penIcon icon">
-                                <a href="#"><i class="fas fa-pen"></i></a>
+                                <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
                             </div>
                         </div>
                     {% endif %}
@@ -138,7 +138,7 @@
                                 <a onclick="return confirm('attention, cela va supprimer l\'article')" href=" {{ path('trick_delete', {"id": trick.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
                             </div>
                             <div class="penIcon icon">
-                                <a href="#"><i class="fas fa-pen"></i></a>
+                                <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
                             </div>
                         </div>
                     {% endif %}
