@@ -42,6 +42,11 @@ class Trick
      */
     private $video;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $CreationDate;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Trick
     public function setVideo(?string $video): self
     {
         $this->video = $video;
+
+        return $this;
+    }
+
+    public function getCreationDate(): ?\DateTimeInterface
+    {
+        return $this->CreationDate;
+    }
+
+    public function setCreationDate(\DateTimeInterface $CreationDate): self
+    {
+        $this->CreationDate = $CreationDate;
 
         return $this;
     }

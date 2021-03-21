@@ -34,6 +34,17 @@ class TrickController extends AbstractController
                 ->add('video')
                 ->getForm(); 
 
+                $form->handleRequest($request); 
+
+                if($form->isSubmitted() && $form->isValid()) {
+                    $trick->setCreationDate(new \DateTime()); 
+
+                    $manager->persist($article); 
+                    $manager->flush(); 
+
+                    return $this->redirectToRoute('trick'); 
+                }
+
          return $this->render('trick/creation.html.twig', [
              'formTrickCreation' => $form->createView()
          ]); 
