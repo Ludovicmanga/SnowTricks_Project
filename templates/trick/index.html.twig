@@ -10,6 +10,15 @@
     border: solid black 1px;
 }
 
+.ContainerIconContainer {
+    display: flex;
+    align-items: right;
+}
+
+.iconContainer {
+    display: flex;
+}
+ 
 #mediaSection {
     display: flex; 
 }
@@ -23,13 +32,22 @@
     border: solid black 1px;
 }
 
-
-
 {% endblock %}
 
 {% block body %}
 
-<div id="trickHero"></div>
+<div id="trickHero">
+    <div class="ContainerIconContainer">
+        <div class="iconContainer">
+            <div class="trashIcon icon">
+                <a href="#"><i class="fas fa-trash"></i></a>
+            </div>
+            <div class="penIcon icon">
+                <a href="#"><i class="fas fa-pen"></i></a>
+            </div>
+        </div>
+    </div> 
+</div>
 <div id="mediaSection">
     <div class="media" id="media1"><img src="img/snowfigure.jpg"></div>
     <div class="media" id="media2"><img src="img/snowfigure.jpg"></div>

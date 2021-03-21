@@ -10,7 +10,8 @@
         {% endblock %}
 
         <style>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        {% endblock %}
 
         #mainNavBar ul {
             list-style: none; 
@@ -45,10 +46,12 @@
 
     </head>
     <body>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+        
         <nav id="mainNavBar">
                 <ul>
                     <li><a href=#>Accueil</a></li>
-                    
                     
                     {% if not app.user %}
                     <li><a href=" {{ path('security_registration') }}">S'inscrire</a></li>
