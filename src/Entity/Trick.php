@@ -42,7 +42,7 @@ class Trick
     private $CreationDate;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trickId", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick", orphanRemoval=true)
      */
     private $images;
 
@@ -122,7 +122,7 @@ class Trick
     {
         if (!$this->images->contains($image)) {
             $this->images[] = $image;
-            $image->setTrickId($this);
+            $image->setTrick($this);
         }
 
         return $this;
@@ -132,8 +132,8 @@ class Trick
     {
         if ($this->images->removeElement($image)) {
             // set the owning side to null (unless already changed)
-            if ($image->getTrickId() === $this) {
-                $image->setTrickId(null);
+            if ($image->getTrick() === $this) {
+                $image->setTrick(null);
             }
         }
 

@@ -5,7 +5,7 @@
 {% block stylesheets %}
 
 #trickHero {
-    background: url('../../{{ trick.image }}'); 
+    background: url('../../img/snowfigure.jpg'); 
     height: 1000px; 
     border: solid black 1px;
 }
@@ -51,11 +51,13 @@
 <h1> {{ trick.name }} </h1>
 <div id="mediaSection">
 
-{% for video in videos %}
-    <div class="media" id="media1"><img src="../../{{ trick.video }}"></div>
+{% for video in trick.videos %}
+    <div class="media" id="media1">
+    <iframe width="560" height="315" src=" {{ video.path }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 {% endfor %}
-{% for image in images %}
-    <div class="media" id="media2"><img src="../../{{ trick.image }}"></div>
+{% for image in trick.images %}
+    <div class="media" id="media2"><img src="../../{{ image.path }}"></div>
 {% endfor %}
 </div>
 
