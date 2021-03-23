@@ -21,7 +21,9 @@ class TrickController extends AbstractController
          $trick = $repo->find($id); 
 
         return $this->render('trick/show.html.twig', [
-            'trick' => $trick
+            'trick' => $trick, 
+            'trickImages' => $trick->getImages,
+            'trickVideos' => $trick->getVideos
         ]);
     }
 
