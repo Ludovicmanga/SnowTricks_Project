@@ -18,7 +18,7 @@ class TrickController extends AbstractController
     public function showTrick($id): Response
     {
         $repo = $this->getDoctrine()->getRepository(Trick::class); 
-         $trick = $repo->find($id); 
+        $trick = $repo->find($id); 
 
         return $this->render('trick/show.html.twig', [
             'trick' => $trick

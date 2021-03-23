@@ -50,9 +50,9 @@ class Image
         return $this->trick;
     }
 
-    public function setTrickId(?Trick $trick): self
+    public function setTrick(?Trick $trick): self
     {
-        $this->trickId = $trick;
+        $this->trick = $trick;
 
         return $this;
     }
