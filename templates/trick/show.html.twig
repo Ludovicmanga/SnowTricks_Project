@@ -50,11 +50,13 @@
 </div>
 <h1> {{ trick.name }} </h1>
 <div id="mediaSection">
-    <div class="media" id="media1"><img src="../../{{ trick.image }}"></div>
+
+{% for video in videos %}
+    <div class="media" id="media1"><img src="../../{{ trick.video }}"></div>
+{% endfor %}
+{% for image in images %}
     <div class="media" id="media2"><img src="../../{{ trick.image }}"></div>
-    <div class="media" id="media3"><img src="../../{{ trick.image }}"></div>
-    <div class="media" id="media4"><img src="../../{{ trick.image }}"></div>
-    <div class="media" id="media5"><img src="../../{{ trick.image }}"></div>
+{% endfor %}
 </div>
 
 <p>

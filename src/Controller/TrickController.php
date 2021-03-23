@@ -26,7 +26,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/trick/create", name="trick_create")
+     * @Route("/create/trick", name="trick_create")
      */
     public function createTrick(Request $request, EntityManagerInterface $manager)
      {
