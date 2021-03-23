@@ -5,7 +5,7 @@
 {% block stylesheets %}
 
 #trickHero {
-    background: url({{ trick.image }}); 
+    background: url('../../{{ trick.image }}'); 
     height: 1000px; 
     border: solid black 1px;
 }
@@ -40,7 +40,7 @@
     <div class="ContainerIconContainer">
         <div class="iconContainer">
             <div class="trashIcon icon">
-                <a onclick="return confirm('attention, cela va supprimer l\'article')" href=" {{ path('trick_delete', {"id": trick.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+                <a onclick="return confirm('attention, cela va supprimer la figure')" href=" {{ path('trick_delete', {"id": trick.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
             </div>
             <div class="penIcon icon">
                 <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
@@ -48,13 +48,15 @@
         </div>
     </div> 
 </div>
-<h1> {{ trick.name }} </h1
+<h1> {{ trick.name }} </h1>
 <div id="mediaSection">
-    <div class="media" id="media1"><img src="{{ trick.image }}"></div>
-    <div class="media" id="media2"><img src="{{ trick.image }}"></div>
-    <div class="media" id="media3"><img src="{{ trick.image }}"></div>
-    <div class="media" id="media4"><img src="{{ trick.image }}"></div>
-    <div class="media" id="media5"><img src="{{ trick.image }}"></div>
+
+{% for video in videos %}
+    <div class="media" id="media1"><img src="../../{{ trick.video }}"></div>
+{% endfor %}
+{% for image in images %}
+    <div class="media" id="media2"><img src="../../{{ trick.image }}"></div>
+{% endfor %}
 </div>
 
 <p>
