@@ -32,6 +32,11 @@ class Trick
     private $description;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $coverImage;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $groupId;
@@ -70,6 +75,18 @@ class Trick
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCoverImage(): ?string
+    {
+        return $this->coverImage;
+    }
+
+    public function setCoverImage(?string $coverImage): self
+    {
+        $this->coverImage = $coverImage;
 
         return $this;
     }
