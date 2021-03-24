@@ -30,6 +30,14 @@
     border: solid black 1px;
 }
 
+.commentContainer {
+    display: flex; 
+}
+
+.commentPicture img{
+    height: 45px; 
+}
+
 {% endblock %}
 
 {% block body %}
@@ -82,9 +90,16 @@
 {# comments related with the trick #}
 
 {% for comment in trick.comments %}
-<div>
-    <p>{{ comment.commentContent }}</p>
+
+<div class="commentContainer">
+    <div class="commentPicture">
+        <img src="../../{{ comment.user.profilePicture }}">
+    </div>
+    <div>
+        <p>  {{ comment.commentContent }}  </p>
+    </div>
 </div>
+
 {% endfor %}
 
 {% endblock %}
