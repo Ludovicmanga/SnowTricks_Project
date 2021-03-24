@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 
@@ -46,7 +48,17 @@ class User Implements UserInterface
     /**
      *  @Assert\EqualTo(propertyPath="password")
      */
-    public $confirm_password;  
+    public $confirm_password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }  
 
     public function getId(): ?int
     {
@@ -98,29 +110,29 @@ class User Implements UserInterface
     }
 
     /**
-     * @return Collection|Message[]
+     * @return Collection|Comments[]
      */
-    public function getMessages(): Collection
+    public function getComments(): Collection
     {
-        return $this->Messages;
+        return $this->comments;
     }
 
-    public function addMessage(Message $message): self
+    public function addComment(Comments $comment): self
     {
-        if (!$this->message->contains($message)) {
-            $this->messages[] = $message;
-            $message->setUser($this);
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeMessage(Message $message): self
+    public function removeComment(Comments $comment): self
     {
-        if ($this->messages->removeElement($message)) {
+        if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($message->getUser() === $this) {
-                $message->setUser(null);
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
             }
         }
 
