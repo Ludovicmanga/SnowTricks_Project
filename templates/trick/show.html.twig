@@ -65,4 +65,26 @@
     {{ trick.description }}
 </p>
 
+{# comment system #}
+
+    {# comment form #}
+
+{% if app.user %}
+
+{{ form_start(commentForm) }}
+{{ form_row(commentForm.commentContent) }}
+<button type="submit">Créer le commentaire</button>
+{{ form_end(commentForm) }}
+
+{% endif %}
+
+
+{# comments related with the trick #}
+
+{% for comment in trick.comments %}
+<div>
+    <p>{{ comment.commentContent }}</p>
+</div>
+{% endfor %}
+
 {% endblock %}
