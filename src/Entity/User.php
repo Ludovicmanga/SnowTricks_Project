@@ -55,6 +55,11 @@ class User Implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $profilePicture;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -135,6 +140,18 @@ class User Implements UserInterface
                 $comment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProfilePicture(): ?string
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture(string $profilePicture): self
+    {
+        $this->profilePicture = $profilePicture;
 
         return $this;
     }
