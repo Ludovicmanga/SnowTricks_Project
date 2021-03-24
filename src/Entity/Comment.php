@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentsRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CommentsRepository::class)
+ * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
-class Comments
+class Comment
 {
     /**
      * @ORM\Id
@@ -20,12 +20,12 @@ class Comments
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $CommentContent;
+    private $commentContent;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $CreationDate;
+    private $creationDate;
 
     /**
      * @ORM\Column(type="datetime")
@@ -51,24 +51,24 @@ class Comments
 
     public function getCommentContent(): ?string
     {
-        return $this->CommentContent;
+        return $this->commentContent;
     }
 
-    public function setCommentContent(string $CommentContent): self
+    public function setCommentContent(string $commentContent): self
     {
-        $this->CommentContent = $CommentContent;
+        $this->commentContent = $commentContent;
 
         return $this;
     }
 
     public function getCreationDate(): ?\DateTimeInterface
     {
-        return $this->CreationDate;
+        return $this->creationDate;
     }
 
-    public function setCreationDate(\DateTimeInterface $CreationDate): self
+    public function setCreationDate(\DateTimeInterface $creationDate): self
     {
-        $this->CreationDate = $CreationDate;
+        $this->creationDate = $creationDate;
 
         return $this;
     }
