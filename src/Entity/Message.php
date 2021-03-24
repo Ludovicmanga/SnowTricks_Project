@@ -18,14 +18,18 @@ class Message
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Trick::class, inversedBy="messages")
      * @ORM\Column(type="integer")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $userId;
+    private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Trick::class, inversedBy="messages")
      * @ORM\Column(type="integer")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $trickId;
+    private $trick;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -47,26 +51,26 @@ class Message
         return $this->id;
     }
 
-    public function getUserId(): ?int
+    public function getUser(): ?int
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function setUserId(int $userId): self
+    public function setUser(int $user): self
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getTrickId(): ?int
+    public function getTrick(): ?int
     {
-        return $this->trickId;
+        return $this->trick;
     }
 
-    public function setTrickId(int $trickId): self
+    public function setTrick(int $trick): self
     {
-        $this->trickId = $trickId;
+        $this->trick = $trick;
 
         return $this;
     }
