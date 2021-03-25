@@ -17,7 +17,7 @@
 .row {
     display: flex;
     margin-right : 200px; 
-    margin-left: 200px; 
+    margin-left: 50px; 
     margin-top: 50px; 
     margin-bottom: 10px; 
     width : 60%;
@@ -103,7 +103,7 @@
         {% endfor %}
     </div>
     <div class="row" id="row1">
-        {% for trick in tricks|slice(0, 4) %} 
+        {% for trick in tricks|slice(4, 4) %} 
             <div class="trick" id="trick">
                 <a href="{{ path('trick_show', {"id": trick.id}) }}"><img src="{{ trick.coverImage }}" ></a>
                 <div class="trickContentContainer">
@@ -125,7 +125,7 @@
         {% endfor %}
     </div>
     <div class="row" id="row1">
-        {% for trick in tricks|slice(0, 4) %} 
+        {% for trick in tricks|slice(8, 4) %} 
             <div class="trick" id="trick">
                 <a href="{{ path('trick_show', {"id": trick.id}) }}"><img src="{{ trick.coverImage }}" ></a>
                 <div class="trickContentContainer">
