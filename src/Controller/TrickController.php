@@ -69,8 +69,8 @@ class TrickController extends AbstractController
                 ->add('name')
                 ->add('description')
                 ->add('GroupId')
-                ->add('image')
-                ->add('video')
+                ->add('images')
+                ->add('videos')
                 ->getForm(); 
 
                 $form->handleRequest($request); 
