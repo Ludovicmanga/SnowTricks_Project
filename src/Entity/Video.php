@@ -23,7 +23,7 @@ class Video
     private $path;
 
     /**
-     * @ORM\ManyToOne(targetEntity=trick::class, inversedBy="videos")
+     * @ORM\ManyToOne(targetEntity=Trick::class, inversedBy="videos")
      * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
@@ -45,12 +45,12 @@ class Video
         return $this;
     }
 
-    public function getTrick(): ?trick
+    public function getTrick(): ?Trick
     {
         return $this->trick;
     }
 
-    public function setTrick(?trick $trick): self
+    public function setTrick(?Trick $trick): self
     {
         $this->trick = $trick;
 
