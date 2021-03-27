@@ -23,16 +23,9 @@ class TrickController extends AbstractController
      * @Route("show/trick/{id}", name="trick_show")
      */
     //public function show($id, Comment $comment = null, Request $request, EntityManagerInterface $manager): Response
-    public function show(Trick $trick, Request $request, EntityManagerInterface $manager): Response
+    public function show(Trick $trick, Comment $comment, Request $request, EntityManagerInterface $manager): Response
     {
-        //we get the trick 
-        //$repoTrick = $this->getDoctrine()->getRepository(Trick::class); 
-        //$trick = $repoTrick->find($id); 
-        //creation of the comment form 
-        //if(!$comment) {
-            $comment = new Comment(); 
-       // }
-        
+        //creation of the form
         $commentForm = $this->createForm(CommentType::class, $comment); 
 
         //handling of the form
@@ -52,6 +45,12 @@ class TrickController extends AbstractController
             $comment->setUser($user); 
             }
 
+                    //we get the trick 
+                    //$repoTrick = $this->getDoctrine()->getRepository(Trick::class); 
+                    //$trick = $repoTrick->find($id); 
+                    //creation of the comment form 
+                    //if(!$comment) {
+
             $manager->persist($comment)
                     ->flush()
             ; 
@@ -66,9 +65,9 @@ class TrickController extends AbstractController
     /**
      * @Route("/create/trick", name="trick_create")
      */
-    public function create(Request $request, EntityManagerInterface $manager)
+    public function create(Trick $trick, Request $request, EntityManagerInterface $manager)
      {        
-         $trick = New Trick; 
+        $trick = New Trick; 
         $form = $this->createForm(TrickType::class, $trick); 
 
                 $form->handleRequest($request); 
@@ -90,8 +89,6 @@ class TrickController extends AbstractController
     * @Route("/update/trick/{id}", name="trick_update")
     */
     public function update(Trick $trick) {
-         //$repo = $this->getDoctrine()->getRepository(Trick::class); 
-         //$trick = $repo->find($id); 
 
         return $this->render('trick/update.html.twig', [
             'trick' => $trick
@@ -101,11 +98,10 @@ class TrickController extends AbstractController
     /**
     * @Route("/delete/trick/{id}", name="trick_delete")
     */
-    public function deleteTrick(Trick $trick): RedirectResponse  
+    public function deleteTrick(Trick $trick, EntityManagerInterface $manager): RedirectResponse  
     {
-        $em = $this->getDoctrine()->getManager(); 
-        $em->remove($trick); 
-        $em->flush();
+        $manager->remove($trick); 
+        $manager->flush();
         
         return $this->redirectToRoute('home'); 
     }
@@ -113,23 +109,21 @@ class TrickController extends AbstractController
     /**
     * @Route("/delete/video/{id}", name="trick_video_delete")
     */
-    public function deleteTrickVideo(Video $video): RedirectResponse  
+    public function deleteTrickVideo(Video $video, EntityManagerInterface $manager): RedirectResponse  
     {
-        $em = $this->getDoctrine()->getManager(); 
-        $em->remove($video); 
-        $em->flush();
-        
+        $manager->remove($video); 
+        $manager->flush();
+
         return $this->redirectToRoute('home'); 
     }
 
     /**
     * @Route("/delete/image/{id}", name="trick_image_delete")
     */
-    public function deleteTrickImage(Image $image): RedirectResponse  
+    public function deleteTrickImage(Image $image, EntityManagerInterface $manager): RedirectResponse  
     {
-        $em = $this->getDoctrine()->getManager(); 
-        $em->remove($image); 
-        $em->flush();
+        $manager->remove($image); 
+        $manager->flush();
         
         return $this->redirectToRoute('home'); 
     }
