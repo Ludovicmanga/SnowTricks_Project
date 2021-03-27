@@ -8,11 +8,8 @@
 
 {{ form_row(formTrickCreation.name, { 'attr' : {'placeholder' : " Nom de la figure"} })}}
 {{ form_row(formTrickCreation.description, { 'attr' : {'placeholder' : " Description de la figure"} })}}
-{{ form_row(formTrickCreation.GroupId, { 'attr' : {'placeholder' : " Groupe de la figure"} })}}
-{{ form_row(formTrickCreation.images, { 'attr' : {'placeholder' : " image de la figure"} })}}
-<i class="far fa-plus-square"></i> Ajouter une autre image
-{{ form_row(formTrickCreation.video, { 'attr' : {'placeholder' : " Video de la figure"} })}}
-<i class="far fa-plus-square"></i> Ajouter une autre vidéo<br>
+{{ form_row(formTrickCreation.coverImage, { 'attr' : {'placeholder' : " Image de couverture"} })}}
+{{ form_row(formTrickCreation.groupId, { 'attr' : {'placeholder' : " Groupe de la figure"} })}}
 <button type="submit">Créer l'article</button>
 
 {{ form_end(formTrickCreation)}}
