@@ -8,6 +8,7 @@ use App\Entity\Image;
 use App\Entity\Trick;
 use App\Entity\Video;
 use App\Entity\Comment;
+use App\Form\TrickType;
 use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,22 +67,14 @@ class TrickController extends AbstractController
      * @Route("/create/trick", name="trick_create")
      */
     public function create(Request $request, EntityManagerInterface $manager)
-     {
-        $trick = New Trick; 
-        
-        $form = $this->createFormBuilder($trick)
-                ->add('name')
-                ->add('description')
-                ->add('GroupId')
-                ->add('images')
-                ->add('videos')
-                ->getForm(); 
+     {        
+         $trick = New Trick; 
+        $form = $this->createForm(TrickType::class, $trick); 
 
                 $form->handleRequest($request); 
 
                 if($form->isSubmitted() && $form->isValid()) {
                     $trick->setCreationDate(new \DateTime()); 
-
                     $manager->persist($trick); 
                     $manager->flush(); 
 
