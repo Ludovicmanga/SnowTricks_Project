@@ -83,7 +83,7 @@
     <div class="row" id="row1">
         {% for trick in tricks|slice(0, 4) %} 
             <div class="trick" id="trick">
-                <a href=" {{ path('trick_show', {"id": trick.id}) }}"><img src="{{ trick.coverImage }}" ></a>
+                <a href=" {{ path('trick_show', {"trick_id": trick.id}) }}"><img src="{{ trick.coverImage }}" ></a>
                 <div class="trickContentContainer">
                     <div class="titleContainer">
                         <h2>{{ trick.name }}</h2>
@@ -105,7 +105,7 @@
     <div class="row" id="row1">
         {% for trick in tricks|slice(4, 4) %} 
             <div class="trick" id="trick">
-                <a href="{{ path('trick_show', {"id": trick.id}) }}"><img src="{{ trick.coverImage }}" ></a>
+                <a href="{{ path('trick_show', {"trick_id": trick.id}) }}"><img src="{{ trick.coverImage }}" ></a>
                 <div class="trickContentContainer">
                     <div class="titleContainer">
                         <h2>{{ trick.name }}</h2>
@@ -127,7 +127,7 @@
     <div class="row" id="row1">
         {% for trick in tricks|slice(8, 4) %} 
             <div class="trick" id="trick">
-                <a href="{{ path('trick_show', {"id": trick.id}) }}"><img src="{{ trick.coverImage }}" ></a>
+                <a href="{{ path('trick_show', {"trick_id": trick.id}) }}"><img src="{{ trick.coverImage }}" ></a>
                 <div class="trickContentContainer">
                     <div class="titleContainer">
                         <h2>{{ trick.name }}</h2>
