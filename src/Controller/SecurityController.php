@@ -19,23 +19,23 @@ class SecurityController extends AbstractController
     public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder) {
         $user = new User(); 
         $form = $this->createForm(RegistrationType::class, $user); 
-
+        
+        // traitement du formulaire
         $form->handleRequest($request); 
-
         if($form->isSubmitted() && $form->isValid()) {
+            // enregistrement de l'utilisateur
             $hash = $encoder->encodePassword($user, $user->getPassword()); 
-
             $user->setPassword($hash); 
-
             $manager->persist($user); 
             $manager->flush();
 
             return $this->redirectToRoute('security_login'); 
         }
 
+        // affichage du formulaire de la page
         return $this->render('security/registration.html.twig', [
             'form' => $form->createView()
-            ]);
+        ]);
     }
 
     /**

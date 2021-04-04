@@ -1,4 +1,28 @@
-#mainNavBar {
-    display: flex;
-    background-color: aqua;
+#mainNavBar ul {
+    list-style: none; 
+    background: #bd1e43; 
+    padding: 0; 
+    margin: 0; 
+    text-align: right; 
+}
+
+#mainNavBar li {
+    display: inline-block; 
+}
+
+#mainNavBar a {
+    text-decoration: none; 
+    color: #fff; 
+    width: 70px; 
+    display: block; 
+    padding: 25px 20px;
+    text-transfor: uppercase;
+    font-weight: bold; 
+    font-family: arial; 
+    text-align: center;
+    font-size: 14px;
+}
+
+#mainNavBar a:hover {
+    background: rgb(168,0,0); 
 }
