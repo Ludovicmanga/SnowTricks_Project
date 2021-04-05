@@ -18,17 +18,16 @@ class TrickType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('coverImage', Filetype::class, [
-                'label' => false,
+                'label' => 'Photo principale de la figure',
                 'multiple' => true,
                 'mapped' => false, 
-                'required' => false
+                'required' => true
             ])
-            ->add('groupId')
             ->add('images', Filetype::class, [
-                'label' => false,
+                'label' => 'Photo(s) de présentation de la figure',
                 'multiple' => true,
                 'mapped' => false, 
-                'required' => false
+                'required' => true
             ])
         ;
     }
