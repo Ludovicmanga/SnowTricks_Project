@@ -68,6 +68,11 @@ class Trick
      */
     private $trickGroup;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updateDate;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -238,6 +243,18 @@ class Trick
     public function setTrickGroup(?TrickGroup $trickGroup): self
     {
         $this->trickGroup = $trickGroup;
+
+        return $this;
+    }
+
+    public function getUpdateDate(): ?\DateTimeInterface
+    {
+        return $this->updateDate;
+    }
+
+    public function setUpdateDate(?\DateTimeInterface $updateDate): self
+    {
+        $this->updateDate = $updateDate;
 
         return $this;
     }
