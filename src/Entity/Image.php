@@ -23,6 +23,11 @@ class Image
     private $path;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Trick::class, inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -41,6 +46,18 @@ class Image
     public function setPath(string $path): self
     {
         $this->path = $path;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
