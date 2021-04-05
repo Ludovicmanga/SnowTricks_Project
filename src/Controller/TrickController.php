@@ -7,9 +7,11 @@ use App\Entity\User;
 use App\Entity\Image;
 use App\Entity\Trick;
 use App\Entity\Video;
+use App\Entity\Upload;
 use App\Services\Test;
 use App\Entity\Comment;
 use App\Form\TrickType;
+use App\Form\UploadType;
 use App\Form\CommentType;
 use App\Services\MyFormFactory;
 use App\Services\CommentService;
@@ -65,7 +67,7 @@ class TrickController extends AbstractController
 
         //if the form is submitted, we hydrate the trick and send it to the DB
         if($form->isSubmitted() && $form->isValid()) {
-                $trickCreationService->add($trick); 
+                $trickCreationService->add($trick, $form); 
             
                 return $this->redirectToRoute('trick_show', [
                     'trick_id' => $trick->getId()
@@ -123,10 +125,23 @@ class TrickController extends AbstractController
     /**
      * @Route("/test", name="test")
      */
-    public function test(Test $test) {
+    public function test(Request $request) {
+
+        $upload = new Upload(); 
+        $form = $this->createForm(UploadType::class, $upload); 
+
+        $form->handleRequest($request); 
+        if($form->isSubmitted() && $form->isValid()) {
+            $file = $upload->getName(); 
+            $fileName = md5(uniqid()).'.'.$file->guessExtension(); 
+            $file->move($this->getParameter('images_directory'), $fileName); 
+            $upload->setName($fileName);
+
+            return $this->redirectToRoute('home'); 
+        }
 
         return $this->render('trick/test.html.twig', [
-            'test' => $test
+            'form' => $form->createView(), 
         ]); 
     }
 }
