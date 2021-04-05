@@ -33,11 +33,6 @@ class Trick
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $groupId;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $CreationDate;
@@ -66,6 +61,12 @@ class Trick
      * @ORM\Column(type="string", length=255)
      */
     private $coverImagePath;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TrickGroup::class, inversedBy="Trick")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $trickGroup;
 
     public function __construct()
     {
@@ -111,18 +112,6 @@ class Trick
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
-    }
-
-    public function setGroupId(int $groupId): self
-    {
-        $this->groupId = $groupId;
 
         return $this;
     }
@@ -237,6 +226,18 @@ class Trick
     public function setCoverImageName(string $coverImageName): self
     {
         $this->coverImageName = $coverImageName;
+
+        return $this;
+    }
+
+    public function getTrickGroup(): ?TrickGroup
+    {
+        return $this->trickGroup;
+    }
+
+    public function setTrickGroup(?TrickGroup $trickGroup): self
+    {
+        $this->trickGroup = $trickGroup;
 
         return $this;
     }
