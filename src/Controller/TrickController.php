@@ -13,6 +13,7 @@ use App\Entity\Comment;
 use App\Form\TrickType;
 use App\Form\UploadType;
 use App\Form\CommentType;
+use App\Form\TrickUpdateType;
 use App\Services\MyFormFactory;
 use App\Services\CommentService;
 use App\Services\FormFactoryService;
@@ -82,10 +83,27 @@ class TrickController extends AbstractController
     /**
     * @Route("/update/trick/{id}", name="trick_update")
     */
-    public function update(Trick $trick) 
-     {
+    public function update(Trick $trick, Request $request, EntityManagerInterface $manager)
+     {  
+        $form = $this->createForm(TrickUpdateType::class, $trick); 
+        $form->handleRequest($request); 
+
+        //if the form is submitted, we hydrate the trick and send it to the DB
+        if($form->isSubmitted() && $form->isValid()) {                 
+                
+                $trick->setUpdateDate(new DateTime()); 
+                $manager->persist($trick); 
+                $manager->flush();
+        
+                return $this->redirectToRoute('trick_show', [
+                            'trick_id' => $trick->getId()
+                ]); 
+        } 
+        
         return $this->render('trick/update.html.twig', [
-            'trick' => $trick
+             'formTrickCreation' => $form->createView(), 
+             'trick' => $trick, 
+             'form' => $form->createView()
         ]); 
      }
 

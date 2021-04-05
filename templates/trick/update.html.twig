@@ -87,7 +87,13 @@ mediaContainer {
 </div>
 
 <p>
-    {{ trick.description }}
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.trickGroup) }}
+    <button type="submit">Mettre à jour le formulaire</button>
+    {{ form_end(form) }}
+
 </p>
 
 {% endblock %}
