@@ -33,11 +33,6 @@ class Trick
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $coverImage;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $groupId;
@@ -48,12 +43,12 @@ class Trick
     private $CreationDate;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick", orphanRemoval=true, cascade={"persist"})
      */
     private $images;
 
     /**
-     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="trick", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="trick", orphanRemoval=true, cascade={"persist"})
      */
     private $videos;
 
@@ -61,6 +56,16 @@ class Trick
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="trick", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $coverImageName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $coverImagePath;
 
     public function __construct()
     {
@@ -86,14 +91,14 @@ class Trick
         return $this;
     }
 
-    public function getCoverImage(): ?string
+    public function getCoverImagePath(): ?string
     {
-        return $this->coverImage;
+        return $this->coverImagePath;
     }
 
-    public function setCoverImage(?string $coverImage): self
+    public function setCoverImagePath(?string $coverImagePath): self
     {
-        $this->coverImage = $coverImage;
+        $this->coverImagePath = $coverImagePath;
 
         return $this;
     }
@@ -220,6 +225,18 @@ class Trick
                 $comment->setTrick(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCoverImageName(): ?string
+    {
+        return $this->coverImageName;
+    }
+
+    public function setCoverImageName(string $coverImageName): self
+    {
+        $this->coverImageName = $coverImageName;
 
         return $this;
     }

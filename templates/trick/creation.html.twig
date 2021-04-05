@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<h1>Création d'un article</h1>
+<h1>Création d'une figure</h1>
 
 {{ form_start(formTrickCreation) }}
 
@@ -10,8 +10,14 @@
 {{ form_row(formTrickCreation.description, { 'attr' : {'placeholder' : " Description de la figure"} })}}
 {{ form_row(formTrickCreation.coverImage, { 'attr' : {'placeholder' : " Image de couverture"} })}}
 {{ form_row(formTrickCreation.groupId, { 'attr' : {'placeholder' : " Groupe de la figure"} })}}
+{{ form_row(formTrickCreation.images) }}
+
 <button type="submit">Créer l'article</button>
 
 {{ form_end(formTrickCreation)}}
+
+
 {% endblock %}
+
+
 
