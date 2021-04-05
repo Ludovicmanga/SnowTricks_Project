@@ -136,7 +136,9 @@ class TrickController extends AbstractController
         $manager->remove($image); 
         $manager->flush();
         
-        return $this->redirectToRoute('home'); 
+        return $this->redirectToRoute('trick_update', [
+            'id' => $image->getTrick()->getId()
+        ]); 
     }
 
     /**

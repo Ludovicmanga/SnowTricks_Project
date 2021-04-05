@@ -71,6 +71,11 @@
 
 <p>
     {{ trick.description }}
+    <div>
+        <div>Date de création : {{ trick.creationDate|date('d/m/Y H:i', timezone="Europe/Paris") }} </div>
+        <div>Date de la dernière modification : {{ trick.updateDate|date('d/m/Y H:i', timezone="Europe/Paris") }} </div>
+        <div>Groupe : {{ trick.trickGroup.name }}</div>
+    </div>
 </p>
 
 {# comment system #}

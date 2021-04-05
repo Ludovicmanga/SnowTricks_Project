@@ -75,7 +75,7 @@ mediaContainer {
         <div class="media" id="media2"><img src="../../{{ image.path }}"></div>
         <div class="iconContainer">
             <div class="trashIcon icon">
-                <a onclick="return confirm('attention, cela va supprimer l\'article')" href=" {{ path('trick_image_delete', {"id": image.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+                <a onclick="return confirm('attention, cela va supprimer l\'image')" href=" {{ path('trick_image_delete', {"id": image.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
             </div>
             <div class="penIcon icon">
                 <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
