@@ -34,66 +34,68 @@ mediaContainer {
     height: 315px; 
     border: solid black 1px;
 }
-
 {% endblock %}
 
 {% block body %}
-
-<div id="trickHero">
-    <div class="ContainerIconContainer">
-        <div class="iconContainer">
-            <div class="trashIcon icon">
-                <a onclick="return confirm('attention, cela va supprimer la figure')" href=" {{ path('trick_delete', {"id": trick.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+    <div id="trickHero">
+        <div class="ContainerIconContainer">
+            <div class="iconContainer">
+                <div class="trashIcon icon">
+                    <a onclick="return confirm('attention, cela va supprimer la figure')" href=" {{ path('trick_delete', {"id": trick.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+                </div>
+                <div class="penIcon icon">
+                    <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
+                </div>
             </div>
-            <div class="penIcon icon">
-                <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
-            </div>
-        </div>
-    </div> 
-</div>
-<h1> {{ trick.name }} </h1>
-<div id="mediaSection">
-
-{% for video in trick.videos %}
-    <div class="mediaContainer">
-        <div class="media" id="media1">
-            <iframe width="560" height="315" src=" {{ video.path }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="iconContainer">
-            <div class="trashIcon icon">
-                <a onclick="return confirm('attention, cela va supprimer la video')" href=" {{ path('trick_video_delete', {"id": video.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
-            </div>
-            <div class="penIcon icon">
-                <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
-            </div>
-        </div>
+        </div> 
     </div>
-    
-{% endfor %}
-{% for image in trick.images %}
-    <div class="mediaContainer">
-        <div class="media" id="media2"><img src="../../{{ image.path }}"></div>
-        <div class="iconContainer">
-            <div class="trashIcon icon">
-                <a onclick="return confirm('attention, cela va supprimer l\'image')" href=" {{ path('trick_image_delete', {"id": image.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+    <h1> {{ trick.name }} </h1>
+    <div id="mediaSection">
+
+    {% for video in trick.videos %}
+        <div class="mediaContainer">
+            <div class="media" id="media1">
+                <iframe width="560" height="315" src=" {{ video.path }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <div class="penIcon icon">
-                <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
+            <div class="iconContainer">
+                <div class="trashIcon icon">
+                    <a onclick="return confirm('attention, cela va supprimer la video')" href=" {{ path('trick_video_delete', {"id": video.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+                </div>
+                <div class="penIcon icon">
+                    <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
+                </div>
             </div>
         </div>
+    {% endfor %}
+
+    {% for image in trick.images %}
+        <div class="mediaContainer">
+            <div class="media" id="media2"><img src="../../{{ image.path }}"></div>
+            <div class="iconContainer">
+                <div class="trashIcon icon">
+                    <a onclick="return confirm('attention, cela va supprimer l\'image')" href=" {{ path('trick_image_delete', {"id": image.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+                </div>
+                <div class="penIcon icon">
+                    <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
+                </div>
+            </div>
+        </div>
+        
+    {% endfor %}
     </div>
-    
-{% endfor %}
-</div>
 
-<p>
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.trickGroup) }}
-    <button type="submit">Mettre à jour le formulaire</button>
-    {{ form_end(form) }}
+    <p>
+        {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.trickGroup) }}
+        <button type="submit">Mettre à jour la figure</button>
+        <div>
+            <a onclick="return confirm('attention, cela va supprimer la figure')" href=" {{ path('trick_delete', {"id": trick.id}) }}">Supprimer la figure</a>
+        </div>
+        {{ form_end(form) }}
 
-</p>
+
+    </p>
 
 {% endblock %}
