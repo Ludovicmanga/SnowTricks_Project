@@ -2,7 +2,8 @@
 
 {% block stylesheets %}
 
-#trickHero {
+#trickHero 
+{
     background: url('../../{{ trick.coverImagePath }}'); 
     height: 1000px; 
     border: solid black 1px;
@@ -34,7 +35,7 @@
     display: flex; 
 }
 
-.commentPicture img{
+.commentPicture img {
     height: 45px; 
 }
 
@@ -61,7 +62,7 @@
 
 {% for video in trick.videos %}
     <div class="media" id="media1">
-    <iframe width="460" height="250" src=" {{ video.path }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="460" height="250" src=" {{ video.path }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 {% endfor %}
 {% for image in trick.images %}

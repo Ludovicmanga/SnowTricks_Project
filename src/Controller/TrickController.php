@@ -59,7 +59,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/create/trick", name="trick_create")
+     * @Route("/create/trick", name="trick_create", methods={"HEAD", "GET", "POST"})
      */
     public function create(Request $request, EntityManagerInterface $manager, TrickCreationService $trickCreationService)
      {  
@@ -82,7 +82,7 @@ class TrickController extends AbstractController
      }
 
     /**
-    * @Route("/update/trick/{id}", name="trick_update")
+    * @Route("/update/trick/{id}", name="trick_update", methods={"HEAD", "GET", "POST"})
     */
     public function update(Trick $trick, Request $request, EntityManagerInterface $manager, TrickUpdateService $trickUpdateService)
      {  
@@ -107,7 +107,7 @@ class TrickController extends AbstractController
      }
 
     /**
-    * @Route("/delete/trick/{id}", name="trick_delete")
+    * @Route("/delete/trick/{id}", name="trick_delete", methods={"HEAD", "GET", "POST"})
     */
     public function deleteTrick(Trick $trick, EntityManagerInterface $manager): RedirectResponse  
      {
@@ -118,7 +118,7 @@ class TrickController extends AbstractController
      }
 
     /**
-    * @Route("/delete/video/{id}", name="trick_video_delete")
+    * @Route("/delete/video/{id}", name="trick_video_delete", methods={"HEAD", "GET", "POST"})
     */
     public function deleteTrickVideo(Video $video, EntityManagerInterface $manager): RedirectResponse  
     {
@@ -129,7 +129,7 @@ class TrickController extends AbstractController
     }
 
     /**
-    * @Route("/delete/image/{id}", name="trick_image_delete")
+    * @Route("/delete/image/{id}", name="trick_image_delete", methods={"HEAD", "GET", "POST"})
     */
     public function deleteTrickImage(Image $image, EntityManagerInterface $manager): RedirectResponse  
     {
