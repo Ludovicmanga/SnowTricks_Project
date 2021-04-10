@@ -7,18 +7,18 @@ use App\Entity\User;
 use App\Entity\Image;
 use App\Entity\Trick;
 use App\Entity\Video;
-use App\Entity\Upload;
-use App\Services\Test;
+//use App\Entity\Upload;
+//use App\Services\Test;
 use App\Entity\Comment;
-use App\Form\TrickType;
-use App\Form\UploadType;
+// use App\Form\UploadType;
 use App\Form\CommentType;
+use App\Form\AppFormFactory;
+use App\Form\TrickCreateType;
 use App\Form\TrickUpdateType;
-use App\Services\MyFormFactory;
 use App\Services\CommentService;
-use App\Services\FormFactoryService;
-use App\Services\TrickUpdateService;
-use App\Services\TrickCreationService;
+// use App\Services\TrickUpdateService;
+// use App\Services\TrickCreationService;
+use App\Services\TrickServiceInterface; 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,15 +31,29 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class TrickController extends AbstractController
 {   
+    private $trickService; 
+    private $em; 
+    private $formFactory;
+
+    public function __construct(TrickServiceInterface $trickService, EntityManagerInterface $em, AppFormFactory $formFactory) {
+        $this->trickService = $trickService; 
+        $this->em = $em; 
+        $this->formFactory = $formFactory; 
+    }
+
      /**
-     * @Route("show/trick/{trick_id}", name="trick_show", methods={"HEAD", "GET", "POST"})
-     * @Entity("trick", expr="repository.findOneById(trick_id)")
+     * @Route("show/trick/{trick_id}", 
+     *     name="trick_show", 
+     *     methods={"HEAD", "GET", "POST"}), 
+     *     @Entity("trick", expr="repository.findOneById(trick_id)")
      */
     public function show(Trick $trick, Request $request, CommentService $commentService): Response
     {
         //creation of the form
         $comment = New Comment(); 
-        $commentForm = $this->createForm(CommentType::class, $comment); 
+        $commentForm = $this->formFactory->create('trick-comment', $comment); 
+        
+        // $commentForm = $this->createForm(CommentType::class, $comment); 
 
         //handling of the form
         $commentForm->handleRequest($request); 
@@ -59,17 +73,19 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/create/trick", name="trick_create", methods={"HEAD", "GET", "POST"})
+     * @Route("/create/trick", 
+     *     name="trick_create", 
+     *     methods={"HEAD", "GET", "POST"})
      */
-    public function create(Request $request, EntityManagerInterface $manager, TrickCreationService $trickCreationService)
+    public function create(Request $request)
      {  
         $trick = New Trick(); 
-        $form = $this->createForm(TrickType::class, $trick); 
+        $form = $this->formFactory->create('trick-create', $trick); 
         $form->handleRequest($request); 
 
         //if the form is submitted, we hydrate the trick and send it to the DB
         if($form->isSubmitted() && $form->isValid()) {
-                $trickCreationService->add($trick, $form); 
+                $this->trickService->add($trick, $form); 
             
                 return $this->redirectToRoute('trick_show', [
                     'trick_id' => $trick->getId()
@@ -82,59 +98,67 @@ class TrickController extends AbstractController
      }
 
     /**
-    * @Route("/update/trick/{id}", name="trick_update", methods={"HEAD", "GET", "POST"})
+    * @Route("/update/trick/{id}", 
+    *     name="trick_update", 
+    *     methods={"HEAD", "GET", "POST"})
     */
-    public function update(Trick $trick, Request $request, EntityManagerInterface $manager, TrickUpdateService $trickUpdateService)
+    public function update(Trick $trick, Request $request)
      {  
-        $form = $this->createForm(TrickUpdateType::class, $trick); 
+        $form = $this->formFactory->create('trick-update', $trick); 
         $form->handleRequest($request); 
 
         //if the form is submitted, we hydrate the trick and send it to the DB by using the service
         if($form->isSubmitted() && $form->isValid()) {                 
-                $trickUpdateService->add($trick); 
+                $this->trickService->update($trick); 
                 
                 //We then return the updated trick
                 return $this->redirectToRoute('trick_show', [
-                            'trick_id' => $trick->getId()
+                    'trick_id' => $trick->getId()
                 ]); 
         } 
         
         return $this->render('trick/update.html.twig', [
-             'formTrickCreation' => $form->createView(), 
-             'trick' => $trick, 
+            'formTrickCreation' => $form->createView(), 
+            'trick' => $trick, 
              'form' => $form->createView()
         ]); 
      }
 
     /**
-    * @Route("/delete/trick/{id}", name="trick_delete", methods={"HEAD", "GET", "POST"})
+    * @Route("/delete/trick/{id}", 
+    *     name="trick_delete", 
+    *     methods={"HEAD", "GET", "POST"})
     */
-    public function deleteTrick(Trick $trick, EntityManagerInterface $manager): RedirectResponse  
+    public function deleteTrick(Trick $trick): RedirectResponse  
      {
-        $manager->remove($trick); 
-        $manager->flush();
+        $this->em->remove($trick); 
+        $this->em->flush();
         
         return $this->redirectToRoute('home'); 
      }
 
     /**
-    * @Route("/delete/video/{id}", name="trick_video_delete", methods={"HEAD", "GET", "POST"})
+    * @Route("/delete/video/{id}", 
+    *     name="trick_video_delete", 
+    *     methods={"HEAD", "GET", "POST"})
     */
-    public function deleteTrickVideo(Video $video, EntityManagerInterface $manager): RedirectResponse  
+    public function deleteTrickVideo(Video $video): RedirectResponse  
     {
-        $manager->remove($video); 
-        $manager->flush();
+        $this->em->remove($video); 
+        $this->em->flush();
 
         return $this->redirectToRoute('home'); 
     }
 
     /**
-    * @Route("/delete/image/{id}", name="trick_image_delete", methods={"HEAD", "GET", "POST"})
+    * @Route("/delete/image/{id}", 
+    *     name="trick_image_delete", 
+    *     methods={"HEAD", "GET", "POST"})
     */
-    public function deleteTrickImage(Image $image, EntityManagerInterface $manager): RedirectResponse  
+    public function deleteTrickImage(Image $image): RedirectResponse  
     {
-        $manager->remove($image); 
-        $manager->flush();
+        $this->em->remove($image); 
+        $this->em->flush();
         
         return $this->redirectToRoute('trick_update', [
             'id' => $image->getTrick()->getId()
@@ -142,7 +166,8 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/test", 
+     *     name="test")
      */
     public function test(Request $request) {
 

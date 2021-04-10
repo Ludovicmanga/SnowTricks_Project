@@ -15,11 +15,10 @@ class TrickUpdateService
         $this->manager = $manager; 
     }   
 
-    public function add(Trick $trick) {
-                
-                $trick->setUpdateDate(new DateTime()); 
-                $this->manager->persist($trick); 
-                $this->manager->flush();
-    }        
-            
+    public function add(Trick $trick) {   
+        $trick->setUpdateDate(new DateTime()); 
+        $this->manager->persist($trick); 
+        $this->manager->flush();
+    }    
+                  
 } 
