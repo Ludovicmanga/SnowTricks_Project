@@ -9,17 +9,18 @@ use App\Entity\Trick;
 use App\Entity\Video;
 use App\Entity\Upload;
 use App\Services\Test;
-use App\Services\TrickServiceInterface; 
 use App\Entity\Comment;
-use App\Form\TrickCreateType;
 use App\Form\UploadType;
 use App\Form\CommentType;
+use App\Form\AppFormFactory;
+use App\Form\TrickCreateType;
 use App\Form\TrickUpdateType;
 use App\Services\MyFormFactory;
 use App\Services\CommentService;
 use App\Services\FormFactoryService;
-use App\Services\TrickUpdateService;
-use App\Services\TrickCreationService;
+// use App\Services\TrickUpdateService;
+// use App\Services\TrickCreationService;
+use App\Services\TrickServiceInterface; 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,23 +35,27 @@ class TrickController extends AbstractController
 {   
     private $trickService; 
     private $em; 
+    private $formFactory; 
 
-    public function __construct(TrickServiceInterface $trickService, EntityManagerInterface $em) {
+    public function __construct(TrickServiceInterface $trickService, EntityManagerInterface $em, AppFormFactory $formFactory) {
         $this->trickService = $trickService; 
         $this->em = $em; 
+        $this->formFactory = $formFactory; 
     }
 
      /**
      * @Route("show/trick/{trick_id}", 
      *     name="trick_show", 
-     *     methods={"HEAD", "GET", "POST"})
+     *     methods={"HEAD", "GET", "POST"}), 
      *     @Entity("trick", expr="repository.findOneById(trick_id)")
      */
     public function show(Trick $trick, Request $request, CommentService $commentService): Response
     {
         //creation of the form
         $comment = New Comment(); 
-        $commentForm = $this->createForm(CommentType::class, $comment); 
+        $commentForm = $formFactory->create('trick-comment', $comment); 
+        
+        // $commentForm = $this->createForm(CommentType::class, $comment); 
 
         //handling of the form
         $commentForm->handleRequest($request); 
@@ -74,7 +79,7 @@ class TrickController extends AbstractController
      *     name="trick_create", 
      *     methods={"HEAD", "GET", "POST"})
      */
-    public function create(Request $request, TrickCreationService $trickCreationService)
+    public function create(Request $request, TrickService $trickService)
      {  
         $trick = New Trick(); 
         $form = $this->createForm(TrickCreateType::class, $trick); 
@@ -82,7 +87,7 @@ class TrickController extends AbstractController
 
         //if the form is submitted, we hydrate the trick and send it to the DB
         if($form->isSubmitted() && $form->isValid()) {
-                $trickCreationService->add($trick, $form); 
+                $trickService->create($trick, $form); 
             
                 return $this->redirectToRoute('trick_show', [
                     'trick_id' => $trick->getId()
@@ -99,14 +104,14 @@ class TrickController extends AbstractController
     *     name="trick_update", 
     *     methods={"HEAD", "GET", "POST"})
     */
-    public function update(Trick $trick, Request $request, TrickUpdateService $trickUpdateService)
+    public function update(Trick $trick, Request $request, TrickService $trickService)
      {  
         $form = $this->createForm(TrickUpdateType::class, $trick); 
         $form->handleRequest($request); 
 
         //if the form is submitted, we hydrate the trick and send it to the DB by using the service
         if($form->isSubmitted() && $form->isValid()) {                 
-                $trickUpdateService->add($trick); 
+                $trickService->update($trick); 
                 
                 //We then return the updated trick
                 return $this->redirectToRoute('trick_show', [
