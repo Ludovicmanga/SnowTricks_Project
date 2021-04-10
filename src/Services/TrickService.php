@@ -8,7 +8,7 @@ use App\Entity\Trick;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class TrickService 
+class TrickService implements TrickServiceInterface
 {
     private $manager; 
     private $params;
@@ -18,7 +18,7 @@ class TrickService
         $this->params = $params;
     }   
 
-    public function add(Trick $trick, $form) {        
+    public function create(Trick $trick, $form) {        
             //We get the images from the trick creation form
             $images = $form->get('images')->getData(); 
 
