@@ -5,7 +5,7 @@ namespace App\Services;
 use DateTime; 
 use Doctrine\ORM\EntityManagerInterface;
 
-class CommentService
+class CommentService implements CommentServiceInterface
 {
     private $manager; 
     // changer en $em

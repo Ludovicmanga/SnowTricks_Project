@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Trick;
 use App\Form\ImageType;
+use App\Form\VideoType;
 use App\Entity\TrickGroup;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,6 +36,11 @@ class TrickCreateType extends AbstractType
                 'multiple' => true,
                 'mapped' => false, 
                 'required' => true
+            ])
+            ->add('videos', CollectionType::class, [
+                'entry_type' => VideoType::class, 
+                'entry_options' => ['label' => false], 
+                'allow_add' => true,
             ])
         ;
     }

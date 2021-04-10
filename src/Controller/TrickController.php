@@ -15,10 +15,10 @@ use App\Form\CommentType;
 use App\Form\AppFormFactory;
 use App\Form\TrickCreateType;
 use App\Form\TrickUpdateType;
-use App\Services\CommentService;
+use App\Services\TrickServiceInterface; 
+use App\Services\CommentServiceInterface;
 // use App\Services\TrickUpdateService;
 // use App\Services\TrickCreationService;
-use App\Services\TrickServiceInterface; 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,7 +47,7 @@ class TrickController extends AbstractController
      *     methods={"HEAD", "GET", "POST"}), 
      *     @Entity("trick", expr="repository.findOneById(trick_id)")
      */
-    public function show(Trick $trick, Request $request, CommentService $commentService): Response
+    public function show(Trick $trick, Request $request, CommentServiceInterface $commentService): Response
     {
         //creation of the form
         $comment = New Comment(); 
@@ -78,7 +78,7 @@ class TrickController extends AbstractController
      *     methods={"HEAD", "GET", "POST"})
      */
     public function create(Request $request)
-     {  
+     {   
         $trick = New Trick(); 
         $form = $this->formFactory->create('trick-create', $trick); 
         $form->handleRequest($request); 

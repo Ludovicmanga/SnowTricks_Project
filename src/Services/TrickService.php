@@ -5,7 +5,6 @@ namespace App\Services;
 use DateTime;
 use App\Entity\Image;
 use App\Entity\Trick;
-use App\Services\TrickServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 

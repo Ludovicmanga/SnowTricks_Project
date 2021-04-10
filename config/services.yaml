@@ -32,3 +32,5 @@ services:
     # please note that last definitions always *replace* previous ones
 
     App\Services\TrickServiceInterface: '@App\Services\TrickService'
+
+    App\Services\CommentServiceInterface: '@App\Services\CommentService'
