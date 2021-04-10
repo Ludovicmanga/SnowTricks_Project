@@ -80,7 +80,7 @@ class TrickController extends AbstractController
     public function create(Request $request)
      {  
         $trick = New Trick(); 
-        $form = $this->createForm(TrickCreateType::class, $trick); 
+        $form = $this->formFactory->create('trick-create', $trick); 
         $form->handleRequest($request); 
 
         //if the form is submitted, we hydrate the trick and send it to the DB
@@ -104,7 +104,7 @@ class TrickController extends AbstractController
     */
     public function update(Trick $trick, Request $request, TrickService $trickService)
      {  
-        $form = $this->createForm(TrickUpdateType::class, $trick); 
+        $form = $this->formFactory->create('trick-update', $trick); 
         $form->handleRequest($request); 
 
         //if the form is submitted, we hydrate the trick and send it to the DB by using the service
