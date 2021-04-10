@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class TrickType extends AbstractType
+class TrickCreateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

@@ -10,7 +10,7 @@ use App\Entity\Video;
 use App\Entity\Upload;
 use App\Services\Test;
 use App\Entity\Comment;
-use App\Form\TrickType;
+use App\Form\TrickCreateType;
 use App\Form\UploadType;
 use App\Form\CommentType;
 use App\Form\TrickUpdateType;
@@ -64,7 +64,7 @@ class TrickController extends AbstractController
     public function create(Request $request, EntityManagerInterface $manager, TrickCreationService $trickCreationService)
      {  
         $trick = New Trick(); 
-        $form = $this->createForm(TrickType::class, $trick); 
+        $form = $this->createForm(TrickCreateType::class, $trick); 
         $form->handleRequest($request); 
 
         //if the form is submitted, we hydrate the trick and send it to the DB
@@ -82,7 +82,9 @@ class TrickController extends AbstractController
      }
 
     /**
-    * @Route("/update/trick/{id}", name="trick_update", methods={"HEAD", "GET", "POST"})
+    * @Route("/update/trick/{id}", 
+    *     name="trick_update", 
+    *     methods={"HEAD", "GET", "POST"})
     */
     public function update(Trick $trick, Request $request, EntityManagerInterface $manager, TrickUpdateService $trickUpdateService)
      {  
@@ -95,13 +97,13 @@ class TrickController extends AbstractController
                 
                 //We then return the updated trick
                 return $this->redirectToRoute('trick_show', [
-                            'trick_id' => $trick->getId()
+                    'trick_id' => $trick->getId()
                 ]); 
         } 
         
         return $this->render('trick/update.html.twig', [
-             'formTrickCreation' => $form->createView(), 
-             'trick' => $trick, 
+            'formTrickCreation' => $form->createView(), 
+            'trick' => $trick, 
              'form' => $form->createView()
         ]); 
      }
