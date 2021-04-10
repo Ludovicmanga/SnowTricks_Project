@@ -6,9 +6,8 @@ use App\Entity\Trick;
 
 interface TrickServiceInterface
 {
-    public function create(Trick $trick); 
+    public function add(Trick $trick, $form); 
 
     public function update(Trick $trick); 
 
-    public function delete(Trick $trick); 
 }

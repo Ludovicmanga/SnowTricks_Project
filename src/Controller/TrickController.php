@@ -7,17 +7,15 @@ use App\Entity\User;
 use App\Entity\Image;
 use App\Entity\Trick;
 use App\Entity\Video;
-use App\Entity\Upload;
-use App\Services\Test;
+//use App\Entity\Upload;
+//use App\Services\Test;
 use App\Entity\Comment;
-use App\Form\UploadType;
+// use App\Form\UploadType;
 use App\Form\CommentType;
 use App\Form\AppFormFactory;
 use App\Form\TrickCreateType;
 use App\Form\TrickUpdateType;
-use App\Services\MyFormFactory;
 use App\Services\CommentService;
-use App\Services\FormFactoryService;
 // use App\Services\TrickUpdateService;
 // use App\Services\TrickCreationService;
 use App\Services\TrickServiceInterface; 
@@ -87,7 +85,7 @@ class TrickController extends AbstractController
 
         //if the form is submitted, we hydrate the trick and send it to the DB
         if($form->isSubmitted() && $form->isValid()) {
-                $trickService->create($trick, $form); 
+                $trickService->add($trick, $form); 
             
                 return $this->redirectToRoute('trick_show', [
                     'trick_id' => $trick->getId()

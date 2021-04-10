@@ -5,6 +5,7 @@ namespace App\Services;
 use DateTime;
 use App\Entity\Image;
 use App\Entity\Trick;
+use App\Services\TrickServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -18,7 +19,7 @@ class TrickService implements TrickServiceInterface
         $this->params = $params;
     }   
 
-    public function create(Trick $trick, $form) {        
+    public function add(Trick $trick, $form) {        
             //We get the images from the trick creation form
             $images = $form->get('images')->getData(); 
 
