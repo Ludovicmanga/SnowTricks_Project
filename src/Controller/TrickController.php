@@ -33,7 +33,7 @@ class TrickController extends AbstractController
 {   
     private $trickService; 
     private $em; 
-    private $formFactory; 
+    private $formFactory;
 
     public function __construct(TrickServiceInterface $trickService, EntityManagerInterface $em, AppFormFactory $formFactory) {
         $this->trickService = $trickService; 
@@ -51,7 +51,7 @@ class TrickController extends AbstractController
     {
         //creation of the form
         $comment = New Comment(); 
-        $commentForm = $formFactory->create('trick-comment', $comment); 
+        $commentForm = $this->formFactory->create('trick-comment', $comment); 
         
         // $commentForm = $this->createForm(CommentType::class, $comment); 
 
@@ -77,7 +77,7 @@ class TrickController extends AbstractController
      *     name="trick_create", 
      *     methods={"HEAD", "GET", "POST"})
      */
-    public function create(Request $request, TrickService $trickService)
+    public function create(Request $request)
      {  
         $trick = New Trick(); 
         $form = $this->createForm(TrickCreateType::class, $trick); 
@@ -85,7 +85,7 @@ class TrickController extends AbstractController
 
         //if the form is submitted, we hydrate the trick and send it to the DB
         if($form->isSubmitted() && $form->isValid()) {
-                $trickService->add($trick, $form); 
+                $this->trickService->add($trick, $form); 
             
                 return $this->redirectToRoute('trick_show', [
                     'trick_id' => $trick->getId()
@@ -109,7 +109,7 @@ class TrickController extends AbstractController
 
         //if the form is submitted, we hydrate the trick and send it to the DB by using the service
         if($form->isSubmitted() && $form->isValid()) {                 
-                $trickService->update($trick); 
+                $this->trickService->update($trick); 
                 
                 //We then return the updated trick
                 return $this->redirectToRoute('trick_show', [
@@ -131,8 +131,8 @@ class TrickController extends AbstractController
     */
     public function deleteTrick(Trick $trick): RedirectResponse  
      {
-        $em->remove($trick); 
-        $em->flush();
+        $this->em->remove($trick); 
+        $this->em->flush();
         
         return $this->redirectToRoute('home'); 
      }
@@ -144,8 +144,8 @@ class TrickController extends AbstractController
     */
     public function deleteTrickVideo(Video $video): RedirectResponse  
     {
-        $em->remove($video); 
-        $em->flush();
+        $this->em->remove($video); 
+        $this->em->flush();
 
         return $this->redirectToRoute('home'); 
     }
@@ -157,8 +157,8 @@ class TrickController extends AbstractController
     */
     public function deleteTrickImage(Image $image): RedirectResponse  
     {
-        $em->remove($image); 
-        $em->flush();
+        $this->em->remove($image); 
+        $this->em->flush();
         
         return $this->redirectToRoute('trick_update', [
             'id' => $image->getTrick()->getId()
