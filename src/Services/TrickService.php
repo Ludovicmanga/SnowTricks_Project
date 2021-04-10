@@ -10,11 +10,11 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class TrickService implements TrickServiceInterface
 {
-    private $manager; 
+    private $em; 
     private $params;
 
-    public function __construct(EntityManagerInterface $manager, ParameterBagInterface $params) {
-        $this->manager = $manager; 
+    public function __construct(EntityManagerInterface $em, ParameterBagInterface $params) {
+        $this->em = $em; 
         $this->params = $params;
     }   
 
@@ -61,14 +61,24 @@ class TrickService implements TrickServiceInterface
                 // $trick->addImage($img); 
             }
 
+            foreach ($form->get('videos')->getData() as $video) {
+                $video->setTrick($trick);
+                $this->em->persist($video);
+              }
+
+            //foreach ($form->get('images')->getData() as $adv) {
+            // $adv->setAdvert($advert);
+            // $em->persist($adv);
+            //}
+
             $trick->setCreationDate(new DateTime());
-            $this->manager->persist($trick); 
-            $this->manager->flush();
+            $this->em->persist($trick); 
+            $this->em->flush();
     }
 
     public function update(Trick $trick) {   
         $trick->setUpdateDate(new DateTime()); 
-        $this->manager->persist($trick); 
-        $this->manager->flush();
+        $this->em->persist($trick); 
+        $this->em->flush();
     }   
 } 
