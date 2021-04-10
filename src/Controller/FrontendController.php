@@ -10,7 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FrontendController extends AbstractController
 {
     /**
-     * @Route("/", name="home", methods={"HEAD", "GET", "POST"})
+     * @Route("/", 
+     *     name="home", 
+     *     methods={"HEAD", "GET", "POST"})
      */
     public function home(): Response
     {

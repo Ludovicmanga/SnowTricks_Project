@@ -41,8 +41,10 @@ class TrickController extends AbstractController
     }
 
      /**
-     * @Route("show/trick/{trick_id}", name="trick_show", methods={"HEAD", "GET", "POST"})
-     * @Entity("trick", expr="repository.findOneById(trick_id)")
+     * @Route("show/trick/{trick_id}", 
+     *     name="trick_show", 
+     *     methods={"HEAD", "GET", "POST"})
+     *     @Entity("trick", expr="repository.findOneById(trick_id)")
      */
     public function show(Trick $trick, Request $request, CommentService $commentService): Response
     {
@@ -68,7 +70,9 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/create/trick", name="trick_create", methods={"HEAD", "GET", "POST"})
+     * @Route("/create/trick", 
+     *     name="trick_create", 
+     *     methods={"HEAD", "GET", "POST"})
      */
     public function create(Request $request, TrickCreationService $trickCreationService)
      {  
@@ -118,7 +122,9 @@ class TrickController extends AbstractController
      }
 
     /**
-    * @Route("/delete/trick/{id}", name="trick_delete", methods={"HEAD", "GET", "POST"})
+    * @Route("/delete/trick/{id}", 
+    *     name="trick_delete", 
+    *     methods={"HEAD", "GET", "POST"})
     */
     public function deleteTrick(Trick $trick): RedirectResponse  
      {
@@ -129,7 +135,9 @@ class TrickController extends AbstractController
      }
 
     /**
-    * @Route("/delete/video/{id}", name="trick_video_delete", methods={"HEAD", "GET", "POST"})
+    * @Route("/delete/video/{id}", 
+    *     name="trick_video_delete", 
+    *     methods={"HEAD", "GET", "POST"})
     */
     public function deleteTrickVideo(Video $video): RedirectResponse  
     {
@@ -140,7 +148,9 @@ class TrickController extends AbstractController
     }
 
     /**
-    * @Route("/delete/image/{id}", name="trick_image_delete", methods={"HEAD", "GET", "POST"})
+    * @Route("/delete/image/{id}", 
+    *     name="trick_image_delete", 
+    *     methods={"HEAD", "GET", "POST"})
     */
     public function deleteTrickImage(Image $image): RedirectResponse  
     {
@@ -153,7 +163,8 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/test", 
+     *     name="test")
      */
     public function test(Request $request) {
 
