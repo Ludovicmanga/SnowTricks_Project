@@ -39,7 +39,7 @@ class AppFormFactory implements AppFormFactoryInterface
         }   
 
         if (null !== $form) {
-            return $this->formfactory->create($form, $object)
+            return $this->formfactory->create($form, $object); 
         }
 
         return false; 
