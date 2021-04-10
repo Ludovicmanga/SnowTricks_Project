@@ -102,7 +102,7 @@ class TrickController extends AbstractController
     *     name="trick_update", 
     *     methods={"HEAD", "GET", "POST"})
     */
-    public function update(Trick $trick, Request $request, TrickService $trickService)
+    public function update(Trick $trick, Request $request)
      {  
         $form = $this->formFactory->create('trick-update', $trick); 
         $form->handleRequest($request); 
