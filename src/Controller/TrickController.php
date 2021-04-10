@@ -9,6 +9,7 @@ use App\Entity\Trick;
 use App\Entity\Video;
 use App\Entity\Upload;
 use App\Services\Test;
+use App\Services\TrickServiceInterface; 
 use App\Entity\Comment;
 use App\Form\TrickCreateType;
 use App\Form\UploadType;
@@ -31,6 +32,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class TrickController extends AbstractController
 {   
+    private $trickService; 
+    private $em; 
+
+    public function __construct(TrickServiceInterface $trickService, EntityManagerInterface $em) {
+        $this->trickService = $trickService; 
+        $this->em = $em; 
+    }
+
      /**
      * @Route("show/trick/{trick_id}", name="trick_show", methods={"HEAD", "GET", "POST"})
      * @Entity("trick", expr="repository.findOneById(trick_id)")
@@ -61,7 +70,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/create/trick", name="trick_create", methods={"HEAD", "GET", "POST"})
      */
-    public function create(Request $request, EntityManagerInterface $manager, TrickCreationService $trickCreationService)
+    public function create(Request $request, TrickCreationService $trickCreationService)
      {  
         $trick = New Trick(); 
         $form = $this->createForm(TrickCreateType::class, $trick); 
@@ -86,7 +95,7 @@ class TrickController extends AbstractController
     *     name="trick_update", 
     *     methods={"HEAD", "GET", "POST"})
     */
-    public function update(Trick $trick, Request $request, EntityManagerInterface $manager, TrickUpdateService $trickUpdateService)
+    public function update(Trick $trick, Request $request, TrickUpdateService $trickUpdateService)
      {  
         $form = $this->createForm(TrickUpdateType::class, $trick); 
         $form->handleRequest($request); 
@@ -111,10 +120,10 @@ class TrickController extends AbstractController
     /**
     * @Route("/delete/trick/{id}", name="trick_delete", methods={"HEAD", "GET", "POST"})
     */
-    public function deleteTrick(Trick $trick, EntityManagerInterface $manager): RedirectResponse  
+    public function deleteTrick(Trick $trick): RedirectResponse  
      {
-        $manager->remove($trick); 
-        $manager->flush();
+        $em->remove($trick); 
+        $em->flush();
         
         return $this->redirectToRoute('home'); 
      }
@@ -122,10 +131,10 @@ class TrickController extends AbstractController
     /**
     * @Route("/delete/video/{id}", name="trick_video_delete", methods={"HEAD", "GET", "POST"})
     */
-    public function deleteTrickVideo(Video $video, EntityManagerInterface $manager): RedirectResponse  
+    public function deleteTrickVideo(Video $video): RedirectResponse  
     {
-        $manager->remove($video); 
-        $manager->flush();
+        $em->remove($video); 
+        $em->flush();
 
         return $this->redirectToRoute('home'); 
     }
@@ -133,10 +142,10 @@ class TrickController extends AbstractController
     /**
     * @Route("/delete/image/{id}", name="trick_image_delete", methods={"HEAD", "GET", "POST"})
     */
-    public function deleteTrickImage(Image $image, EntityManagerInterface $manager): RedirectResponse  
+    public function deleteTrickImage(Image $image): RedirectResponse  
     {
-        $manager->remove($image); 
-        $manager->flush();
+        $em->remove($image); 
+        $em->flush();
         
         return $this->redirectToRoute('trick_update', [
             'id' => $image->getTrick()->getId()
