@@ -56,8 +56,15 @@ class TrickController extends AbstractController
         $commentForm = $this->formFactory->create('trick-comment', $comment); 
         
         $limit = 5; 
+
+        // We get the page number
         $page = (int)$request->query->get("page", 1);
+
+        // We get the comments of the page
         $paginatedComments = $commentRepo->getPaginatedComments($page, $limit, $trick); 
+
+        // We get the total number of comments
+        $comments = $commentRepo->getTotalComments(); 
 
         //handling of the form
         $commentForm->handleRequest($request); 
