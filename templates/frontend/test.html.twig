@@ -110,15 +110,60 @@
             </div>
         {% endfor %}
     </div>
+    <div class="row" id="row2">
+        {% for trick in tricks|slice(4, 4) %} 
+            <div class="trick" id="trick">
+                <a href="{{ path('trick_show', {"trick_id": trick.id}) }}"><img src="{{ trick.coverImagePath }}" ></a>
+                <div class="trickContentContainer">
+                    <div class="titleContainer">
+                        <h2>{{ trick.name }}</h2>
+                    </div>
+                    {% if app.user %}
+                        <div class="iconContainer">
+                            <div class="trashIcon icon">
+                                <a onclick="return confirm('attention, cela va supprimer l\'article')" href=" {{ path('trick_delete', {"id": trick.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+                            </div>
+                            <div class="penIcon icon">
+                                <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
     <div id="loadMoreButtonContainer">
         <button onclick="loadMore()">Load more</button>
     </div>
-    <div id="tricks"></div>
+     <div id="createDiv">
+        <button onclick="addDiv()">Add div</button>
+    </div>
+    
+    <div id="tricks">
+    
+    </div>
 {% endblock %}
 
 {% block javascripts %}
 
 <script>
+
+function addDiv(){
+
+    console.log('added'); 
+    
+    var idiv = document.createElement('div'); 
+        iDiv.id = block; 
+        iDiv.className = 'block'; 
+    
+    var innerDiv = document.createElement('div'); 
+    innerDiv.className = 'block-2' ;
+
+    iDiv.appendChild(innerDiv); 
+
+    document.getElementByTagName('body')[0].appendChild(iDiv); 
+
+}
 
 function loadMore(){
         xhr = new XMLHttpRequest(); 
@@ -126,20 +171,19 @@ function loadMore(){
 
         xhr.onload = function(){
             
-            console.log("loaded"); 
-
             if (this.status == 200) {
-                console.log("works"); 
 
                     var tricks = JSON.parse(this.responseText); 
 
                     var output = ''; 
 
                     for(var i in tricks){
-                        output += '<ul>' + 
-                        '<li> nom : '+tricks[i].name+'</li>' + 
-                        '<li> description : '+tricks[i].description+'</li>' + 
-                        '</ul>' ;
+                      
+                    output += 
+                        '<div>'+
+                        'yo '+tricks[i].name+
+                        '<a href="{{ path('trick_show', {"trick_id":'+tricks[i].id+'}) }}"><img src="'+tricks[i].coverImagePath+'" ></a>'+
+                        '</div>';         
                     }                     
             }
             document.getElementById('tricks').innerHTML = output ; 
