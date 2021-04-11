@@ -47,4 +47,31 @@ class CommentRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * Returns all comments per page
+     * @return void
+     */
+    public function getPaginatedComments($page, $limit, $trick){
+        $query = $this->createQueryBuilder('comment')
+            ->where('comment.trick ='.$trick->getId())
+            ->orderBy('comment.creationDate')
+            ->setFirstResult(($page * $limit) - $limit)
+            ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult(); 
+    }
+
+    /**
+     * Returns total number of comments for a trick
+     * @return void
+     */
+    public function getTotalComments($trick){
+        $query = $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.trick ='.$trick->getId())
+        ;
+        return $query->getQuery()->getSingleScalarResult();
+    }  
+
 }

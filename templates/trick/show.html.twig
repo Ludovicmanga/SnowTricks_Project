@@ -95,17 +95,22 @@
 
 {# comments related with the trick #}
 
-{% for comment in trick.comments %}
-
-<div class="commentContainer">
-    <div class="commentPicture">
-        <img src="../../{{ comment.user.profilePicture }}">
+{% for paginatedComment in paginatedComments %}
+    <div class="commentContainer">
+        <div class="commentPicture">
+            <img src="../../{{ paginatedComment.user.profilePicture }}">
+        </div>
+        <div>
+            <p>  {{ paginatedComment.commentContent }}  </p>
+        </div>
     </div>
-    <div>
-        <p>  {{ comment.commentContent }}  </p>
-    </div>
-</div>
-
 {% endfor %}
+<ul>
+    {% for item in 1..(( totalComments / limit)|round(0,'ceil')) %}
+        <li>
+            <a href="?page={{ item }}">{{ item }}</a>
+        </li>
+    {% endfor %}
+</ul>
 
 {% endblock %}

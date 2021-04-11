@@ -15,10 +15,11 @@ use App\Form\CommentType;
 use App\Form\AppFormFactory;
 use App\Form\TrickCreateType;
 use App\Form\TrickUpdateType;
+use App\Repository\CommentRepository;
 use App\Services\TrickServiceInterface; 
-use Doctrine\ORM\EntityManagerInterface;
 // use App\Services\TrickUpdateService;
 // use App\Services\TrickCreationService;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Services\CommentServiceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,13 +49,22 @@ class TrickController extends AbstractController
      *     methods={"HEAD", "GET", "POST"}), 
      *     @Entity("trick", expr="repository.findOneById(trick_id)")
      */
-    public function show(Trick $trick, Request $request, CommentServiceInterface $commentService): Response
+    public function show(Trick $trick, Request $request, CommentServiceInterface $commentService, CommentRepository $commentRepo): Response
     {
         //creation of the form
         $comment = New Comment(); 
         $commentForm = $this->formFactory->create('trick-comment', $comment); 
         
-        // $commentForm = $this->createForm(CommentType::class, $comment); 
+        $limit = 5; 
+
+        // We get the page number
+        $page = (int)$request->query->get("page", 1);
+
+        // We get the comments of the page
+        $paginatedComments = $commentRepo->getPaginatedComments($page, $limit, $trick); 
+
+        // We get the total number of comments
+        $totalComments = $commentRepo->getTotalComments($trick); 
 
         //handling of the form
         $commentForm->handleRequest($request); 
@@ -69,7 +79,11 @@ class TrickController extends AbstractController
         
         return $this->render('trick/show.html.twig', [
             'trick' => $trick, 
-            'commentForm' => $commentForm->createView()
+            'paginatedComments' => $paginatedComments, 
+            'commentForm' => $commentForm->createView(), 
+            'totalComments' => $totalComments, 
+            'limit' => $limit, 
+            'page' => $page
         ]);
     }
 

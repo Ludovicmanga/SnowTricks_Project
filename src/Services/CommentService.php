@@ -7,24 +7,22 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class CommentService implements CommentServiceInterface
 {
-    private $manager; 
+    private $em; 
     // changer en $em
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->manager = $manager; 
+        $this->em = $em; 
     }
 
     public function add($comment, $trick) {
 
-        if(!$comment->getId()) {
             $comment
                 ->setCreationDate(new DateTime())
                 ->setTrick($trick)
                 ->setModificationDate(new DateTime())
             ; 
             
-            $this->manager->persist($comment);
-            $this->manager->flush(); 
-        } 
+            $this->em->persist($comment);
+            $this->em->flush(); 
     }
 }
