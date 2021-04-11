@@ -155,8 +155,9 @@
         {% endfor %}
     </div>  
     <div id="loadMoreButtonContainer">
-        <a href=#><button onclick="loadMore()">Load more</button></a>
+        <button onclick="loadMore()">Load more</button>
     </div>
+    <div id="tricks"></div>
 {% endblock %}
 
 {% block javascripts %}
@@ -165,11 +166,33 @@
 
 function loadMore(){
         xhr = new XMLHttpRequest(); 
+        xhr.open('GET', '{{ path("load_more_tricks") }}', true); 
 
         xhr.onload = function(){
+            
             console.log("loaded"); 
+
+            if (this.status == 200) {
+                console.log("works"); 
+
+                    var tricks = JSON.parse(this.responseText); 
+
+                    alert(tricks.tricks);
+
+                    var output = ''; 
+
+                    for(var i in tricks){
+                        output += '<ul>' + 
+                        '<li> nom : '+tricks[i].name+'</li>' + 
+                        '<li> description : '+tricks[i].description+'</li>' + 
+                        '</ul>' ;
+                    }
+                     
+            }
+
+            document.getElementById('tricks').innerHTML = output ; 
         }
-        xhr.open('GET', '{{ path("load_more_tricks") }}', true); 
+        
         xhr.send(); 
 }
 

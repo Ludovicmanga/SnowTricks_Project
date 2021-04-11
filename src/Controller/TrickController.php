@@ -171,14 +171,30 @@ class TrickController extends AbstractController
      *     name="load_more_tricks", 
      *     methods={"HEAD", "GET", "POST"}) 
      */
-    public function loadMore () {
-
+    public function loadMore() {
         $tricks = $this->getDoctrine()->getRepository(Trick::class)->findAll(); 
 
-        echo json_encode($tricks); 
+       // dd($tricks); 
+       // return new JsonResponse([
+       //     'tricks' => $tricks
+       // ]);  
 
-     //   return new JsonResponse(array(
-     //     '' => ''
-     // ));  
-    }
+        // ---------------------------------
+        //$response = new Response(json_encode($tricks));
+        // $response->headers->set('Content-Type', 'application/json');
+
+        // return $response;
+        // -----------------------------
+
+        $arrayCollection = array();
+
+        foreach($tricks as $trick) {
+            $arrayCollection[] = array(
+                'name' => $trick->getName(),
+                'description' => $trick->getDescription()
+            );
+        }
+
+        return new JsonResponse($arrayCollection);
+            }
 }
