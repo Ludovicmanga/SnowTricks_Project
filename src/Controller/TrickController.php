@@ -16,13 +16,14 @@ use App\Form\AppFormFactory;
 use App\Form\TrickCreateType;
 use App\Form\TrickUpdateType;
 use App\Services\TrickServiceInterface; 
-use App\Services\CommentServiceInterface;
+use Doctrine\ORM\EntityManagerInterface;
 // use App\Services\TrickUpdateService;
 // use App\Services\TrickCreationService;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Services\CommentServiceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -164,28 +165,20 @@ class TrickController extends AbstractController
             'id' => $image->getTrick()->getId()
         ]); 
     }
-
+    
     /**
-     * @Route("/test", 
-     *     name="test")
+     * @Route("/loadMoreTricks", 
+     *     name="load_more_tricks", 
+     *     methods={"HEAD", "GET", "POST"}) 
      */
-    public function test(Request $request) {
+    public function loadMore () {
 
-        $upload = new Upload(); 
-        $form = $this->createForm(UploadType::class, $upload); 
+        $tricks = $this->getDoctrine()->getRepository(Trick::class)->findAll(); 
 
-        $form->handleRequest($request); 
-        if($form->isSubmitted() && $form->isValid()) {
-            $file = $upload->getName(); 
-            $fileName = md5(uniqid()).'.'.$file->guessExtension(); 
-            $file->move($this->getParameter('images_directory'), $fileName); 
-            $upload->setName($fileName);
+        echo json_encode($tricks); 
 
-            return $this->redirectToRoute('home'); 
-        }
-
-        return $this->render('trick/test.html.twig', [
-            'form' => $form->createView(), 
-        ]); 
+     //   return new JsonResponse(array(
+     //     '' => ''
+     // ));  
     }
 }

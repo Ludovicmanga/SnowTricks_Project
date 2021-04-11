@@ -155,6 +155,24 @@
         {% endfor %}
     </div>  
     <div id="loadMoreButtonContainer">
-        <a href=#><button>Load more</button></a>
+        <a href=#><button onclick="loadMore()">Load more</button></a>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+
+<script>
+
+function loadMore(){
+        xhr = new XMLHttpRequest(); 
+
+        xhr.onload = function(){
+            console.log("loaded"); 
+        }
+        xhr.open('GET', '{{ path("load_more_tricks") }}', true); 
+        xhr.send(); 
+}
+
+</script>
+
+{% endblock  %}
