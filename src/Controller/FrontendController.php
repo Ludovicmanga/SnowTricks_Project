@@ -23,4 +23,19 @@ class FrontendController extends AbstractController
             'controller_name' => 'FrontendController'
         ]);
     }
+
+    /**
+     * @Route("/test", 
+     *     name="test", 
+     *     methods={"HEAD", "GET", "POST"})
+     */
+    public function test(): Response
+    {
+        $tricks = $this->getDoctrine()->getRepository(Trick::class)->findAll(); 
+
+        return $this->render('frontend/test.html.twig', [
+            'tricks' => $tricks,
+            'controller_name' => 'FrontendController'
+        ]);
+    }
 }

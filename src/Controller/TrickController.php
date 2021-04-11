@@ -174,24 +174,13 @@ class TrickController extends AbstractController
     public function loadMore() {
         $tricks = $this->getDoctrine()->getRepository(Trick::class)->findAll(); 
 
-       // dd($tricks); 
-       // return new JsonResponse([
-       //     'tricks' => $tricks
-       // ]);  
-
-        // ---------------------------------
-        //$response = new Response(json_encode($tricks));
-        // $response->headers->set('Content-Type', 'application/json');
-
-        // return $response;
-        // -----------------------------
-
         $arrayCollection = array();
 
         foreach($tricks as $trick) {
             $arrayCollection[] = array(
                 'name' => $trick->getName(),
-                'description' => $trick->getDescription()
+                'description' => $trick->getDescription(), 
+                'coverImagePath' => $trick->getCoverImagePath()
             );
         }
 
