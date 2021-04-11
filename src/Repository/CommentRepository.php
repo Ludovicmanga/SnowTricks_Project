@@ -61,4 +61,17 @@ class CommentRepository extends ServiceEntityRepository
         ;
         return $query->getQuery()->getResult(); 
     }
+
+    /**
+     * Returns total number of comments for a trick
+     * @return void
+     */
+    public function getTotalComments($trick){
+        $query = $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.trick ='.$trick->getId())
+        ;
+        return $query->getQuery()->getSingleScalarResult();
+    }  
+
 }

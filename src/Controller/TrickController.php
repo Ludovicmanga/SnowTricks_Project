@@ -64,7 +64,7 @@ class TrickController extends AbstractController
         $paginatedComments = $commentRepo->getPaginatedComments($page, $limit, $trick); 
 
         // We get the total number of comments
-        $comments = $commentRepo->getTotalComments(); 
+        $totalComments = $commentRepo->getTotalComments($trick); 
 
         //handling of the form
         $commentForm->handleRequest($request); 
@@ -80,7 +80,10 @@ class TrickController extends AbstractController
         return $this->render('trick/show.html.twig', [
             'trick' => $trick, 
             'paginatedComments' => $paginatedComments, 
-            'commentForm' => $commentForm->createView()
+            'commentForm' => $commentForm->createView(), 
+            'totalComments' => $totalComments, 
+            'limit' => $limit, 
+            'page' => $page
         ]);
     }
 
