@@ -95,14 +95,14 @@
 
 {# comments related with the trick #}
 
-{% for comment in trick.comments %}
+{% for paginatedComment in paginatedComments %}
 
 <div class="commentContainer">
     <div class="commentPicture">
-        <img src="../../{{ comment.user.profilePicture }}">
+        <img src="../../{{ paginatedComment.user.profilePicture }}">
     </div>
     <div>
-        <p>  {{ comment.commentContent }}  </p>
+        <p>  {{ paginatedComment.commentContent }}  </p>
     </div>
 </div>
 
