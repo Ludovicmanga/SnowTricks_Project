@@ -111,7 +111,7 @@
         {% endfor %}
     </div>
     <div id="loadMoreButtonContainer">
-        <button onclick="loadMore()">Load more</button>
+        <button onclick="loadMore()" value="Increment Value">Load more</button>
     </div>
     <div id="tricks"></div>
 {% endblock %}
@@ -121,16 +121,21 @@
 <script>
 
 function loadMore(){
+
+    // We increment the value every time the button is clicked
+        var value = parseInt(document.getElementById('tricks').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value +=4;
+        document.getElementById('tricks').value = value;
+        console.log(value); 
+
+    // We send the information to the controller
         xhr = new XMLHttpRequest(); 
-        xhr.open('GET', '{{ path("load_more_tricks") }}', true); 
+        xhr.open('POST', '{{ path("load_more_tricks") }}'+'?offset ='+value, true); 
 
         xhr.onload = function(){
             
-            console.log("loaded"); 
-
             if (this.status == 200) {
-                console.log("works"); 
-
                     var tricks = JSON.parse(this.responseText); 
 
                     var output = ''; 

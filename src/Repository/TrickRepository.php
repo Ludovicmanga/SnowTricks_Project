@@ -48,4 +48,17 @@ class TrickRepository extends ServiceEntityRepository
     }
     */
 
+    /**
+     * Returns total number of comments for a trick
+     * @return void
+     */
+    public function findFourLastTricks($offset){
+        $query = $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults(4)
+        ;
+        return $query->getQuery()->getResult();
+    }  
+
 }
