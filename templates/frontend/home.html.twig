@@ -123,16 +123,20 @@
 function loadMore(){
 
     // We increment the value every time the button is clicked
-        var value = parseInt(document.getElementById('tricks').value, 10);
-        value = isNaN(value) ? 0 : value;
-        value +=4;
-        document.getElementById('tricks').value = value;
-        console.log(value); 
+        var offset = parseInt(document.getElementById('tricks').offset, 10);
+        offset = isNaN(offset) ? 0 : offset;
+        offset +=4;
+        document.getElementById('tricks').offset = offset;
 
     // We send the information to the controller
         xhr = new XMLHttpRequest(); 
-        xhr.open('POST', '{{ path("load_more_tricks") }}'+'?offset ='+value, true); 
 
+        // We insert the offset number in the url 
+        var url = '{{ path("load_more_tricks", {"offset": "offset_number"}) }}'
+        url = url.replace("offset_number", offset)
+
+        // We send the url to the controller
+        xhr.open('POST', url , true); 
         xhr.onload = function(){
             
             if (this.status == 200) {
@@ -148,8 +152,7 @@ function loadMore(){
                     }                     
             }
             document.getElementById('tricks').innerHTML = output ; 
-        }
-        
+        }   
         xhr.send(); 
 }
 

@@ -181,13 +181,12 @@ class TrickController extends AbstractController
     }
     
     /**
-     * @Route("/loadMoreTricks", 
+     * @Route("/loadMoreTricks/{offset}", 
      *     name="load_more_tricks", 
      *     methods={"HEAD", "GET", "POST"}) 
      */
-    public function loadMore(Request $request) {
+    public function loadMore(Request $request, $offset) {
 
-        $offset = $request->query->get("offset");
         $tricks = $this->getDoctrine()->getRepository(Trick::class)->findFourLastTricks($offset); 
 
         $arrayCollection = array();
@@ -201,5 +200,6 @@ class TrickController extends AbstractController
         }
 
         return new JsonResponse($arrayCollection);
+        
     }
 }
