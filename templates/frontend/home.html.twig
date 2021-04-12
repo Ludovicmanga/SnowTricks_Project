@@ -148,13 +148,24 @@ function loadMore(){
                         output += '<ul>' + 
                         '<li> nom : '+tricks[i].name+'</li>' + 
                         '<li> description : '+tricks[i].description+'</li>' + 
+                        '<div class="trick">'+
+                            '<img src='+tricks[i].coverImagePath+'>'+
+                        '</div>'+
                         '</ul>' ;
                     }                     
             }
-            document.getElementById('tricks').innerHTML = output ; 
+
+            // We create a new div
+            let divElement = document.createElement('div') ; 
+            let divElementText = document.createTextNode('Dynamically created div element') ; 
+            divElement.appendChild(divElementText)
+            document.body.appendChild(divElement)
+            divElement.innerHTML = output ; 
+
         }   
         xhr.send(); 
 }
+
 
 </script>
 

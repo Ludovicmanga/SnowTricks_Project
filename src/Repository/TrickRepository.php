@@ -55,7 +55,7 @@ class TrickRepository extends ServiceEntityRepository
     public function findFourLastTricks($offset){
         $query = $this->createQueryBuilder('a')
             ->orderBy('a.id', 'DESC')
-            ->setFirstResult($offset)
+            ->setFirstResult($offset - 4)
             ->setMaxResults(4)
         ;
         return $query->getQuery()->getResult();
