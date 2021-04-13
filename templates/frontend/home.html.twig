@@ -110,10 +110,10 @@
             </div>
         {% endfor %}
     </div>
+    <div id="tricks"></div>
     <div id="loadMoreButtonContainer">
         <button onclick="loadMore()" value="Increment Value">Load more</button>
     </div>
-    <div id="tricks"></div>
 {% endblock %}
 
 {% block javascripts %}
@@ -142,30 +142,69 @@ function loadMore(){
             if (this.status == 200) {
                     var tricks = JSON.parse(this.responseText); 
 
+                    // We create a row div
+                    let rowElement = document.createElement('div') ; 
+                  //  rowElement.attr(class.row); 
+                    document.body.appendChild(rowElement) ; 
+
                     var output = ''; 
 
                     for(var i in tricks){
-                        output += '<ul>' + 
+                        output = 
+                        '<div>hello'+tricks[i].name+'</div>'+
+                        '<div class="trick">'+
+                            '<img src='+tricks[i].coverImagePath +'>'+
+                        '</div>'
+
+                        
+                        /*
+                        
+                         output += 
+
+                        '<ul>' + 
                         '<li> nom : '+tricks[i].name+'</li>' + 
                         '<li> description : '+tricks[i].description+'</li>' + 
                         '<div class="trick">'+
                             '<img src='+tricks[i].coverImagePath+'>'+
                         '</div>'+
                         '</ul>' ;
-                    }                     
+
+                        */
+
+                        console.log(output); 
+
+                        let divToCreate = document.createElement('div') ; 
+                        document.body.appendChild(divToCreate)
+                        divToCreate.innerHTML = output ;  
+
+                        rowElement.appendChild(divToCreate); 
+                    }      
             }
 
+            /*
             // We create a new div
             let divElement = document.createElement('div') ; 
             let divElementText = document.createTextNode('Dynamically created div element') ; 
             divElement.appendChild(divElementText)
             document.body.appendChild(divElement)
             divElement.innerHTML = output ; 
+            */
+            
+            /*
+            
+            // We create a row div
+            let rowElement = document.createElement('div') ; 
+            rowElement.appendChild(divElement)
+            document.body.appendChild(rowElement)
+
+            */
+            
+
+            
 
         }   
         xhr.send(); 
 }
-
 
 </script>
 
