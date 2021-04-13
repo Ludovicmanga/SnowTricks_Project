@@ -106,7 +106,7 @@ class TrickController extends AbstractController
                     'trick_id' => $trick->getId()
             ]); 
         } 
-        
+     
         return $this->render('trick/creation.html.twig', [
              'formTrickCreation' => $form->createView()
          ]); 
@@ -181,12 +181,13 @@ class TrickController extends AbstractController
     }
     
     /**
-     * @Route("/loadMoreTricks", 
+     * @Route("/loadMoreTricks/{offset}", 
      *     name="load_more_tricks", 
      *     methods={"HEAD", "GET", "POST"}) 
      */
-    public function loadMore() {
-        $tricks = $this->getDoctrine()->getRepository(Trick::class)->findAll(); 
+    public function loadMore(Request $request, $offset) {
+
+        $tricks = $this->getDoctrine()->getRepository(Trick::class)->findFourLastTricks($offset); 
 
         $arrayCollection = array();
 
@@ -199,5 +200,6 @@ class TrickController extends AbstractController
         }
 
         return new JsonResponse($arrayCollection);
-            }
+        
+    }
 }

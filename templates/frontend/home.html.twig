@@ -110,10 +110,10 @@
             </div>
         {% endfor %}
     </div>
-    <div id="loadMoreButtonContainer">
-        <button onclick="loadMore()">Load more</button>
-    </div>
     <div id="tricks"></div>
+    <div id="loadMoreButtonContainer">
+        <button onclick="loadMore()" value="Increment Value">Load more</button>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -121,30 +121,88 @@
 <script>
 
 function loadMore(){
-        xhr = new XMLHttpRequest(); 
-        xhr.open('GET', '{{ path("load_more_tricks") }}', true); 
 
+    // We increment the value every time the button is clicked
+        var offset = parseInt(document.getElementById('tricks').offset, 10);
+        offset = isNaN(offset) ? 0 : offset;
+        offset +=4;
+        document.getElementById('tricks').offset = offset;
+
+    // We send the information to the controller
+        xhr = new XMLHttpRequest(); 
+
+        // We insert the offset number in the url 
+        var url = '{{ path("load_more_tricks", {"offset": "offset_number"}) }}'
+        url = url.replace("offset_number", offset)
+
+        // We send the url to the controller
+        xhr.open('POST', url , true); 
         xhr.onload = function(){
             
-            console.log("loaded"); 
-
             if (this.status == 200) {
-                console.log("works"); 
-
                     var tricks = JSON.parse(this.responseText); 
+
+                    // We create a row div
+                    let rowElement = document.createElement('div') ; 
+                  //  rowElement.attr(class.row); 
+                    document.body.appendChild(rowElement) ; 
 
                     var output = ''; 
 
                     for(var i in tricks){
-                        output += '<ul>' + 
+                        output = 
+                        '<div>hello'+tricks[i].name+'</div>'+
+                        '<div class="trick">'+
+                            '<img src='+tricks[i].coverImagePath +'>'+
+                        '</div>'
+
+                        
+                        /*
+                        
+                         output += 
+
+                        '<ul>' + 
                         '<li> nom : '+tricks[i].name+'</li>' + 
                         '<li> description : '+tricks[i].description+'</li>' + 
+                        '<div class="trick">'+
+                            '<img src='+tricks[i].coverImagePath+'>'+
+                        '</div>'+
                         '</ul>' ;
-                    }                     
+
+                        */
+
+                        console.log(output); 
+
+                        let divToCreate = document.createElement('div') ; 
+                        document.body.appendChild(divToCreate)
+                        divToCreate.innerHTML = output ;  
+
+                        rowElement.appendChild(divToCreate); 
+                    }      
             }
-            document.getElementById('tricks').innerHTML = output ; 
-        }
-        
+
+            /*
+            // We create a new div
+            let divElement = document.createElement('div') ; 
+            let divElementText = document.createTextNode('Dynamically created div element') ; 
+            divElement.appendChild(divElementText)
+            document.body.appendChild(divElement)
+            divElement.innerHTML = output ; 
+            */
+            
+            /*
+            
+            // We create a row div
+            let rowElement = document.createElement('div') ; 
+            rowElement.appendChild(divElement)
+            document.body.appendChild(rowElement)
+
+            */
+            
+
+            
+
+        }   
         xhr.send(); 
 }
 
