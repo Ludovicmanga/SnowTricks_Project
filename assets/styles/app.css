@@ -1,28 +1,71 @@
-#mainNavBar ul {
-    list-style: none; 
-    background: #bd1e43; 
-    padding: 0; 
-    margin: 0; 
-    text-align: right; 
+#homeHero {
+    height: 1000px; 
+    background: url(img/homeHero.jpg) no-repeat center;
+    background-size: 80%;
+    position : relative; 
 }
 
-#mainNavBar li {
-    display: inline-block; 
+#homeHero h1 {
+    font-size : 3em;
+    text-align : center; 
+    vertical-align: center;  
 }
 
-#mainNavBar a {
-    text-decoration: none; 
-    color: #fff; 
-    width: 70px; 
-    display: block; 
-    padding: 25px 20px;
-    text-transfor: uppercase;
-    font-weight: bold; 
-    font-family: arial; 
-    text-align: center;
-    font-size: 14px;
+.row {
+    display: flex;
+    margin-right : 200px; 
+    margin-left: 50px; 
+    margin-top: 50px; 
+    margin-bottom: 10px; 
+    width : 60%;
 }
 
-#mainNavBar a:hover {
-    background: rgb(168,0,0); 
+.trick {
+    margin-left: 5px; 
+    margin-right: 5px;
+    border: solid black 2px;
+    border-radius: 10px;
+}
+
+.trick img {
+    height: 180px;
+    border: solid black 0.5px;
+}
+
+.trickContentContainer {
+    display: flex;
+    justify-content: space-between; 
+}
+
+.iconContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.titleContainer {
+    margin-left: 76px;
+}
+
+.icon {
+    margin-right: 15px;
+}
+
+#loadMoreButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+#loadMoreButtonContainer button {
+    height: 80px;
+    width: 120px;
+    border-radius: 20px;
+}
+
+#downArrow {
+    position : absolute; 
+    bottom : 5%; 
+    right : 1%;
 }
