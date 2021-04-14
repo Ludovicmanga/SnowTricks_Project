@@ -98,3 +98,72 @@
     bottom : 5%; 
     right : 1%;
 }
+
+/* Show page  */
+
+#trickHero {
+    height: 1000px; 
+    border: solid black 1px;
+    }
+
+.ContainerIconContainer {
+    display: flex;
+    align-items: right;
+}
+
+.iconContainer {
+    display: flex;
+}
+ 
+#mediaSection {
+    display: flex; 
+}
+
+.media {
+    border: solid black 1px; 
+}
+
+.media img {
+    height: 250px; 
+    border: solid black 1px;
+}
+
+.commentContainer {
+    display: flex; 
+}
+
+.commentPicture img {
+    height: 45px; 
+}
+
+/* update page */
+
+.ContainerIconContainer {
+    display: flex;
+    align-items: right;
+}
+
+.iconContainer {
+    display: flex;
+}
+ 
+#mediaSection {
+    display: flex; 
+}
+
+.mediaContainer {
+    display : flex; 
+    flex-direction : column; 
+}
+
+.media {
+    border: solid black 1px; 
+}
+
+.media img {
+    height: 315px; 
+    border: solid black 1px;
+}
+
+
+

@@ -1,44 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-
-#trickHero 
-{
-    background: url('../../{{ trick.coverImagePath }}'); 
-    height: 1000px; 
-    border: solid black 1px;
-}
-
-.ContainerIconContainer {
-    display: flex;
-    align-items: right;
-}
-
-.iconContainer {
-    display: flex;
-}
- 
-#mediaSection {
-    display: flex; 
-}
-
-.media {
-    border: solid black 1px; 
-}
-
-.media img {
-    height: 250px; 
-    border: solid black 1px;
-}
-
-.commentContainer {
-    display: flex; 
-}
-
-.commentPicture img {
-    height: 45px; 
-}
-
+    <style>
+        #trickHero 
+        {
+            background: url('../../{{ trick.coverImagePath }}'); 
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
