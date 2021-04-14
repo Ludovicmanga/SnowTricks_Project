@@ -146,52 +146,7 @@
 
 {% block javascripts %}
 
-<script>
-
-function addDiv(){
-
-    console.log('added'); 
-    
-    var idiv = document.createElement('div'); 
-        iDiv.id = block; 
-        iDiv.className = 'block'; 
-    
-    var innerDiv = document.createElement('div'); 
-    innerDiv.className = 'block-2' ;
-
-    iDiv.appendChild(innerDiv); 
-
-    document.getElementByTagName('body')[0].appendChild(iDiv); 
-
-}
-
-function loadMore(){
-        xhr = new XMLHttpRequest(); 
-        xhr.open('GET', '{{ path("load_more_tricks") }}', true); 
-
-        xhr.onload = function(){
-            
-            if (this.status == 200) {
-
-                    var tricks = JSON.parse(this.responseText); 
-
-                    var output = ''; 
-
-                    for(var i in tricks){
-                      
-                    output += 
-                        '<div>'+
-                        'yo '+tricks[i].name+
-                        '<a href="{{ path('trick_show', {"trick_id":'+tricks[i].id+'}) }}"><img src="'+tricks[i].coverImagePath+'" ></a>'+
-                        '</div>';         
-                    }                     
-            }
-            document.getElementById('tricks').innerHTML = output ; 
-        }
-        
-        xhr.send(); 
-}
-
+<script src="../js/scripts.js">
 </script>
 
 {% endblock  %}

@@ -5,44 +5,13 @@
         
         <title>{% block title %}{% endblock %}</title>
 
-        <style>
-        {% block stylesheets %}
-        {% endblock %}
-
-        #mainNavBar ul {
-            list-style: none; 
-            background: #bd1e43; 
-            padding: 0; 
-            margin: 0; 
-            text-align: right; 
-        }
-
-        #mainNavBar li {
-            display: inline-block; 
-        }
-        
-        #mainNavBar a {
-            text-decoration: none; 
-            color: #fff; 
-            width: 70px; 
-            display: block; 
-            padding: 25px 20px;
-            text-transfor: uppercase;
-            font-weight: bold; 
-            font-family: arial; 
-            text-align: center;
-            font-size: 14px;
-        }
-
-        #mainNavBar a:hover {
-            background: rgb(168,0,0); 
-        }
-
-        </style>
-
     </head>
+
+    {% block stylesheets %}
+    {% endblock %}
+
     <body>
-        
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         
@@ -65,6 +34,8 @@
             <p>&copy Copyright : Ludovic Manga</p>
         </footer>
     </body>
+
+    {% block javascripts %}{% endblock %}
+
 </html>
 
-{% block javascripts %}{% endblock %}

@@ -1,87 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-
-#homeHero {
-    height: 1000px; 
-    background: url(img/homeHero.jpg) no-repeat center;
-    background-size: 80%;
-    position : relative; 
-}
-
-#homeHero h1 {
-    font-size : 3em;
-    text-align : center; 
-    vertical-align: center;  
-}
-
-.row {
-    display: flex;
-    margin-right : 200px; 
-    margin-left: 50px; 
-    margin-top: 50px; 
-    margin-bottom: 10px; 
-    width : 60%;
-}
-
-.trick {
-    margin-left: 5px; 
-    margin-right: 5px;
-    border: solid black 2px;
-    border-radius: 10px;
-}
-
-.trick img {
-    height: 180px;
-    border: solid black 0.5px;
-}
-
-.trickContentContainer {
-    display: flex;
-    justify-content: space-between; 
-}
-
-.iconContainer {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 10px;
-}
-
-.titleContainer {
-    margin-left: 76px;
-}
-
-.icon {
-    margin-right: 15px;
-}
-
-#loadMoreButtonContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-}
-
-#loadMoreButtonContainer button {
-    height: 80px;
-    width: 120px;
-    border-radius: 20px;
-}
-
-#downArrow {
-    position : absolute; 
-    bottom : 5%; 
-    right : 1%;
-}
-
-{% endblock %}
-
-{% block head %}
-
-{% endblock %}
-
-{% block title %}{% endblock %}
-
 {% block body %}
 
 <div id="homeHero">
@@ -111,101 +29,63 @@
         {% endfor %}
     </div>
     <div id="tricks"></div>
+
     <div id="loadMoreButtonContainer">
         <button onclick="loadMore()" value="Increment Value">Load more</button>
     </div>
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+            function loadMore(){
 
-<script>
+                // We increment the offest value every time the button is clicked
+                    var offset = parseInt(document.getElementById('tricks').offset, 10);
+                    offset = isNaN(offset) ? 0 : offset;
+                    offset +=4;
+                    document.getElementById('tricks').offset = offset;
 
-function loadMore(){
+                // We send the information to the controller
+                    xhr = new XMLHttpRequest(); 
 
-    // We increment the value every time the button is clicked
-        var offset = parseInt(document.getElementById('tricks').offset, 10);
-        offset = isNaN(offset) ? 0 : offset;
-        offset +=4;
-        document.getElementById('tricks').offset = offset;
+                    // We insert the offset number in the url 
+                    var url = '{{ path("load_more_tricks", {"offset": "offset_number"}) }}'
+                    url = url.replace("offset_number", offset)
 
-    // We send the information to the controller
-        xhr = new XMLHttpRequest(); 
-
-        // We insert the offset number in the url 
-        var url = '{{ path("load_more_tricks", {"offset": "offset_number"}) }}'
-        url = url.replace("offset_number", offset)
-
-        // We send the url to the controller
-        xhr.open('POST', url , true); 
-        xhr.onload = function(){
-            
-            if (this.status == 200) {
-                    var tricks = JSON.parse(this.responseText); 
-
-                    // We create a row div
-                    let rowElement = document.createElement('div') ; 
-                  //  rowElement.attr(class.row); 
-                    document.body.appendChild(rowElement) ; 
-
-                    var output = ''; 
-
-                    for(var i in tricks){
-                        output = 
-                        '<div>hello'+tricks[i].name+'</div>'+
-                        '<div class="trick">'+
-                            '<img src='+tricks[i].coverImagePath +'>'+
-                        '</div>'
-
+                    // We send the url to the controller
+                    xhr.open('POST', url , true); 
+                    xhr.onload = function(){
                         
-                        /*
-                        
-                         output += 
+                        if (this.status == 200) {
+                                var tricks = JSON.parse(this.responseText); 
 
-                        '<ul>' + 
-                        '<li> nom : '+tricks[i].name+'</li>' + 
-                        '<li> description : '+tricks[i].description+'</li>' + 
-                        '<div class="trick">'+
-                            '<img src='+tricks[i].coverImagePath+'>'+
-                        '</div>'+
-                        '</ul>' ;
+                                // We create a row div
+                                let rowElement = document.createElement('div'); 
 
-                        */
+                                // We give the class "row" to this div
+                                rowElement.classList.add('row'); 
+                                document.body.appendChild(rowElement); 
 
-                        console.log(output); 
+                                var output = ''; 
 
-                        let divToCreate = document.createElement('div') ; 
-                        document.body.appendChild(divToCreate)
-                        divToCreate.innerHTML = output ;  
+                                for(var i in tricks){
+                                    output = 
+                                    '<div>hello'+tricks[i].name+'</div>'+
+                                    '<div class="trick">'+
+                                        '<img src='+tricks[i].coverImagePath +'>'+
+                                    '</div>'
 
-                        rowElement.appendChild(divToCreate); 
-                    }      
-            }
+                                    // We create the child div
+                                    let divToCreate = document.createElement('div') ; 
+                                    document.body.appendChild(divToCreate)
+                                    divToCreate.innerHTML = output ;  
 
-            /*
-            // We create a new div
-            let divElement = document.createElement('div') ; 
-            let divElementText = document.createTextNode('Dynamically created div element') ; 
-            divElement.appendChild(divElementText)
-            document.body.appendChild(divElement)
-            divElement.innerHTML = output ; 
-            */
-            
-            /*
-            
-            // We create a row div
-            let rowElement = document.createElement('div') ; 
-            rowElement.appendChild(divElement)
-            document.body.appendChild(rowElement)
-
-            */
-            
-
-            
-
-        }   
-        xhr.send(); 
-}
-
-</script>
-
-{% endblock  %}
+                                    // We put the child div into the row div
+                                    rowElement.appendChild(divToCreate); 
+                                }      
+                        }
+                    }   
+                    xhr.send(); 
+             }
+    </script>
+{% endblock %}
