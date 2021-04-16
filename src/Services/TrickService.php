@@ -12,6 +12,7 @@ class TrickService implements TrickServiceInterface
 {
     private $em; 
     private $params;
+    private $respository; 
 
     public function __construct(EntityManagerInterface $em, ParameterBagInterface $params) {
         $this->em = $em; 
@@ -76,9 +77,17 @@ class TrickService implements TrickServiceInterface
             $this->em->flush();
     }
 
-    public function update(Trick $trick) {   
+    public function update(Trick $trick) 
+    {   
         $trick->setUpdateDate(new DateTime()); 
         $this->em->persist($trick); 
         $this->em->flush();
     }   
+
+    public function findNextTricks($offset, $quantity)
+    {
+        $offset = $offset > 50 ? 50 : $offset ; 
+        $quantity = $quantity > 50 ? 50 : $quantity ; 
+        $tricks = $this->repository->findNextTricks($offset, $quantity); 
+    }
 } 

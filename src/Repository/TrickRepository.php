@@ -52,11 +52,12 @@ class TrickRepository extends ServiceEntityRepository
      * Returns total number of comments for a trick
      * @return void
      */
-    public function findFourLastTricks($offset){
+    public function findNextTricks($offset, $quantity)
+    {
         $query = $this->createQueryBuilder('a')
             ->orderBy('a.id', 'DESC')
-            ->setFirstResult($offset - 4)
-            ->setMaxResults(4)
+            ->setFirstResult($offset)
+            ->setMaxResults($quantity)
         ;
         return $query->getQuery()->getResult();
     }  
