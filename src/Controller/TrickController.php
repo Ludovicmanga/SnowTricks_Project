@@ -7,18 +7,10 @@ use App\Entity\User;
 use App\Entity\Image;
 use App\Entity\Trick;
 use App\Entity\Video;
-//use App\Entity\Upload;
-//use App\Services\Test;
 use App\Entity\Comment;
-// use App\Form\UploadType;
-use App\Form\CommentType;
 use App\Form\AppFormFactory;
-use App\Form\TrickCreateType;
-use App\Form\TrickUpdateType;
 use App\Repository\CommentRepository;
 use App\Services\TrickServiceInterface; 
-// use App\Services\TrickUpdateService;
-// use App\Services\TrickCreationService;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Services\CommentServiceInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -124,12 +116,12 @@ class TrickController extends AbstractController
 
         //if the form is submitted, we hydrate the trick and send it to the DB by using the service
         if($form->isSubmitted() && $form->isValid()) {                 
-                $this->trickService->update($trick); 
-                
-                //We then return the updated trick
-                return $this->redirectToRoute('trick_show', [
-                    'trick_id' => $trick->getId()
-                ]); 
+            $this->trickService->update($trick); 
+            
+            //We then return the updated trick
+            return $this->redirectToRoute('trick_show', [
+                'trick_id' => $trick->getId()
+            ]); 
         } 
         
         return $this->render('trick/update.html.twig', [
@@ -144,8 +136,9 @@ class TrickController extends AbstractController
     *     name="trick_delete", 
     *     methods={"HEAD", "GET", "POST"})
     */
-    public function deleteTrick(Trick $trick): RedirectResponse  
+    public function delete(Trick $trick): RedirectResponse  
      {
+        
         $this->em->remove($trick); 
         $this->em->flush();
         
@@ -157,7 +150,7 @@ class TrickController extends AbstractController
     *     name="trick_video_delete", 
     *     methods={"HEAD", "GET", "POST"})
     */
-    public function deleteTrickVideo(Video $video): RedirectResponse  
+    public function deleteVideo(Video $video): RedirectResponse  
     {
         $this->em->remove($video); 
         $this->em->flush();
@@ -170,7 +163,7 @@ class TrickController extends AbstractController
     *     name="trick_image_delete", 
     *     methods={"HEAD", "GET", "POST"})
     */
-    public function deleteTrickImage(Image $image): RedirectResponse  
+    public function deleteImage(Image $image): RedirectResponse  
     {
         $this->em->remove($image); 
         $this->em->flush();
@@ -181,25 +174,26 @@ class TrickController extends AbstractController
     }
     
     /**
-     * @Route("/loadMoreTricks/{offset}", 
+     * @Route("/loadMoreTricks/{offset}/{quantity}", 
      *     name="load_more_tricks", 
      *     methods={"HEAD", "GET", "POST"}) 
      */
-    public function loadMore(Request $request, $offset) {
-
-        $tricks = $this->getDoctrine()->getRepository(Trick::class)->findFourLastTricks($offset); 
+    public function loadMore(Request $request, $offset, $quantity = 4) 
+    {
+      //$tricks = $this->getDoctrine()->getRepository(Trick::class)->findFourLastTricks($offset); 
+        $tricks = $this->trickService->findNextTricks($offset, $quantity); 
 
         $arrayCollection = array();
 
         foreach($tricks as $trick) {
             $arrayCollection[] = array(
+                'id' => $trick->getId(), 
                 'name' => $trick->getName(),
                 'description' => $trick->getDescription(), 
                 'coverImagePath' => $trick->getCoverImagePath()
             );
         }
 
-        return new JsonResponse($arrayCollection);
-        
+        return new JsonResponse($arrayCollection); 
     }
 }
