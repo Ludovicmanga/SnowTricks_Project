@@ -25,13 +25,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class TrickController extends AbstractController
 {   
-    private $trickService; 
-    private $em; 
+    private $trickService;  
     private $formFactory;
 
-    public function __construct(TrickServiceInterface $trickService, EntityManagerInterface $em, AppFormFactory $formFactory) {
+    public function __construct(TrickServiceInterface $trickService, AppFormFactory $formFactory) {
         $this->trickService = $trickService; 
-        $this->em = $em; 
         $this->formFactory = $formFactory; 
     }
 
@@ -178,10 +176,11 @@ class TrickController extends AbstractController
      *     name="load_more_tricks", 
      *     methods={"HEAD", "GET", "POST"}) 
      */
-    public function loadMore(Request $request, $offset, $quantity = 4) 
+    public function loadMore(Request $request, $offset, $quantity = 4, EntityManagerInterface $em) 
     {
-      //$tricks = $this->getDoctrine()->getRepository(Trick::class)->findFourLastTricks($offset); 
-        $tricks = $this->trickService->findNextTricks($offset, $quantity); 
+      $tricks = $this->getDoctrine()->getRepository(Trick::class)->findNextTricks($offset, $quantity); 
+      //$tricks = $this->trickService->findNextTricks($offset, $quantity); 
+      //$tricks = $this->get('trickrepository')->findNextTricks($offset, $quantity); 
 
         $arrayCollection = array();
 
