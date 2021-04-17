@@ -1,22 +1,24 @@
 <?php
 
-namespace App\Services; 
+namespace App\Services;
 
 use DateTime;
 use App\Entity\Image;
 use App\Entity\Trick;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use App\Repository\TrickRepository; 
 
 class TrickService implements TrickServiceInterface
 {
     private $em; 
     private $params;
-    private $respository; 
+    private $repository; 
 
-    public function __construct(EntityManagerInterface $em, ParameterBagInterface $params) {
+    public function __construct(EntityManagerInterface $em, ParameterBagInterface $params, TrickRepository $repository) {
         $this->em = $em; 
         $this->params = $params;
+        $this->repository = $repository; 
     }   
 
     public function add(Trick $trick, $form) {        
@@ -84,6 +86,7 @@ class TrickService implements TrickServiceInterface
         $this->em->flush();
     }   
 
+    //The offset and quantity are limited to 50
     public function findNextTricks($offset, $quantity)
     {
         $offset = $offset > 50 ? 50 : $offset ; 

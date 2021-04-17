@@ -10,4 +10,6 @@ interface TrickServiceInterface
 
     public function update(Trick $trick); 
 
+    public function findNextTricks($offset, $quantity);
+
 }
