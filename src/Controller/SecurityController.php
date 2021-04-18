@@ -7,7 +7,9 @@ use App\Form\RegistrationType;
 use App\Repository\UserRepository;
 use App\Services\UserServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,10 +67,21 @@ class SecurityController extends AbstractController
      * @Route("activation/{token}", 
      *     name="activation")
      */
-    public function activation($token, UserRepository $userRepo){
+    public function activation($token, UserRepository $userRepo, MailerInterface $mailer){
         //We verify wether a user already has this token
         $user = $userRepo->findOneBy(['activationToken' => $token]); 
-        
+
+        $message = (new TemplatedEmail())
+            ->from('ludovic.mangaj@gmail.com')
+            ->to('ludovic.mangaj@gmail.com')
+            ->subject('activation de votre compte SnowTricks')
+            ->htmltemplate('emails/activation.html.twig')
+            ->context([
+                'token' => $user->getActivationToken()
+            ])
+            ;
+        $mailer->send($message); 
+
         //We launch the activation by using the user service
         $this->userService->activate($user);
 
