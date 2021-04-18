@@ -58,7 +58,17 @@ class User Implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $profilePicture;
+    private $profile_picture_path;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $activationToken;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $profile_picture_name;
 
     public function __construct()
     {
@@ -144,14 +154,38 @@ class User Implements UserInterface
         return $this;
     }
 
-    public function getProfilePicture(): ?string
+    public function getProfilePicturePath(): ?string
     {
-        return $this->profilePicture;
+        return $this->profile_picture_path;
     }
 
-    public function setProfilePicture(string $profilePicture): self
+    public function setProfilePicturePath(string $profile_picture_path): self
     {
-        $this->profilePicture = $profilePicture;
+        $this->profilePicture = $profile_picture_path;
+
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activationToken;
+    }
+
+    public function setActivationToken(?string $activationToken): self
+    {
+        $this->activationToken = $activationToken;
+
+        return $this;
+    }
+
+    public function getProfilePictureName(): ?string
+    {
+        return $this->profile_picture_name;
+    }
+
+    public function setProfilePictureName(string $profile_picture_name): self
+    {
+        $this->profile_picture_name = $profile_picture_name;
 
         return $this;
     }

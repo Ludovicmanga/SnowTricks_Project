@@ -45,3 +45,6 @@ services:
     App\Services\TrickServiceInterface: '@App\Services\TrickService'
 
     App\Services\CommentServiceInterface: '@App\Services\CommentService'
+
+    App\Services\UserServiceInterface: '@App\Services\UserService'
+
