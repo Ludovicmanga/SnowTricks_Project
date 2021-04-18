@@ -5,7 +5,7 @@ namespace App\Services;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserService implements UserServiceInterface
 {
@@ -53,12 +53,6 @@ class UserService implements UserServiceInterface
     }
 
     public function activate($user){
-         
-        //If no user exist with this token 
-        if(!$user){
-            //Erreur 404
-            throw $this->createNotFoundException('cet utilisateur n\'existe pas'); 
-        }
         
         //We delete the token
         $user->setActivationToken(null); 

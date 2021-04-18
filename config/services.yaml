@@ -48,3 +48,5 @@ services:
 
     App\Services\UserServiceInterface: '@App\Services\UserService'
 
+    App\Services\MailerServiceInterface: '@App\Services\MailerService'
+
