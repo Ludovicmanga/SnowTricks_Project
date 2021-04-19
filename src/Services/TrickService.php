@@ -15,7 +15,10 @@ class TrickService implements TrickServiceInterface
     private $params;
     private $repository; 
 
-    public function __construct(EntityManagerInterface $em, ParameterBagInterface $params, TrickRepository $repository) {
+    public function __construct(
+        EntityManagerInterface $em, 
+        ParameterBagInterface $params, 
+        TrickRepository $repository) {
         $this->em = $em; 
         $this->params = $params;
         $this->repository = $repository; 
@@ -91,6 +94,7 @@ class TrickService implements TrickServiceInterface
     {
         $offset = $offset > 50 ? 50 : $offset ; 
         $quantity = $quantity > 50 ? 50 : $quantity ; 
-        $tricks = $this->repository->findNextTricks($offset, $quantity); 
+        
+        return $this->repository->findNextTricks($offset, $quantity); 
     }
 } 

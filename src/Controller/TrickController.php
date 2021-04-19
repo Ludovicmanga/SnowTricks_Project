@@ -178,8 +178,8 @@ class TrickController extends AbstractController
      */
     public function loadMore(Request $request, $offset, $quantity = 4, EntityManagerInterface $em) 
     {
-      $tricks = $this->getDoctrine()->getRepository(Trick::class)->findNextTricks($offset, $quantity); 
-      //$tricks = $this->trickService->findNextTricks($offset, $quantity); 
+      //$tricks = $this->getDoctrine()->getRepository(Trick::class)->findNextTricks($offset, $quantity); 
+      $tricks = $this->trickService->findNextTricks($offset, $quantity); 
       //$tricks = $this->get('trickrepository')->findNextTricks($offset, $quantity); 
 
         $arrayCollection = array();
