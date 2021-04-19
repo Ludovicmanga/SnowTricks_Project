@@ -3,21 +3,27 @@
 namespace App\Services; 
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserService implements UserServiceInterface
 {
     private $em; 
     private $encoder; 
     private $params; 
+    private $mailerService; 
 
-    public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $encoder, ParameterBagInterface $params)
+    public function __construct(
+        EntityManagerInterface $em, 
+        UserPasswordEncoderInterface $encoder, 
+        ParameterBagInterface $params, 
+        MailerServiceInterface $mailerService)
     {
         $this->em = $em; 
         $this->encoder = $encoder; 
         $this->params = $params; 
+        $this->mailerService = $mailerService;
     }
 
     public function register($user, $form)
@@ -50,6 +56,9 @@ class UserService implements UserServiceInterface
             
         $this->em->persist($user); 
         $this->em->flush();
+
+        $this->mailerService->sendActivationToken($user); 
+
     }
 
     public function activate($user){

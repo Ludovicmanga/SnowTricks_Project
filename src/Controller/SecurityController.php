@@ -14,6 +14,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 class SecurityController extends AbstractController
 {
@@ -38,7 +39,6 @@ class SecurityController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             // enregistrement de l'utilisateur en passant par le service
             $this->userService->register($user, $form);
-            $mailerService->sendActivationToken($user); 
     
             return $this->redirectToRoute('security_login'); 
         }
@@ -67,20 +67,12 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/activation/{token}", 
-     *     name="activation")
+     *     name="activation") 
+     * @Entity("user", expr="repository.findOneByActivationToken(token)")
      */
-    public function activation($token, UserRepository $userRepo, MailerInterface $mailer){
-        //We verify wether a user already has this token
-        $user = $userRepo->findOneBy(['activationToken' => $token]); 
-
+    public function activation(User $user)
+    {
         //We launch the activation by using the user service
-
-        //If no user exist with this token 
-        if(!$user){
-            //404 error
-            throw $this->NotFoundException('cet utilisateur n\'existe pas'); 
-        }
-        
         $this->userService->activate($user);
 
         //We send a flash message 
@@ -90,28 +82,14 @@ class SecurityController extends AbstractController
     }
 
      /**
-     * @Route("/testmail/{token}", 
+     * @Route("/testmail", 
      *     name="testmail")
      */
-    public function testMail($token, MailerInterface $mailer)
+    public function testMail()
     {
-        $message = (new TemplatedEmail())
-            ->from('ludovic.mangaj@gmail.com')
-            ->to('ludovic.mangaj@gmail.com')
-            ->subject('activation de votre compte SnowTricks')
-            ->htmltemplate('emails/activation.html.twig')
-            ->context([
-                'token' => $token
-            ])
-        ;
-        //We send the email
-        $mailer->send($message); 
-
-        //We send a flash message 
         $this->addFlash('message', 'vous avez bien activé votre compte');
 
         return $this->redirectToRoute('home');
-
     }
 
 }
