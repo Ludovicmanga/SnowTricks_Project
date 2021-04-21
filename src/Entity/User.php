@@ -70,6 +70,11 @@ class User Implements UserInterface
      */
     private $profile_picture_name;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $reset_token;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -186,6 +191,18 @@ class User Implements UserInterface
     public function setProfilePictureName(string $profile_picture_name): self
     {
         $this->profile_picture_name = $profile_picture_name;
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->reset_token;
+    }
+
+    public function setResetToken(?string $reset_token): self
+    {
+        $this->reset_token = $reset_token;
 
         return $this;
     }
