@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User; 
 use App\Form\RegistrationType; 
+use App\Form\ResetPasswordType;
 use App\Repository\UserRepository;
 use App\Services\UserServiceInterface;
 use App\Services\MailerServiceInterface;
@@ -13,8 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class SecurityController extends AbstractController
 {
@@ -81,15 +86,87 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-     /**
-     * @Route("/testmail", 
-     *     name="testmail")
+    /**
+     * @Route("/forgot-password", name="app_forgotten_password")
      */
-    public function testMail()
+    public function forgottenPass(EntityManagerInterface $em, Request $request, UserRepository $userRepo, TokenGeneratorInterface $tokenGenerator, MailerServiceInterface $mailerService)
     {
-        $this->addFlash('message', 'vous avez bien activé votre compte');
+        $form = $this->createForm(ResetPasswordType::class); 
+        $form->handleRequest($request); 
 
-        return $this->redirectToRoute('home');
+        if($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData(); 
+            $user = $userRepo->findOneByEmail($data['email']); 
+
+            if(!$user){
+                $this->addFlash('danger', 'cette adresse n\'existe pas'); 
+                return $this->redirectToRoute('security_login'); 
+            }
+
+            $token = $tokenGenerator->generateToken(); 
+
+            try {
+                $user->setResetToken($token); 
+                $em->persist($user); 
+                $em->flush(); 
+        
+            } catch(\Exception $e){
+                $this->addFlash('Warning', 'une erreur est survenue'.$e->getMessage()); 
+                return $this->redirectToRoute('security_login'); 
+            }
+
+            // we generate the password reset URL
+            $url = $this->generateUrl('app_reset_password', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL); 
+
+            // we send the message
+            $mailerService->resetPassword($url); 
+
+            // we write the flash message
+            $this->addFlash('message', 'un e-mail de confirmation vous a bien été renvoyé'); 
+            return $this->redirectToRoute('security_login'); 
+        }
+
+        // we redirect to the page asking for an e-mail 
+        return $this->render('security/forgotten_password.html.twig', [
+            'emailForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     *@Route("/reset-password/{token}", name="app_reset_password")
+     */
+    public function resetPassword(
+        $token, 
+        Request $request, 
+        UserPasswordEncoderInterface $passwordEncoder, 
+        EntityManagerInterface $em)
+    {
+        // We look for the user having the given token 
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['reset_token' => $token]); 
+
+        if(!$user){
+            $this->addFlash('danger', 'Token inconnu'); 
+            return $this->redirectToRoute('security_login'); 
+        }
+
+        // If form is sent with post method
+        if($request->isMethod('POST')){
+            // We delete the token
+            $user->setResetToken(null); 
+
+            // We encrypt the password
+            $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
+            $em->persist($user); 
+            $em->flush();  
+
+            $this->addFlash('message', 'mot de passe modifié avec succès!');
+
+            return $this->redirectToRoute('security_login'); 
+        } else {
+            return $this->render('security/reset_password.html.twig', [
+                'token' => $token
+            ]);
+        }
     }
 
 }

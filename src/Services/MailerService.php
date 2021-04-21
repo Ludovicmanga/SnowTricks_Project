@@ -28,5 +28,21 @@ class MailerService implements MailerServiceInterface
 
         //We send the email
         $this->mailer->send($message);
-        }
+    }
+
+    public function resetPassword($url)
+    {
+        $message = (new TemplatedEmail())
+            ->from('ludovic.mangaj@gmail.com')
+            ->to('ludovic.mangaj@gmail.com')
+            ->subject('réinitialisation de votre mot de passe')
+            ->htmltemplate('emails/reset_password.html.twig')
+            ->context([
+                'url' => $url
+            ])
+        ;
+
+        //We send the email
+        $this->mailer->send($message);
+    }
 }
