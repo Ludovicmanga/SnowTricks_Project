@@ -30,7 +30,7 @@
 
 {% for video in trick.videos %}
     <div class="media" id="media1">
-        <iframe width="460" height="250" src=" {{ video.path }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {{ video.path|raw }}
     </div>
 {% endfor %}
 {% for image in trick.images %}
@@ -66,7 +66,7 @@
 {% for paginatedComment in paginatedComments %}
     <div class="commentContainer">
         <div class="commentPicture">
-            <img src="../../{{ paginatedComment.user.profilePicture }}">
+            <img src="../../{{ paginatedComment.user.profilePicturePath }}">
         </div>
         <div>
             <p>  {{ paginatedComment.commentContent }}  </p>
