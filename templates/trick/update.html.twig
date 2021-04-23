@@ -28,7 +28,7 @@
     {% for video in trick.videos %}
         <div class="mediaContainer">
             <div class="media" id="media1">
-                <iframe width="560" height="315" src=" {{ video.path }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                {{ video.path|raw }}
             </div>
             <div class="iconContainer">
                 <div class="trashIcon icon">

@@ -30,12 +30,32 @@ function loadMore(){
                     var output = ''; 
 
                     for(var i in tricks){
-                        output = 
-                        '<div>hello'+tricks[i].name+'</div>'+
-                        '<div class="trick">'+
-                            '<img src='+tricks[i].coverImagePath +'>'+
-                        '</div>'
 
+                        output = 
+                        '<div class="trick" id="trick">'+
+                            '<a href=" {{ path("trick_show", {"id": "trickid"}) }}"><img src="{{"trickcoverImagePath"}}"></a>'+
+                            '<div class="trickContentContainer">'+
+                                '<div class="titleContainer">'+
+                                    '<h2>{{"trickname"}}</h2>'+
+                                '</div>'+
+                                '{% if app.user %}'+
+                                    '<div class="iconContainer">'+
+                                        '<div class="trashIcon icon">'+
+                                            '<a onclick="return confirm("attention, cela va supprimer l\'article")" href=" {{ path("trick_delete", {"id": "trickid"}) }}" class="delete"><i class="fas fa-trash"></i></a>'+
+                                        '</div>'+
+                                        '<div class="penIcon icon">'+
+                                            '<a href=" {{ path("trick_update", {"id": "trickid"}) }}"><i class="fas fa-pen"></i></a>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '{% endif %}'+
+                            '</div>'+
+                        '</div>';
+
+                        //We replace the variables in the twig path with the actual values
+                        output = output.replace(/trickid/g, tricks[i].id); 
+                        output = output.replace(/trickname/g, tricks[i].name); 
+                        output = output.replace(/trickcoverImagePath/g, tricks[i].coverImagePath); 
+                        
                         // We create the child div
                         let divToCreate = document.createElement('div') ; 
                         document.body.appendChild(divToCreate)
@@ -48,4 +68,3 @@ function loadMore(){
         }   
         xhr.send(); 
 }
-

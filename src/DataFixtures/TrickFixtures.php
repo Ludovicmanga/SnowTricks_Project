@@ -24,7 +24,7 @@ class TrickFixtures extends Fixture
              
                  Le snowboardeur qui pratique le snowboard freestyle est appelé freestyleur (freestyler), ou plus généralement rideur (rider). 
                  Les épreuves de snowboard freestyle disputées en Coupe du monde, aux championnats du monde et aux Jeux olympiques sont le half-pipe, le slopestyle, le big air et le snowboard-cross...')
-                 ->setGroupId($i)
+                 ->setGroupId(1)
                  ->setCoverImagePath('img/cover.jpg')
                  ->setCreationDate(new \DateTime()); 
             

@@ -11,8 +11,9 @@ use App\Entity\Comment;
 use App\Form\AppFormFactory;
 use App\Repository\CommentRepository;
 use App\Services\TrickServiceInterface; 
-use Doctrine\ORM\EntityManagerInterface;
 use App\Services\CommentServiceInterface;
+use App\Services\VideoServiceInterface;
+use App\Services\ImageServiceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -93,7 +94,7 @@ class TrickController extends AbstractController
                 $this->trickService->add($trick, $form); 
             
                 return $this->redirectToRoute('trick_show', [
-                    'trick_id' => $trick->getId()
+                    'id' => $trick->getId()
             ]); 
         } 
      
@@ -118,7 +119,7 @@ class TrickController extends AbstractController
             
             //We then return the updated trick
             return $this->redirectToRoute('trick_show', [
-                'trick_id' => $trick->getId()
+                'id' => $trick->getId()
             ]); 
         } 
         
@@ -136,10 +137,7 @@ class TrickController extends AbstractController
     */
     public function delete(Trick $trick): RedirectResponse  
      {
-        
-        $this->em->remove($trick); 
-        $this->em->flush();
-        
+        $this->trickService->remove($trick); 
         return $this->redirectToRoute('home'); 
      }
 
@@ -148,12 +146,12 @@ class TrickController extends AbstractController
     *     name="trick_video_delete", 
     *     methods={"HEAD", "GET", "POST"})
     */
-    public function deleteVideo(Video $video): RedirectResponse  
+    public function deleteVideo(Video $video, VideoServiceInterface $videoService): RedirectResponse  
     {
-        $this->em->remove($video); 
-        $this->em->flush();
-
-        return $this->redirectToRoute('home'); 
+        $videoService->remove($video); 
+        return $this->redirectToRoute('trick_update', [
+            'id' => $video->getTrick()->getId()
+        ]); 
     }
 
     /**
@@ -163,9 +161,7 @@ class TrickController extends AbstractController
     */
     public function deleteImage(Image $image): RedirectResponse  
     {
-        $this->em->remove($image); 
-        $this->em->flush();
-        
+        $imageService->remove($image); 
         return $this->redirectToRoute('trick_update', [
             'id' => $image->getTrick()->getId()
         ]); 
@@ -176,11 +172,9 @@ class TrickController extends AbstractController
      *     name="load_more_tricks", 
      *     methods={"HEAD", "GET", "POST"}) 
      */
-    public function loadMore(Request $request, $offset, $quantity = 4, EntityManagerInterface $em) 
+    public function loadMore(Request $request, $offset, $quantity = 4) 
     {
-      //$tricks = $this->getDoctrine()->getRepository(Trick::class)->findNextTricks($offset, $quantity); 
       $tricks = $this->trickService->findNextTricks($offset, $quantity); 
-      //$tricks = $this->get('trickrepository')->findNextTricks($offset, $quantity); 
 
         $arrayCollection = array();
 
