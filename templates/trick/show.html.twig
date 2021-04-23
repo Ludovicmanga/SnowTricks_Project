@@ -27,8 +27,12 @@
     {% endif %}
 </div>
 <h1> {{ trick.name }} </h1>
-<div id="mediaSection">
 
+{% if app.user %}
+    <a href="{{ path("trick_update", {"id": trick.id}) }}">Modifier la figure<a/>
+{% endif %}
+
+<div id="mediaSection">
 {% for video in trick.videos %}
     <div class="media" id="media1">
         {{ video.path|raw }}
