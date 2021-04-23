@@ -95,7 +95,7 @@ class SecurityController extends AbstractController
         $form->handleRequest($request); 
 
         if($form->isSubmitted() && $form->isValid()){
-            $this->userService->createResetToken($form, $request); 
+            $this->userService->createResetToken($form); 
         }
 
         // we redirect to the page asking for an e-mail 
@@ -105,35 +105,22 @@ class SecurityController extends AbstractController
     }
 
     /**
-     *@Route("/reset-password/{token}", name="app_reset_password")
+     *@Route("/reset-password/{token}", 
+     *    name="app_reset_password"),
+     *    @Entity("user", expr="repository.findOneByResetToken(token)")
      */
-    public function resetPassword(
-        $token, 
-        Request $request, 
-        UserPasswordEncoderInterface $passwordEncoder, 
-        EntityManagerInterface $em)
+    public function resetPassword($token, User $user, Request $request)
     {
-        // We look for the user having the given token 
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['reset_token' => $token]); 
+         // We look for the user having the given token 
+         // $user = $this->repository->findOneBy(['reset_token' => $token]); 
 
         if(!$user){
             $this->addFlash('danger', 'Token inconnu'); 
             return $this->redirectToRoute('security_login'); 
         }
 
-        // If form is sent with post method
         if($request->isMethod('POST')){
-            // We delete the token
-            $user->setResetToken(null); 
-
-            // We encrypt the password
-            $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
-            $em->persist($user); 
-            $em->flush();  
-
-            $this->addFlash('message', 'mot de passe modifié avec succès!');
-
-            return $this->redirectToRoute('security_login'); 
+            return $this->userService->resetPassword($token, $request, $user);
         } else {
             return $this->render('security/reset_password.html.twig', [
                 'token' => $token

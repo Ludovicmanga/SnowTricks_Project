@@ -2,13 +2,13 @@
 
 namespace App\Services; 
 
+use Twig\Environment;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -25,6 +25,7 @@ class UserService implements UserServiceInterface
     private $session;
     private $urlGenerator; 
     private $tokenGenerator;  
+    private $templating; 
 
     public function __construct(
         EntityManagerInterface $em, 
@@ -35,7 +36,8 @@ class UserService implements UserServiceInterface
         TokenGeneratorInterface $tokenGenerator, 
         RouterInterface $router, 
         UrlGeneratorInterface $urlGenerator,
-        SessionInterface $session)
+        SessionInterface $session, 
+        Environment $templating)
     {
         $this->em = $em; 
         $this->encoder = $encoder; 
@@ -46,6 +48,7 @@ class UserService implements UserServiceInterface
         $this->urlGenerator = $urlGenerator; 
         $this->tokenGenerator = $tokenGenerator;
         $this->router = $router; 
+        $this->templating = $templating; 
     }
 
     public function register($user, $form)
@@ -90,7 +93,7 @@ class UserService implements UserServiceInterface
         $this->em->flush(); 
     }
 
-    public function createResetToken($form, $request)
+    public function createResetToken($form)
     {
         // We identify the user thanks to the form input
         $data = $form->getData(); 
@@ -122,6 +125,22 @@ class UserService implements UserServiceInterface
         // we write the flash message
         $this->session->getFlashBag()->add('message', 'un e-mail de confirmation vous a bien été renvoyé'); 
         return new RedirectResponse($this->router->generate('security_login'));
+    }
+
+    public function resetPassword($token, $request, $user)
+    {
+            // We delete the token
+            
+            $user->setResetToken(null); 
+            
+            // We encrypt the password
+            $user->setPassword($this->encoder->encodePassword($user, $request->request->get('password')));
+            $this->em->persist($user); 
+            $this->em->flush();  
+
+            $this->session->getFlashBag()->add('message', 'mot de passe modifié avec succès!');
+
+            return new RedirectResponse($this->router->generate('security_login'));    
     }
 
 }
