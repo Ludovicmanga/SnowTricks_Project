@@ -18,6 +18,5 @@ class VideoService implements VideoServiceInterface
         $this->em->remove($video); 
         $this->em->flush(); 
     }
-
 }
 

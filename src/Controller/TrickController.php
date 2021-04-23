@@ -14,7 +14,6 @@ use App\Services\TrickServiceInterface;
 use App\Services\CommentServiceInterface;
 use App\Services\VideoServiceInterface;
 use App\Services\ImageServiceInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -173,11 +172,9 @@ class TrickController extends AbstractController
      *     name="load_more_tricks", 
      *     methods={"HEAD", "GET", "POST"}) 
      */
-    public function loadMore(Request $request, $offset, $quantity = 4, EntityManagerInterface $em) 
+    public function loadMore(Request $request, $offset, $quantity = 4) 
     {
-      //$tricks = $this->getDoctrine()->getRepository(Trick::class)->findNextTricks($offset, $quantity); 
       $tricks = $this->trickService->findNextTricks($offset, $quantity); 
-      //$tricks = $this->get('trickrepository')->findNextTricks($offset, $quantity); 
 
         $arrayCollection = array();
 

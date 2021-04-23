@@ -2,9 +2,6 @@
 
 namespace App\Form; 
 
-use App\Form\CommentType;
-use App\Form\TrickCreateType;
-use App\Form\TrickUpdateType;
 use Symfony\Component\Form\FormFactoryInterface; 
 
 class AppFormFactory implements AppFormFactoryInterface

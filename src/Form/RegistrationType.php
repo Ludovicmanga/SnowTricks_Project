@@ -20,7 +20,7 @@ class RegistrationType extends AbstractType
             ->add('confirm_password', PasswordType::class)
             ->add('profile_picture', FileType::class, [
                 'label' => 'Votre photo de profil',
-                'multiple' => false,
+                'multiple' => true,
                 'mapped' => false, 
                 'required' => true
             ])

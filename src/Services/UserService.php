@@ -58,31 +58,33 @@ class UserService implements UserServiceInterface
         $user->setPassword($hash); 
         $user->setActivationToken(md5(uniqid()));
 
-        //We get the profile picture from the user registration form
+        // We get the profile picture from the user registration form
         $pictures = $form->get('profile_picture')->getData(); 
 
-        // We get the profile picture
-
-            // we make a loop to get the cover image
-            foreach($pictures as $picture) {
-                // We generate the image file name
-                $pictureFile = md5(uniqid()).'.'.$picture->guessExtension();                 
-                
-                // We copy the file in upload folder
-                $picture->move(
-                    $this->params->get('images_directory'), 
-                    $pictureFile
-                ); 
-
-                // We put the image in the database
-                $user->setProfilePictureName($pictureFile);
-                $user->setProfilePicturePath('uploads/'.$user->getProfilePictureName()); 
-            }
+        // We make a loop to get the profile picture
+        foreach($pictures as $picture) {
+            // We generate the image file name
+            $pictureFile = md5(uniqid()).'.'.$picture->guessExtension();                 
             
+            // We copy the file in upload folder
+            $picture->move(
+                $this->params->get('images_directory'), 
+                $pictureFile
+            ); 
+
+            // We put the image in the database
+            $user->setProfilePictureName($pictureFile);
+            $user->setProfilePicturePath('uploads/'.$user->getProfilePictureName()); 
+        }
+
         $this->em->persist($user); 
         $this->em->flush();
 
-        $this->mailerService->sendActivationToken($user); 
+        // We create a flash message to indicate the account creation worked 
+        $this->session->getFlashBag()->add('message', 'Le compte a bien été créé!');
+        
+        //After the user is created, we send it an activation link by e-mail
+        $this->mailerService->sendActivationToken($user);
     }
 
     public function activate($user){

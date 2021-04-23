@@ -5,21 +5,13 @@ namespace App\Controller;
 use App\Entity\User; 
 use App\Form\RegistrationType; 
 use App\Form\ResetPasswordType;
-use App\Repository\UserRepository;
 use App\Services\UserServiceInterface;
 use App\Services\MailerServiceInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Symfony\Component\Config\Definition\Exception\Exception;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class SecurityController extends AbstractController
 {
@@ -72,8 +64,9 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/activation/{token}", 
-     *     name="activation") 
-     * @Entity("user", expr="repository.findOneByActivationToken(token)")
+     *     name="activation"), 
+     * @Entity("user", 
+     *     expr="repository.findOneByActivationToken(token)")
      */
     public function activation(User $user)
     {

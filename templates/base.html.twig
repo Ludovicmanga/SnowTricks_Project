@@ -2,40 +2,34 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        
         <title>{% block title %}{% endblock %}</title>
-
     </head>
-
     {% block stylesheets %}
     {% endblock %}
-
     <body>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         
         <nav id="mainNavBar">
-                <ul>
-                    <li><a href="{{ path('home') }}">Accueil</a></li>
-                    
-                    {% if not app.user %}
+            <ul>
+                <li><a href="{{ path('home') }}">Accueil</a></li>
+
+                {% if not app.user %}
                     <li><a href=" {{ path('security_registration') }}">S'inscrire</a></li>
-                    <li><a href=" {{ path('security_login') }}">Se connecter</a></li>
-                    
-                    {% else %}
+                    <li><a href=" {{ path('security_login') }}">Se connecter</a></li>    
+                
+                {% else %}
                     <li><a href=" {{ path('security_logout') }}">Se déconnecter</a></li>
 
-                    {% endif %}
-                </ul>
+                {% endif %}
+            </ul>
         </nav>
             {% block body %}{% endblock %}
         <footer>
             <p>&copy Copyright : Ludovic Manga</p>
         </footer>
     </body>
-
     {% block javascripts %}{% endblock %}
-
 </html>
 
