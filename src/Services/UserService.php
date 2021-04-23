@@ -2,9 +2,17 @@
 
 namespace App\Services; 
 
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class UserService implements UserServiceInterface
@@ -13,17 +21,31 @@ class UserService implements UserServiceInterface
     private $encoder; 
     private $params; 
     private $mailerService; 
+    private $router; 
+    private $session;
+    private $urlGenerator; 
+    private $tokenGenerator;  
 
     public function __construct(
         EntityManagerInterface $em, 
         UserPasswordEncoderInterface $encoder, 
         ParameterBagInterface $params, 
-        MailerServiceInterface $mailerService)
+        MailerServiceInterface $mailerService, 
+        UserRepository $userRepository, 
+        TokenGeneratorInterface $tokenGenerator, 
+        RouterInterface $router, 
+        UrlGeneratorInterface $urlGenerator,
+        SessionInterface $session)
     {
         $this->em = $em; 
         $this->encoder = $encoder; 
         $this->params = $params; 
         $this->mailerService = $mailerService;
+        $this->repository = $userRepository; 
+        $this->session = $session;
+        $this->urlGenerator = $urlGenerator; 
+        $this->tokenGenerator = $tokenGenerator;
+        $this->router = $router; 
     }
 
     public function register($user, $form)
@@ -58,7 +80,6 @@ class UserService implements UserServiceInterface
         $this->em->flush();
 
         $this->mailerService->sendActivationToken($user); 
-
     }
 
     public function activate($user){
@@ -67,6 +88,40 @@ class UserService implements UserServiceInterface
         $user->setActivationToken(null); 
         $this->em->persist($user); 
         $this->em->flush(); 
+    }
+
+    public function createResetToken($form, $request)
+    {
+        // We identify the user thanks to the form input
+        $data = $form->getData(); 
+        $user = $this->repository->findOneByEmail($data['email']); 
+
+        if(!$user){
+            $this->session->getFlashBag()->add('message', 'l\'utilisateur n\'existe pas!');
+            return new RedirectResponse($this->router->generate('security_login'));
+        }
+
+        $token = $this->tokenGenerator->generateToken(); 
+
+        try {
+            $user->setResetToken($token); 
+            $this->em->persist($user); 
+            $this->em->flush(); 
+    
+        } catch(\Exception $e){
+            $this->session->getFlashBag('message', 'une erreur est survenue'.$e->getMessage()); 
+            return new RedirectResponse($this->router->generate('home'));
+        }
+
+        // we generate the password reset URL
+        $url = $this->urlGenerator->generate('app_reset_password', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL); 
+
+        // we send the message
+        $this->mailerService->resetPassword($url); 
+
+        // we write the flash message
+        $this->session->getFlashBag()->add('message', 'un e-mail de confirmation vous a bien été renvoyé'); 
+        return new RedirectResponse($this->router->generate('security_login'));
     }
 
 }

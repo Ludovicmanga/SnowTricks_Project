@@ -89,41 +89,13 @@ class SecurityController extends AbstractController
     /**
      * @Route("/forgot-password", name="app_forgotten_password")
      */
-    public function forgottenPass(EntityManagerInterface $em, Request $request, UserRepository $userRepo, TokenGeneratorInterface $tokenGenerator, MailerServiceInterface $mailerService)
+    public function forgottenPassword(Request $request)
     {
         $form = $this->createForm(ResetPasswordType::class); 
         $form->handleRequest($request); 
 
         if($form->isSubmitted() && $form->isValid()){
-            $data = $form->getData(); 
-            $user = $userRepo->findOneByEmail($data['email']); 
-
-            if(!$user){
-                $this->addFlash('danger', 'cette adresse n\'existe pas'); 
-                return $this->redirectToRoute('security_login'); 
-            }
-
-            $token = $tokenGenerator->generateToken(); 
-
-            try {
-                $user->setResetToken($token); 
-                $em->persist($user); 
-                $em->flush(); 
-        
-            } catch(\Exception $e){
-                $this->addFlash('Warning', 'une erreur est survenue'.$e->getMessage()); 
-                return $this->redirectToRoute('security_login'); 
-            }
-
-            // we generate the password reset URL
-            $url = $this->generateUrl('app_reset_password', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL); 
-
-            // we send the message
-            $mailerService->resetPassword($url); 
-
-            // we write the flash message
-            $this->addFlash('message', 'un e-mail de confirmation vous a bien été renvoyé'); 
-            return $this->redirectToRoute('security_login'); 
+            $this->userService->createResetToken($form, $request); 
         }
 
         // we redirect to the page asking for an e-mail 
@@ -168,5 +140,4 @@ class SecurityController extends AbstractController
             ]);
         }
     }
-
 }

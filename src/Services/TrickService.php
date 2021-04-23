@@ -97,4 +97,11 @@ class TrickService implements TrickServiceInterface
         
         return $this->repository->findNextTricks($offset, $quantity); 
     }
+
+    public function remove($trick)
+    {
+        $this->em->remove($trick); 
+        $this->em->flush(); 
+    }
+
 } 
