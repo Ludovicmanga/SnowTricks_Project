@@ -34,10 +34,10 @@ class TrickController extends AbstractController
     }
 
      /**
-     * @Route("show/trick/{trick_id}", 
+     * @Route("show/trick/{id}", 
      *     name="trick_show", 
      *     methods={"HEAD", "GET", "POST"}), 
-     *     @Entity("trick", expr="repository.findOneById(trick_id)")
+     *     @Entity("trick", expr="repository.findOneById(id)")
      */
     public function show(Trick $trick, Request $request, CommentServiceInterface $commentService, CommentRepository $commentRepo): Response
     {
