@@ -16,7 +16,6 @@
   width: 70px;
   display: block;
   padding: 25px 20px;
-  text-transform: uppercase;
   font-weight: bold;
   font-family: Arial, sans-serif;;
   text-align: center;
@@ -119,14 +118,18 @@
 .mediaContainer {
   display: flex;
   flex-direction: column;
+  display: inline-block;
+  width: 30%;
+
 }  
 
 .media {
   border: solid black 1px;
+  margin-bottom: 15px;
 }
 
 .media img {
-  height: 250px;
+  width: 30%;
   border: solid black 1px;
 }
 
