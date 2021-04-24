@@ -81,8 +81,35 @@ class TrickService implements TrickServiceInterface
         $this->em->flush();
     }
 
-    public function update(Trick $trick) 
+    public function update(Trick $trick, $form) 
     {   
+         //We get the images from the trick creation form
+         $images = $form->get('images')->getData(); 
+ 
+         // we make a loop to get the images
+         foreach($images as $image) {
+             // We generate the image file name
+             $imageFile = md5(uniqid()).'.'.$image->guessExtension();                 
+             
+             // We copy the file in upload folder
+             $image->move(
+                 $this->params->get('images_directory'), 
+                 $imageFile
+             ); 
+ 
+             // We put the image in the database
+             $img = new Image; 
+             $img->setName($imageFile);
+             $img->setPath('uploads/'.$img->getName()); 
+             $trick->addImage($img); 
+         }
+
+         // We allow the adding of new videos
+         foreach ($form->get('videos')->getData() as $video) {
+            $video->setTrick($trick);
+            $this->em->persist($video);
+         }
+
         $trick->setUpdateDate(new DateTime()); 
         $this->em->persist($trick); 
         $this->em->flush();

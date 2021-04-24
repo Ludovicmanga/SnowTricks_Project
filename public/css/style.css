@@ -116,7 +116,7 @@
 }
  
 #mediaSection {
-    display: flex; 
+    display: inline-block; 
 }
 
 .media {
@@ -145,10 +145,6 @@
 
 .iconContainer {
     display: flex;
-}
- 
-#mediaSection {
-    display: flex; 
 }
 
 .mediaContainer {
