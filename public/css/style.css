@@ -17,9 +17,10 @@
   display: block;
   padding: 25px 20px;
   font-weight: bold;
-  font-family: Arial, sans-serif;;
+  font-family: Arial, sans-serif;
   text-align: center;
   font-size: 14px;
+
 }
 
 #mainNavBar a:hover {
@@ -105,10 +106,6 @@
 .ContainerIconContainer {
   display: flex;
   align-items: right;
-}
-
-.iconContainer {
-  display: flex;
 }
  
 #mediaSection {
