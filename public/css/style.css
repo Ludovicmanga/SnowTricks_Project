@@ -18,7 +18,7 @@
   padding: 25px 20px;
   text-transform: uppercase;
   font-weight: bold;
-  font-family: arial;
+  font-family: Arial, sans-serif;;
   text-align: center;
   font-size: 14px;
 }
@@ -29,21 +29,21 @@
 
 #homeHero {
   height: 1000px;
-  background: url(../img/homeHero.jpg) no-repeat center;
+  background: url(../img/homeHero.jpg), no-repeat center;
   background-size: 80%;
-  position : relative;
+  position: relative;
 }
 
 #homeHero h1 {
-  font-size : 3em;
-  text-align : center;
+  font-size: 3em;
+  text-align: center;
   vertical-align: center;
 }
 
 .row {
   display: flex;
-  margin: 50 px 200px 10px 50px; 
-  width : 60%;
+  margin: 50 px 200px 10px 50px;
+  width: 60%;
 }
 
 .trick {
@@ -91,9 +91,9 @@
 }
 
 #downArrow {
-  position : absolute;
-  bottom : 5%;
-  right : 1%;
+  position: absolute;
+  bottom: 5%;
+  right: 1%;
 }
 
 /* Show page  */
@@ -116,6 +116,11 @@
   display: inline-block;
 }
 
+.mediaContainer {
+  display: flex;
+  flex-direction: column;
+}  
+
 .media {
   border: solid black 1px;
 }
@@ -133,30 +138,8 @@
   height: 45px;
 }
 
-/* update page */
 
-.ContainerIconContainer {
-  display: flex;
-  align-items: right;
-}
 
-.iconContainer {
-  display: flex;
-}
-
-.mediaContainer {
-  display : flex;
-  flex-direction : column;
-}
-
-.media {
-  border: solid black 1px;
-}
-
-.media img {
-  height: 315px;
-  border: solid black 1px;
-}
 
 
 
