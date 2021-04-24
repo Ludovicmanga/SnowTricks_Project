@@ -17,5 +17,5 @@ class ImageService implements ImageServiceInterface
     {
         $this->em->remove($image); 
         $this->em->flush(); 
-    }
+    }    
 }

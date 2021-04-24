@@ -109,13 +109,13 @@ class TrickController extends AbstractController
     *     methods={"HEAD", "GET", "POST"})
     */
     public function update(Trick $trick, Request $request)
-     {  
+     { 
         $form = $this->formFactory->create('trick-update', $trick); 
         $form->handleRequest($request); 
 
         //if the form is submitted, we hydrate the trick and send it to the DB by using the service
         if($form->isSubmitted() && $form->isValid()) {                 
-            $this->trickService->update($trick); 
+            $this->trickService->update($trick, $form); 
             
             //We then return the updated trick
             return $this->redirectToRoute('trick_show', [
@@ -141,32 +141,6 @@ class TrickController extends AbstractController
         return $this->redirectToRoute('home'); 
      }
 
-    /**
-    * @Route("/delete/video/{id}", 
-    *     name="trick_video_delete", 
-    *     methods={"HEAD", "GET", "POST"})
-    */
-    public function deleteVideo(Video $video, VideoServiceInterface $videoService): RedirectResponse  
-    {
-        $videoService->remove($video); 
-        return $this->redirectToRoute('trick_update', [
-            'id' => $video->getTrick()->getId()
-        ]); 
-    }
-
-    /**
-    * @Route("/delete/image/{id}", 
-    *     name="trick_image_delete", 
-    *     methods={"HEAD", "GET", "POST"})
-    */
-    public function deleteImage(Image $image): RedirectResponse  
-    {
-        $imageService->remove($image); 
-        return $this->redirectToRoute('trick_update', [
-            'id' => $image->getTrick()->getId()
-        ]); 
-    }
-    
     /**
      * @Route("/loadMoreTricks/{offset}/{quantity}", 
      *     name="load_more_tricks", 

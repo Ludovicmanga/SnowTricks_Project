@@ -13,22 +13,15 @@
 {% block body %}
 
 <div id="trickHero">
-    {% if app.user %}
-    <div class="ContainerIconContainer">
-        <div class="iconContainer">
-            <div class="trashIcon icon">
-                <a onclick="return confirm('attention, cela va supprimer la figure')" href=" {{ path('trick_delete', {"id": trick.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
-            </div>
-            <div class="penIcon icon">
-                <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
-            </div>
-        </div>
-    </div> 
-    {% endif %}
+
 </div>
 <h1> {{ trick.name }} </h1>
-<div id="mediaSection">
 
+{% if app.user %}
+    <a href="{{ path("trick_update", {"id": trick.id}) }}">Modifier la figure<a/>
+{% endif %}
+
+<div id="mediaSection">
 {% for video in trick.videos %}
     <div class="media" id="media1">
         {{ video.path|raw }}
