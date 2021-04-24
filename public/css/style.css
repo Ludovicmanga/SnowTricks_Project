@@ -29,7 +29,7 @@
 
 #homeHero {
   height: 1000px;
-  background: url(../img/homeHero.jpg), no-repeat center;
+  background: url(../img/homeHero.jpg) no-repeat center;
   background-size: 80%;
   position: relative;
 }
@@ -117,16 +117,18 @@
   flex-direction: column;
   display: inline-block;
   width: 30%;
-
-}  
+  margin-bottom: 10px;
+}
 
 .media {
   border: solid black 1px;
   margin-bottom: 15px;
+  height: 250px;
 }
 
 .media img {
-  width: 30%;
+  height: 100%; 
+  width: 100%;
   border: solid black 1px;
 }
 
