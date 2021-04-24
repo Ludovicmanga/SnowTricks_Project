@@ -87,8 +87,7 @@ class UserService implements UserServiceInterface
         $this->mailerService->sendActivationToken($user);
     }
 
-    public function activate($user){
-        
+    public function activate($user){  
         //We delete the token
         $user->setActivationToken(null); 
         $this->em->persist($user); 
@@ -131,19 +130,17 @@ class UserService implements UserServiceInterface
 
     public function resetPassword($token, $request, $user)
     {
-            // We delete the token
-            
-            $user->setResetToken(null); 
-            
-            // We encrypt the password
-            $user->setPassword($this->encoder->encodePassword($user, $request->request->get('password')));
-            $this->em->persist($user); 
-            $this->em->flush();  
+        // We delete the token
+        
+        $user->setResetToken(null); 
+        
+        // We encrypt the password
+        $user->setPassword($this->encoder->encodePassword($user, $request->request->get('password')));
+        $this->em->persist($user); 
+        $this->em->flush();  
 
-            $this->session->getFlashBag()->add('message', 'mot de passe modifié avec succès!');
+        $this->session->getFlashBag()->add('message', 'mot de passe modifié avec succès!');
 
-            return new RedirectResponse($this->router->generate('security_login'));    
+        return new RedirectResponse($this->router->generate('security_login'));    
     }
-
 }
-

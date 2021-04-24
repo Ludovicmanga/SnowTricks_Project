@@ -26,29 +26,29 @@
     <h1> {{ trick.name }} </h1>
     <div id="mediaSection">
 
-    {% for video in trick.videos %}
-        <div class="mediaContainer">
-            <div class="media" id="media1">
-                {{ video.path|raw }}
-            </div>
-            <div class="iconContainer">
-                <div class="trashIcon icon">
-                    <a onclick="return confirm('attention, cela va supprimer la video')" href=" {{ path('trick_video_delete', {"id": video.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+        {% for video in trick.videos %}
+            <div class="mediaContainer">
+                <div class="media" id="media1">
+                    {{ video.path|raw }}
+                </div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <a onclick="return confirm('attention, cela va supprimer la video')" href=" {{ path('trick_video_delete', {"id": video.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
 
-    {% for image in trick.images %}
-        <div class="mediaContainer">
-            <div class="media" id="media2"><img src="../../{{ image.path }}"></div>
-            <div class="iconContainer">
-                <div class="trashIcon icon">
-                    <a onclick="return confirm('attention, cela va supprimer l\'image')" href=" {{ path('trick_image_delete', {"id": image.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+        {% for image in trick.images %}
+            <div class="mediaContainer">
+                <div class="media" id="media2"><img src="../../{{ image.path }}"></div>
+                <div class="iconContainer">
+                    <div class="trashIcon icon">
+                        <a onclick="return confirm('attention, cela va supprimer l\'image')" href=" {{ path('trick_image_delete', {"id": image.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+                    </div>
                 </div>
-            </div>
-        </div>       
-    {% endfor %}
+            </div>       
+        {% endfor %}
     </div>
 
     <p>

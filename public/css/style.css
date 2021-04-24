@@ -1,56 +1,56 @@
 #mainNavBar ul {
-    list-style: none; 
-    background: #bd1e43; 
-    padding: 0; 
-    margin: 0; 
-    text-align: right; 
+    list-style: none;
+    background: #bd1e43;
+    padding: 0;
+    margin: 0;
+    text-align: right;
 }
 
 #mainNavBar li {
-    display: inline-block; 
+    display: inline-block;
 }
 
 #mainNavBar a {
-    text-decoration: none; 
-    color: #fff; 
-    width: 70px; 
-    display: block; 
+    text-decoration: none;
+    color: #fff;
+    width: 70px;
+    display: block;
     padding: 25px 20px;
-    text-transfor: uppercase;
-    font-weight: bold; 
-    font-family: arial; 
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: arial;
     text-align: center;
     font-size: 14px;
 }
 
 #mainNavBar a:hover {
-    background: rgb(168,0,0); 
+    background: rgb(168,0,0);
 }
 
 #homeHero {
-    height: 1000px; 
+    height: 1000px;
     background: url(../img/homeHero.jpg) no-repeat center;
     background-size: 80%;
-    position : relative; 
+    position : relative;
 }
 
 #homeHero h1 {
     font-size : 3em;
-    text-align : center; 
-    vertical-align: center;  
+    text-align : center;
+    vertical-align: center;
 }
 
 .row {
     display: flex;
-    margin-right : 200px; 
-    margin-left: 50px; 
-    margin-top: 50px; 
-    margin-bottom: 10px; 
+    margin-right : 200px;
+    margin-left: 50px;
+    margin-top: 50px;
+    margin-bottom: 10px;
     width : 60%;
 }
 
 .trick {
-    margin-left: 5px; 
+    margin-left: 5px;
     margin-right: 5px;
     border: solid black 2px;
     border-radius: 10px;
@@ -63,7 +63,7 @@
 
 .trickContentContainer {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 .iconContainer {
@@ -94,15 +94,15 @@
 }
 
 #downArrow {
-    position : absolute; 
-    bottom : 5%; 
+    position : absolute;
+    bottom : 5%;
     right : 1%;
 }
 
 /* Show page  */
 
 #trickHero {
-    height: 1000px; 
+    height: 1000px;
     border: solid black 1px;
     }
 
@@ -116,24 +116,24 @@
 }
  
 #mediaSection {
-    display: inline-block; 
+    display: inline-block;
 }
 
 .media {
-    border: solid black 1px; 
+    border: solid black 1px;
 }
 
 .media img {
-    height: 250px; 
+    height: 250px;
     border: solid black 1px;
 }
 
 .commentContainer {
-    display: flex; 
+    display: flex;
 }
 
 .commentPicture img {
-    height: 45px; 
+    height: 45px;
 }
 
 /* update page */
@@ -148,16 +148,16 @@
 }
 
 .mediaContainer {
-    display : flex; 
-    flex-direction : column; 
+    display : flex;
+    flex-direction : column;
 }
 
 .media {
-    border: solid black 1px; 
+    border: solid black 1px;
 }
 
 .media img {
-    height: 315px; 
+    height: 315px;
     border: solid black 1px;
 }
 
