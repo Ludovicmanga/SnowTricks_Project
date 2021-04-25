@@ -2,8 +2,7 @@
 
 {% block stylesheets %}
     <style>
-        #trickHero 
-        {
+        #trickHero {
             background: url('../../{{ trick.coverImagePath }}') center top no-repeat; 
             background-size: 100% auto;
         }
@@ -12,42 +11,59 @@
 
 {% block body %}
 
-<div id="trickHero">
-
-</div>
-<h1> {{ trick.name }} </h1>
-
-{% if app.user %}
-    <a href="{{ path("trick_update", {"id": trick.id}) }}">Modifier la figure<a/>
-{% endif %}
-
-<div id="mediaSection">
-{% for video in trick.videos %}
-    <div class="media" id="media1">
-        {{ video.path|raw }}
+    <div id="trickHero">   
     </div>
-{% endfor %}
-{% for image in trick.images %}
-    <div class="media" id="media2"><img src="../../{{ image.path }}"></div>
-{% endfor %}
-</div>
+    <h1> {{ trick.name }} </h1>
 
-<p>
-    {{ trick.description }}
-    <div>
+    {% if app.user %}
+    <button id="updateButton"><a href="{{ path("trick_update", {"id": trick.id}) }}">Modifier la figure<a/></button>
+    {% endif %}
+
+    <div id="mediaSection">
+        {% for video in trick.videos %}
+            <div class="mediaContainer">
+                <div class="media" id="media1">
+                    {{ video.path|raw }}
+                </div>
+            </div>
+        {% endfor %}
+
+        {% for image in trick.images %}
+            <div class="mediaContainer">
+                <div class="media" id="media2"><img src="../../{{ image.path }}"></div>
+            </div>       
+        {% endfor %}
+    </div>
+
+<div id="trick_infos">
+        <h3>Infos</h3>
         <div>Date de création : {{ trick.creationDate|date('d/m/Y H:i', timezone="Europe/Paris") }} </div>
         <div>Date de la dernière modification : {{ trick.updateDate|date('d/m/Y H:i', timezone="Europe/Paris") }} </div>
         <div>Groupe : {{ trick.trickGroup.name }}</div>
-    </div>
-</p>
+</div>
+
+<div id="trick_description">
+    <h3>Description de la figure</h3>
+    <p>
+        {{ trick.description }}
+    </p>
+</div>
+
 
 {# comment system #}
 
-    {# comment form #}
+    {# We display the comment form #}
+
+{% for message in app.flashes('message') %}
+        <div class="flash-message" id="comment_flash_message">
+            {{ message }}
+        </div>
+{% endfor %}
 
 {% if app.user %}
 
 {{ form_start(commentForm) }}
+<label>Ecrivez votre commentaire</label><br>
 {{ form_row(commentForm.commentContent) }}
 <button type="submit">Créer le commentaire</button>
 {{ form_end(commentForm) }}
@@ -55,24 +71,30 @@
 {% endif %}
 
 
-{# comments related with the trick #}
-
-{% for paginatedComment in paginatedComments %}
-    <div class="commentContainer">
-        <div class="commentPicture">
-            <img src="../../{{ paginatedComment.user.profilePicturePath }}">
+{# We display the comments related with the trick #}
+<div id="commentSection">
+    {% for paginatedComment in paginatedComments %}
+        <div class="commentContainer">
+            <div class="commentPicture">
+                <img src="../../{{ paginatedComment.user.profilePicturePath }}">
+            </div>
+            <div class="commentContent">
+                <p> {{ paginatedComment.commentContent }} </p>
+            </div>
         </div>
-        <div>
-            <p>  {{ paginatedComment.commentContent }}  </p>
-        </div>
-    </div>
-{% endfor %}
-<ul>
-    {% for item in 1..(( totalComments / limit)|round(0,'ceil')) %}
-        <li>
-            <a href="?page={{ item }}">{{ item }}</a>
-        </li>
+        <hr>
     {% endfor %}
-</ul>
+        <ul>
+            <div class="pageContainer">
+                {% for item in 1..(( totalComments / limit)|round(0,'ceil')) %}
+                    <li class="pageList">
+                        <div class="page">
+                            <a href="?page={{ item }}">{{ item }}</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </div>    
+        </ul>
+</div>
 
 {% endblock %}

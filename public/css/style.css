@@ -28,13 +28,19 @@
 }
 
 #homeHero {
-  height: 1000px;
+  height: 850px;
   background: url(../img/homeHero.jpg) no-repeat center;
   background-size: 80%;
   position: relative;
 }
 
+@font-face {
+  src: url(fonts/BebasNeue/TTF/BebasNeue-Regular.ttf); 
+  font-family: BebasNeue;
+}
+
 #homeHero h1 {
+  font-family: 'Montserrat', sans-serif;
   font-size: 3em;
   text-align: center;
   vertical-align: center;
@@ -50,11 +56,13 @@
   margin-left: 5px;
   margin-right: 5px;
   border: solid black 2px;
-  border-radius: 10px;
+  display: inline-block;
+  width: 22%;
 }
 
 .trick img {
   height: 180px;
+  width: 100%;
   border: solid black 0.5px;
 }
 
@@ -99,8 +107,32 @@
 /* Show page  */
 
 #trickHero {
-  height: 1000px;
+  height: 650px;
   border: solid black 1px;
+}
+
+#updateButton {
+  background-color: #4CAF50; /* Green */
+  border: solid black 1px;
+  border-radius: 10px;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#updateButton a {
+  text-decoration: none;
+  color: white;
+}
+
+#updateButton a:hover {
+  font-weight: bold;
 }
 
 .ContainerIconContainer {
@@ -132,16 +164,64 @@
   border: solid black 1px;
 }
 
+iframe {
+  width: 100%;
+  height: 100%;
+}
+
+#comment_flash_message {
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#commentSection {
+  border : solid black 1px;
+  width: 70%;
+  margin-right : auto;
+  margin-top: 20px;
+  padding: 30px;
+  border-radius: 15px;
+}
+
 .commentContainer {
   display: flex;
+  margin-top: 20px;
+  width: 50%;
+}
+
+.commentContent {
+  margin-left: 15px;
 }
 
 .commentPicture img {
   height: 45px;
 }
 
+.pageContainer {
+  display: flex;
+}
 
+.pageList {
+  list-style: none;
+}
 
+.page a {
+  margin: 10px;
+}
+
+#trick_infos, #trick_description {
+  width: 90%;
+  margin: 15px auto 15px 10px;  
+  border: solid black 1px; 
+  background-color: rgb(240, 240, 240);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+h3 {
+  font-size: 1em;
+}
 
 
 
