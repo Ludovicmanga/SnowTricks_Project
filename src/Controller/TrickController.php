@@ -66,6 +66,7 @@ class TrickController extends AbstractController
 
             //We add the comment content and the trick to the trick comment
             $commentService->add($comment, $trick);
+            $this->addFlash('message', 'Votre commentaire a bien été ajouté!'); 
         }
         
         return $this->render('trick/show.html.twig', [
