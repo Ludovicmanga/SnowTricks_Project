@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Inscription sur le site</h1>
+    <h1 id="registration_header">Inscription sur le site</h1>
 
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr' : {'class' : 'registration_form'}}) }}
     {{ form_row(form.userName, {'label' : 'Nom d\'utilisateur', 'attr' : {'placeholder' : 'Nom d\'utilisateur...'}}) }}
     {{ form_row(form.email, {'label' : 'Adresse e-mail', 'attr' : {'placeholder' : 'Adresse e-mail...'}}) }}
     {{ form_row(form.password, {'label' : 'Mot de passe', 'attr' : {'placeholder' : 'Mot de passe...'}}) }}

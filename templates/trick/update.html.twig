@@ -52,22 +52,36 @@
     </div>
 
     <p>
-        {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.trickGroup) }}
-        {{ form_row(form.images) }}
-        <h2>Modifier ou ajouter des vidéos</h2>
-        <ul class="videos" data-prototype="{{ form_widget(form.videos.vars.prototype)|e('html_attr') }}">
-            {% for video in form.videos %} 
-                <li>{{ form_row(video.path) }}</li>
-            {% endfor %}
-        </ul>
-        <button type="button" class="add_item_link" data-collection-holder-class="videos">Ajouter une vidéo</button>
-        <button type="submit">Mettre à jour la figure</button>
-        <div>
-            <a onclick="return confirm('attention, cela va supprimer la figure')" href=" {{ path('trick_delete', {"id": trick.id}) }}">Supprimer la figure</a>
-        </div>
+        {{ form_start(form, {'attr' : {'id' : 'update_form'}}) }}
+            <div id="update_title_label_container" class="label_container">
+                <label>Titre de la figure</label><br>
+            </div>
+            {{ form_row(form.name , {'attr' : {'class' : 'update_form_name'}}) }}
+            <div id="update_description_label_container" class="label_container">
+                <label>Description</label><br>
+            </div>
+            {{ form_row(form.description, {'attr' : {'id' : 'update_form_description'}}) }}
+            <div id="update_group_label_container" class="label_container">
+                <label>Groupe</label><br>
+            </div>
+            {{ form_row(form.trickGroup, {'attr' : {'id' : 'update_form_group'}}) }}
+            <div id="update_images_label_container" class="label_container">
+                <label>Ajouter une ou des images</label><br>
+            </div>
+            {{ form_row(form.images, {'attr' : {'id' : 'update_form_images'}}) }}
+            <h2>Modifier ou ajouter des vidéos</h2>
+            <ul class="videos" data-prototype="{{ form_widget(form.videos.vars.prototype)|e('html_attr') }}">
+                {% for video in form.videos %} 
+                    <li>{{ form_row(video.path) }}</li>
+                {% endfor %}
+            </ul>
+            <button type="button" class="add_item_link" data-collection-holder-class="videos">
+                <i class="far fa-plus-square"></i> Ajouter une vidéo
+            </button></br>
+            <button id="update_form_submit_button" type="submit">Mettre à jour la figure</button></br>
+            <button id="update_form_delete_button">
+                <a onclick="return confirm('attention, cela va supprimer la figure')" href=" {{ path('trick_delete', {"id": trick.id}) }}">Supprimer la figure</a>
+            </button>
         {{ form_end(form) }}
     </p>
 

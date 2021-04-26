@@ -7,9 +7,9 @@
         </div>
     {% endfor %}
 
-<h1>Connexion</h1>
+<h1 id="login_header">Connexion</h1>
 
-<form action="{{ path('security_login') }}" method="post">
+<form class="login_form" action="{{ path('security_login') }}" method="post">
     <div>
         <input placeholder="adresse e-mail" required name="_username" type="text" class="form-control">
     </div>

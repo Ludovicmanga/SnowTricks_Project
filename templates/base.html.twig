@@ -4,6 +4,12 @@
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %}</title>
     </head>
+        <style type="text/css">
+            @font-face {
+              font-family: 'Abel'; 
+              src: url({{ asset('fonts/Abel/Abel-Regular.ttf') }}); 
+            } 
+        </style>
     {% block stylesheets %}
     {% endblock %}
     <body>
