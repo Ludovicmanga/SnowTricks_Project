@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <style>
         
-    </style>
 {% endblock %}
 
 {% block body %}
@@ -13,13 +11,13 @@
         {{ message }}
     </div>
 {% endfor %}
-
-<div id="homeHero">
-    <h1>Site communautaire Snowtricks</h1>
+<h1 id="header_title">Site communautaire Snowtricks</h1>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+<div id="homeHero">
     <a id="downArrow" href="#row1"><i class="fas fa-arrow-down"></i></a> 
 </div>
+<div id="body_container">
     {% for trick in tricks|slice(0, 4) %} 
         <div class="trick" id="trick">
             <a href=" {{ path('trick_show', {"id": trick.id}) }}"><img src="{{ trick.coverImagePath }}" ></a>
@@ -40,11 +38,12 @@
             </div>
         </div>
     {% endfor %}
-<div id="tricks"></div>
-
-<div id="loadMoreButtonContainer">
-    <button onclick="loadMore()" value="Increment Value">Plus de figures</button>
+    <div id="tricks"></div>
+    <div id="loadMoreButtonContainer">
+        <button onclick="loadMore()" value="Increment Value"><i class="far fa-plus-square"></i> Plus de figures</button>
+    </div>
 </div>
+
 {% endblock %}
 
 {% block javascripts %}
@@ -71,12 +70,7 @@
                 if (this.status === 200) {
                         var tricks = JSON.parse(this.responseText); 
 
-                        // We create a row div
-                      //  let rowElement = document.createElement("div"); 
-
-                        // We give the class "row" to this div
-                       // rowElement.classList.add("row"); 
-                       // document.body.appendChild(rowElement); 
+                        const tricksDiv = document.getElementById("tricks"); 
 
                         var output = ""; 
 
@@ -108,7 +102,7 @@
                             // We create the child div
                             let divToCreate = document.createElement('div') ; 
                             divToCreate.classList.add("trick"); 
-                            document.body.appendChild(divToCreate)
+                            tricksDiv.appendChild(divToCreate); 
                             divToCreate.innerHTML = output ;  
 
                             // We put the child div into the row div

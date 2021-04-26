@@ -10,11 +10,9 @@
 {% endblock %}
 
 {% block body %}
-
+     <h1 id="trick_title"> {{ trick.name }} </h1>
     <div id="trickHero">   
     </div>
-    <h1> {{ trick.name }} </h1>
-
     {% if app.user %}
     <button id="updateButton"><a href="{{ path("trick_update", {"id": trick.id}) }}">Modifier la figure<a/></button>
     {% endif %}
@@ -35,66 +33,73 @@
         {% endfor %}
     </div>
 
-<div id="trick_infos">
-        <h3>Infos</h3>
-        <div>Date de création : {{ trick.creationDate|date('d/m/Y H:i', timezone="Europe/Paris") }} </div>
-        <div>Date de la dernière modification : {{ trick.updateDate|date('d/m/Y H:i', timezone="Europe/Paris") }} </div>
-        <div>Groupe : {{ trick.trickGroup.name }}</div>
-</div>
+    <div id="trick_infos">
+            <h3>Infos</h3>
+            <div>Date de création : {{ trick.creationDate|date('d/m/Y H:i', timezone="Europe/Paris") }} </div>
+            <div>Date de la dernière modification : {{ trick.updateDate|date('d/m/Y H:i', timezone="Europe/Paris") }} </div>
+            <div>Groupe : {{ trick.trickGroup.name }}</div>
+    </div>
 
-<div id="trick_description">
-    <h3>Description de la figure</h3>
-    <p>
-        {{ trick.description }}
-    </p>
-</div>
+    <div id="trick_description">
+        <h3>Description de la figure</h3>
+        <p>
+            {{ trick.description }}
+        </p>
+    </div>
 
 
 {# comment system #}
 
     {# We display the comment form #}
 
-{% for message in app.flashes('message') %}
-        <div class="flash-message" id="comment_flash_message">
-            {{ message }}
-        </div>
-{% endfor %}
+    <h2>Espace commentaires</h2>
 
-{% if app.user %}
-
-{{ form_start(commentForm) }}
-<label>Ecrivez votre commentaire</label><br>
-{{ form_row(commentForm.commentContent) }}
-<button type="submit">Créer le commentaire</button>
-{{ form_end(commentForm) }}
-
-{% endif %}
-
-
-{# We display the comments related with the trick #}
-<div id="commentSection">
-    {% for paginatedComment in paginatedComments %}
-        <div class="commentContainer">
-            <div class="commentPicture">
-                <img src="../../{{ paginatedComment.user.profilePicturePath }}">
+    {% for message in app.flashes('message') %}
+            <div class="flash-message" id="comment_flash_message">
+                {{ message }}
             </div>
-            <div class="commentContent">
-                <p> {{ paginatedComment.commentContent }} </p>
-            </div>
-        </div>
-        <hr>
     {% endfor %}
-        <ul>
-            <div class="pageContainer">
-                {% for item in 1..(( totalComments / limit)|round(0,'ceil')) %}
-                    <li class="pageList">
-                        <div class="page">
-                            <a href="?page={{ item }}">{{ item }}</a>
-                        </div>
-                    </li>
-                {% endfor %}
-            </div>    
-        </ul>
-</div>
 
+    {% if app.user %}
+
+    {{ form_start(commentForm) }}
+    <label>Ecrivez votre commentaire</label><br>
+    {{ form_row(commentForm.commentContent) }}
+    <button type="submit">Créer le commentaire</button>
+    {{ form_end(commentForm) }}
+
+    {% endif %}
+
+
+    {# We display the comments related with the trick #}
+    {% if totalComments > 0 %}
+        <div id="commentSection">
+            {% for paginatedComment in paginatedComments %}
+                <div class="commentContainer">
+                    <div class="commentPicture">
+                        <img src="../../{{ paginatedComment.user.profilePicturePath }}">
+                    </div>
+                    <div class="commentContent">
+                        <p> {{ paginatedComment.commentContent }} </p>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+
+            {# We display the comments page numbers #} 
+            <ul>
+                <div class="pageContainer">
+                    {% for item in 1..(( totalComments / limit)|round(0,'ceil')) %}
+                        <li class="pageList">
+                            <div class="page">
+                                {% if item > 0 %}
+                                <a href="?page={{ item }}">{{ item }}</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </div>    
+            </ul>
+        </div>
+    {% endif %}
 {% endblock %}

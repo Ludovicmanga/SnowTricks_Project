@@ -1,3 +1,7 @@
+* {
+  font-family: 'Abel';
+}
+
 #mainNavBar ul {
   list-style: none;
   background: #bd1e43;
@@ -30,17 +34,11 @@
 #homeHero {
   height: 850px;
   background: url(../img/homeHero.jpg) no-repeat center;
-  background-size: 80%;
+  background-size: 100%;
   position: relative;
 }
 
-@font-face {
-  src: url(fonts/BebasNeue/TTF/BebasNeue-Regular.ttf); 
-  font-family: BebasNeue;
-}
-
-#homeHero h1 {
-  font-family: 'Montserrat', sans-serif;
+#header_title {
   font-size: 3em;
   text-align: center;
   vertical-align: center;
@@ -53,11 +51,12 @@
 }
 
 .trick {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 11px;
+  margin-right: 11px;
+  margin-bottom: 10px;
   border: solid black 2px;
   display: inline-block;
-  width: 22%;
+  width: 21%;
 }
 
 .trick img {
@@ -69,6 +68,7 @@
 .trickContentContainer {
   display: flex;
   justify-content: space-between;
+  text-align: center;
 }
 
 .iconContainer {
@@ -78,7 +78,7 @@
 }
 
 .titleContainer {
-  margin-left: 76px;
+  width: 100%;
 }
 
 .icon {
@@ -96,6 +96,15 @@
   height: 80px;
   width: 120px;
   border-radius: 20px;
+  cursor: pointer;
+  background: green;
+  transition-duration: 0.4s;
+  color: white;
+}
+
+#loadMoreButtonContainer button:hover {
+  background:rgb(35,104,26);
+  color: rgb(217,217,217);
 }
 
 #downArrow {
@@ -105,6 +114,11 @@
 }
 
 /* Show page  */
+
+#trick_title {
+  text-align: center;  
+  font-size: 3em;
+}
 
 #trickHero {
   height: 650px;
@@ -133,6 +147,46 @@
 
 #updateButton a:hover {
   font-weight: bold;
+}
+
+#update_form_submit_button {
+  background-color: #4CAF50; /* Green */
+  border: solid black 1px;
+  border-radius: 10px;
+  color: white;
+  padding: 7px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 20%;
+}
+
+#update_form_delete_button {
+  background-color: red;
+  border: solid black 1px;
+  border-radius: 10px;
+  color: white;
+  padding: 7px 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 20%;
+}
+
+#update_form_delete_button a {
+  text-decoration: none;
+  color : white; 
+}
+
+#update_form_delete_button a:hover, #update_form_submit_button a:hover {
+  font-weight: bold; 
 }
 
 .ContainerIconContainer {
@@ -223,5 +277,76 @@ h3 {
   font-size: 1em;
 }
 
+/* update page */
 
+#update_form {
+  background: rgb(241,241,241);
+  border: solid black 1px; 
+  border-radius: 10px;
+  padding: 40px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+#trick_update_name {
+  margin-left: 50px;
+  width: 70%;
+}
+
+#trick_update_description {
+  margin-left: 49px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 70%;
+  height: 200px;
+}
+
+#trick_update_trickGroup {
+  margin-left: 48px;
+}
+
+#trick_update_images {
+  margin-top: 10px;
+}
+
+#description_container {
+  display: flex;
+  width: 100%;
+}
+
+.label_container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* registration form */
+
+.registration_form {
+  background: rgba(255,0,0,0.4);
+  padding: 30px; 
+  width: 60%;
+  border-radius: 5px;
+  border: solid black 1px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#registration_header {
+  text-align: center;
+}
+
+#login_header {
+  text-align: center;
+}
+
+.login_form {
+  background: rgba(255,0,0,0.4);
+  padding: 30px; 
+  width: 60%;
+  border-radius: 5px;
+  border: solid black 1px;
+  margin-left: auto;
+  margin-right: auto;
+}
