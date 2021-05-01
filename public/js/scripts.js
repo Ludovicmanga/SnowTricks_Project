@@ -1,70 +1,47 @@
-function loadMore(){
 
-    // We increment the offest value every time the button is clicked
-        var offset = parseInt(document.getElementById("tricks").offset, 10);
-        offset = isNaN(offset) ? 0 : offset;
-        offset +=4;
-        document.getElementById("tricks").offset = offset;
+/**
+ * Add videos to the trick form
+ */
 
-    // We send the information to the controller
-        xhr = new XMLHttpRequest(); 
+jQuery(document).ready(function() {
+    // Get the ul that holds the collection of videos
+    var $videosCollectionHolder = $('ul.videos');
+    // count the current form inputs we have (e.g. 2), use that as the new
+    // index when inserting a new item (e.g. 2)
+    $videosCollectionHolder.data('index', $videosCollectionHolder.find('input').length);
 
-        // We insert the offset number in the url 
-        var url = '{{ path("load_more_tricks", {"offset": "offset_number"}) }}'; 
-        url = url.replace("offset_number", offset); 
+    $('body').on('click', '.add_item_link', function(e) {
+        var $collectionHolderClass = $(e.currentTarget).data('collectionHolderClass');
+        // add a new video form (see next code block)
+        addFormToCollection($collectionHolderClass);
+    })
+});
 
-        // We send the url to the controller
-        xhr.open("POST", url , true); 
-        xhr.onload = function(){
-            
-            if (this.status === 200) {
-                    var tricks = JSON.parse(this.responseText); 
+function addFormToCollection($collectionHolderClass) {
+    // Get the ul that holds the collection of videos
+    var $collectionHolder = $('.' + $collectionHolderClass);
 
-                    // We create a row div
-                    let rowElement = document.createElement("div"); 
+    // Get the data-prototype explained earlier
+    var prototype = $collectionHolder.data('prototype');
 
-                    // We give the class "row" to this div
-                    rowElement.classList.add("row"); 
-                    document.body.appendChild(rowElement); 
+    // get the new index
+    var index = $collectionHolder.data('index');
 
-                    var output = ""; 
+    var newForm = prototype;
+    // You need this only if you didn't set 'label' => false in your videos field in TaskType
+    // Replace '__name__label__' in the prototype's HTML to
+    // instead be a number based on how many items we have
+    // newForm = newForm.replace(/__name__label__/g, index);
 
-                    for(var i in tricks){
+    // Replace '__name__' in the prototype's HTML to
+    // instead be a number based on how many items we have
+    newForm = newForm.replace(/__name__/g, index);
 
-                        output = 
-                        '<div class="trick" id="trick">'+
-                            '<a href=" {{ path("trick_show", {"id": "trickid"}) }}"><img src="{{"trickcoverImagePath"}}"></a>'+
-                            '<div class="trickContentContainer">'+
-                                '<div class="titleContainer">'+
-                                    '<h2>{{"trickname"}}</h2>'+
-                                '</div>'+
-                                '{% if app.user %}'+
-                                    '<div class="iconContainer">'+
-                                        '<div class="trashIcon icon">'+
-                                            '<a onclick="return confirm("attention, cela va supprimer l\'article")" href=" {{ path("trick_delete", {"id": "trickid"}) }}" class="delete"><i class="fas fa-trash"></i></a>'+
-                                        '</div>'+
-                                        '<div class="penIcon icon">'+
-                                            '<a href=" {{ path("trick_update", {"id": "trickid"}) }}"><i class="fas fa-pen"></i></a>'+
-                                        '</div>'+
-                                    '</div>'+
-                                '{% endif %}'+
-                            '</div>'+
-                        '</div>';
+    // increase the index with one for the next item
+    $collectionHolder.data('index', index + 1);
 
-                        //We replace the variables in the twig path with the actual values
-                        output = output.replace(/trickid/g, tricks[i].id); 
-                        output = output.replace(/trickname/g, tricks[i].name); 
-                        output = output.replace(/trickcoverImagePath/g, tricks[i].coverImagePath); 
-                        
-                        // We create the child div
-                        let divToCreate = document.createElement('div') ; 
-                        document.body.appendChild(divToCreate)
-                        divToCreate.innerHTML = output ;  
-
-                        // We put the child div into the row div
-                        rowElement.appendChild(divToCreate); 
-                    }      
-            }
-        }   
-        xhr.send(); 
+    // Display the form in the page in an li, before the "Add a video" link li
+    var $newFormLi = $('<li></li>').append(newForm);
+    // Add the new form at the end of the list
+    $collectionHolder.append($newFormLi)
 }
