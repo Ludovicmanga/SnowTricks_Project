@@ -2,7 +2,7 @@
 
 **Version 1.0.0** 
 
-This project was created in the context of OpenClassRooms Symfony path. 
+:moneybag: This project was created in the context of OpenClassRooms Symfony path. 
 
 **Installation of the project**
 
@@ -21,4 +21,4 @@ php bin/console doctrine:fixtures:load
 --- 
 
 ## License  copyright 
-&copy Ludovic Manga-jocky 
+Copyright Ludovic Manga-jocky 
