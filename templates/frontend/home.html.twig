@@ -68,48 +68,47 @@
             xhr.onload = function(){
                 
                 if (this.status === 200) {
-                        var tricks = JSON.parse(this.responseText); 
 
-                        const tricksDiv = document.getElementById("tricks"); 
+                    var tricks = JSON.parse(this.responseText); 
+                    const tricksDiv = document.getElementById("tricks"); 
+                    var output = ""; 
 
-                        var output = ""; 
-
-                        for(var i in tricks){
-
-                            output = 
-                                '<a href=" {{ path("trick_show", {"id": "trickid"}) }}"><img src="{{"trickcoverImagePath"}}"></a>'+
-                                '<div class="trickContentContainer">'+
-                                    '<div class="titleContainer">'+
-                                        '<h2>{{"trickname"}}</h2>'+
-                                    '</div>'+
-                                    '{% if app.user %}'+
-                                        '<div class="iconContainer">'+
-                                            '<div class="trashIcon icon">'+
-                                                '<a onclick="return confirm("attention, cela va supprimer l\'article")" href=" {{ path("trick_delete", {"id": "trickid"}) }}" class="delete"><i class="fas fa-trash"></i></a>'+
-                                            '</div>'+
-                                            '<div class="penIcon icon">'+
-                                                '<a href=" {{ path("trick_update", {"id": "trickid"}) }}"><i class="fas fa-pen"></i></a>'+
-                                            '</div>'+
+                    for(var i in tricks){
+                        output = 
+                            '<a href=" {{ path("trick_show", {"id": "trickid"}) }}"><img src="{{"trickcoverImagePath"}}"></a>'+
+                            '<div class="trickContentContainer">'+
+                                '<div class="titleContainer">'+
+                                    '<h2>{{"trickname"}}</h2>'+
+                                '</div>'+
+                                '{% if app.user %}'+
+                                    '<div class="iconContainer">'+
+                                        '<div class="trashIcon icon">'+
+                                            '<a onclick="return confirm("attention, cela va supprimer l\'article")" href=" {{ path("trick_delete", {"id": "trickid"}) }}" class="delete"><i class="fas fa-trash"></i></a>'+
                                         '</div>'+
-                                    '{% endif %}'+
-                                '</div>';
+                                        '<div class="penIcon icon">'+
+                                            '<a href=" {{ path("trick_update", {"id": "trickid"}) }}"><i class="fas fa-pen"></i></a>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '{% endif %}'+
+                            '</div>';
 
-                            //We replace the variables in the twig path with the actual values
-                            output = output.replace(/trickid/g, tricks[i].id); 
-                            output = output.replace(/trickname/g, tricks[i].name); 
-                            output = output.replace(/trickcoverImagePath/g, tricks[i].coverImagePath); 
-                            
-                            // We create the child div
-                            let divToCreate = document.createElement('div') ; 
-                            divToCreate.classList.add("trick"); 
-                            tricksDiv.appendChild(divToCreate); 
-                            divToCreate.innerHTML = output ;  
+                        //We replace the variables in the twig path with the actual values
+                        output = output.replace(/trickid/g, tricks[i].id); 
+                        output = output.replace(/trickname/g, tricks[i].name); 
+                        output = output.replace(/trickcoverImagePath/g, tricks[i].coverImagePath); 
+                        
+                        // We create the child div
+                        let divToCreate = document.createElement('div') ; 
+                        divToCreate.classList.add("trick"); 
+                        tricksDiv.appendChild(divToCreate); 
+                        divToCreate.innerHTML = output ;  
 
-                            // We put the child div into the row div
-                           // rowElement.appendChild(divToCreate); 
-                        }      
+                        // We put the child div into the row div
+                        // rowElement.appendChild(divToCreate); 
+                    }      
                 }
             }   
+
             xhr.send(); 
         }
     </script>

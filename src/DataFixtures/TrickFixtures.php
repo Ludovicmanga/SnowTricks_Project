@@ -3,18 +3,22 @@
 namespace App\DataFixtures;
 
 use App\Entity\Trick;
+use App\Entity\TrickGroup;
 use Doctrine\Persistence\ObjectManager;
+use App\Repository\TrickGroupRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class TrickFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
 
         for($i = 1 ; $i < 12 ; $i++){
             $trick = new Trick;
+            $trickGroupRepository = new TrickGroupRepository; 
+            $trickGroup = $trickGroupRepository->findOneById(1); 
+        ; 
+
             $trick
                 ->setName('Trick'.$i)
                 ->setDescription('Le snowboard freestyle (anglicisme) ou la planche acrobatique de neige1 (ou artistique) est la pratique de la planche à neige de figures, apparue dans les années 1980 et héritière du skateboard. 
@@ -24,7 +28,7 @@ class TrickFixtures extends Fixture
              
                  Le snowboardeur qui pratique le snowboard freestyle est appelé freestyleur (freestyler), ou plus généralement rideur (rider). 
                  Les épreuves de snowboard freestyle disputées en Coupe du monde, aux championnats du monde et aux Jeux olympiques sont le half-pipe, le slopestyle, le big air et le snowboard-cross...')
-                 ->setGroupId(1)
+                 ->setTrickGroup($trickGroup)
                  ->setCoverImagePath('img/cover.jpg')
                  ->setCreationDate(new \DateTime()); 
             
