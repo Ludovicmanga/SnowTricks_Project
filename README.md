@@ -2,7 +2,7 @@
 
 **Version 1.0.0** 
 
-:computer: This project was created in the context of OpenClassRooms Symfony path. 
+:computer: This project was created in the context of OpenClassRooms Symfony path. </br>
 :briefcase: It is the 6th project 
 
 
