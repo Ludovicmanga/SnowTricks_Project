@@ -32,11 +32,5 @@ It was a very important project, and it allowed me to understand the framework.
 
 --- 
 
-## Codacy Badge
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/53aeba9db65642bb8d0d31c2c2d25f2b)](https://www.codacy.com/gh/Ludovicmanga/projetSnowTricks/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ludovicmanga/projetSnowTricks&amp;utm_campaign=Badge_Grade)
-
---- 
-
 ## License  copyright 
 :copyright: Copyright Ludovic Manga-jocky 
