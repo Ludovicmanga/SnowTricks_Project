@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Video;
 use App\Services\VideoServiceInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,6 +18,7 @@ class VideoController extends AbstractController
     public function delete(Video $video, VideoServiceInterface $videoService): Response  
     {
         $videoService->remove($video); 
+        
         return $this->redirectToRoute('trick_update', [
             'id' => $video->getTrick()->getId()
         ]); 

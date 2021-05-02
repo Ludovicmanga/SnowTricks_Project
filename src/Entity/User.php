@@ -56,7 +56,7 @@ class User Implements UserInterface
     private $comments;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $profile_picture_path;
 
@@ -66,7 +66,7 @@ class User Implements UserInterface
     private $activationToken;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $profile_picture_name;
 
