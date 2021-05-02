@@ -11,15 +11,18 @@
 
 <form class="login_form" action="{{ path('security_login') }}" method="post">
     <div>
-        <input placeholder="adresse e-mail" required name="_username" type="text" class="form-control">
+        <input placeholder="adresse e-mail" required name="_username" type="text" class="form-control"><span></span>
     </div>
      <div>
         <input placeholder="mot de passe" required name="_password" type="password" class="form-control">
     </div>
-    <div>
+    <div id="login_button_container">
         <button type="submit">Se connecter</button>
     </div>
-    <a href="{{ path("app_forgotten_password") }}">Mot de passe oublié</a>
+    <div id="login_form_forgot_link_container">
+        <a id="login_form_forgot_link" href="{{ path("app_forgotten_password") }}">Mot de passe oublié</a>
+    </div>
+    
 </form>
 
 {% endblock %}
