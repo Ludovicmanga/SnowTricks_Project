@@ -19,7 +19,7 @@
 </div>
 <div id="body_container">
     {% for trick in tricks|slice(0, 4) %} 
-        <div class="trick" id="trick">
+        <div class="trick" id="trickHome">
             <a href=" {{ path('trick_show', {"id": trick.id}) }}"><img src="{{ trick.coverImagePath }}" ></a>
             <div class="trickContentContainer">
                 <div class="titleContainer">
