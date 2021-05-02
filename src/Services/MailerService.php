@@ -14,7 +14,7 @@ class MailerService implements MailerServiceInterface
         $this->mailer = $mailer; 
     }
 
-    public function sendActivationToken($user)
+    public function sendUserActivationToken($user)
     {
         $message = (new TemplatedEmail())
             ->from('ludovic.mangaj@gmail.com')
@@ -26,10 +26,12 @@ class MailerService implements MailerServiceInterface
             ])
         ;
 
-        //We send the email
         $this->mailer->send($message);
     }
 
+    /**
+     * We send the email allowing the user to reset his password
+     */
     public function resetPassword($url)
     {
         $message = (new TemplatedEmail())
@@ -42,7 +44,6 @@ class MailerService implements MailerServiceInterface
             ])
         ;
 
-        //We send the email
         $this->mailer->send($message);
     }
 }

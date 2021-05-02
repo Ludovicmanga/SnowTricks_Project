@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class CommentService implements CommentServiceInterface
 {
     private $em; 
-    // changer en $em
+
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em; 
@@ -21,7 +21,7 @@ class CommentService implements CommentServiceInterface
                 ->setTrick($trick)
                 ->setModificationDate(new DateTime())
             ; 
-            
+    
             $this->em->persist($comment);
             $this->em->flush(); 
     }

@@ -30,17 +30,13 @@ class SecurityController extends AbstractController
     public function registration(Request $request, MailerServiceInterface $mailerService) {
         $user = new User(); 
         $form = $this->createForm(RegistrationType::class, $user); 
-        
-        // traitement du formulaire
         $form->handleRequest($request); 
         if($form->isSubmitted() && $form->isValid()) {
-            // enregistrement de l'utilisateur en passant par le service
             $this->userService->register($user, $form);
     
             return $this->redirectToRoute('security_login'); 
         }
 
-        // affichage du formulaire de la page
         return $this->render('security/registration.html.twig', [
             'form' => $form->createView()
         ]);
@@ -70,10 +66,7 @@ class SecurityController extends AbstractController
      */
     public function activation(User $user)
     {
-        //We launch the activation by using the user service
         $this->userService->activate($user);
-
-        //We send a flash message 
         $this->addFlash('message', 'vous avez bien activé votre compte');
 
         return $this->redirectToRoute('home');
@@ -82,7 +75,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/forgot-password", name="app_forgotten_password")
      */
-    public function forgottenPassword(Request $request)
+    public function sendResetPasswordToken(Request $request)
     {
         $form = $this->createForm(ResetPasswordType::class); 
         $form->handleRequest($request); 
@@ -91,7 +84,7 @@ class SecurityController extends AbstractController
             $this->userService->createResetToken($form); 
         }
 
-        // we redirect to the page asking for an e-mail 
+        // we redirect to the form asking for an e-mail 
         return $this->render('security/forgotten_password.html.twig', [
             'emailForm' => $form->createView()
         ]);
@@ -101,12 +94,11 @@ class SecurityController extends AbstractController
      *@Route("/reset-password/{token}", 
      *    name="app_reset_password"),
      *    @Entity("user", expr="repository.findOneByResetToken(token)")
+     * 
+     * We identify the user thanks to his token, and set a new password once the form is filled
      */
     public function resetPassword($token, User $user, Request $request)
     {
-         // We look for the user having the given token 
-         // $user = $this->repository->findOneBy(['reset_token' => $token]); 
-
         if(!$user){
             $this->addFlash('danger', 'Token inconnu'); 
             return $this->redirectToRoute('security_login'); 
