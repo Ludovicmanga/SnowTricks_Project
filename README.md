@@ -13,7 +13,7 @@ It was a very important project, and it allowed me to understand the framework.
 
 2. Modify the .env file, according to your own configuration
 >MAILER_DSN=smtp://localhost:1025
->DATABASE_URL="mysql://root:@127.0.0.1:3306/snowTricks?serverVersion=mariadb-10.4.11"
+DATABASE_URL="mysql://root:@127.0.0.1:3306/snowTricks?serverVersion=mariadb-10.4.11"
 
 3. Install the dependencies 
 >composer install
