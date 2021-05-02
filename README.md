@@ -1,5 +1,7 @@
 # SnowTricks Website
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff8245a076284f2e852bb1e422332219)](https://app.codacy.com/gh/Ludovicmanga/projetSnowTricks?utm_source=github.com&utm_medium=referral&utm_content=Ludovicmanga/projetSnowTricks&utm_campaign=Badge_Grade_Settings)
+
 **Version 1.0.0** 
 
 :computer: This project was created in the context of OpenClassRooms Symfony path. </br>
