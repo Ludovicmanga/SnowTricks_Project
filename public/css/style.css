@@ -105,7 +105,7 @@
 }
 
 #loadMoreButtonContainer button:hover {
-  background:rgb(35, 104, 26);
+  background: rgb(35, 104, 26);
   color: rgb(217, 217, 217);
 }
 
@@ -187,7 +187,8 @@
   color: white;
 }
 
-#update_form_delete_button a:hover, #update_form_submit_button a:hover {
+#update_form_delete_button a:hover, 
+#update_form_submit_button a:hover {
   font-weight: bold;
 }
 
@@ -195,15 +196,14 @@
   display: flex;
   align-items: right;
 }
- 
+
 #mediaSection {
   display: inline-block;
 }
 
 .mediaContainer {
-  display: flex;
+  display: flex inline-block;
   flex-direction: column;
-  display: inline-block;
   width: 30%;
   margin-bottom: 10px;
 }
@@ -294,12 +294,9 @@ h3 {
   height: 150px;
   margin-left: 10%;
   margin-right: 10%;
-  border-radius: 15px;
-}
-
-.comment_form textarea{
   padding-left: 10px;
   padding-top: 10px;
+  border-radius: 15px;
 }
 
 #comment_form_button {
@@ -382,26 +379,26 @@ h3 {
   margin-right: auto;
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
 
     /* navbar */
 
   #mainNavBar a {
     font-size: 2em;
-  } 
+  }
 
   #mainNavBar li {
     width: 25%;
   }
 
-    /* home page */
+  /* home page */
 
-    #header_title {
+  #header_title {
     font-size: 4.5em;
     text-align: center;
     vertical-align: center;
     margin-top: 150px;
-  }
+}
 
   .trick {
     width: 93%;
@@ -409,10 +406,10 @@ h3 {
     margin-right: auto;
   }
 
-    #loadMoreButtonContainer button {
-      height: 150px;
-      width: 35%;
-      font-size: 2.5em;
+  #loadMoreButtonContainer button {
+    height: 150px;
+    width: 35%;
+    font-size: 2.5em;
   }
 
   .fas {
@@ -487,7 +484,8 @@ h3 {
     width: 80%;
   }
 
-  .login_form input[type="text"], .login_form input[type="password"] {
+  .login_form input[type="text"], 
+  .login_form input[type="password"] {
     padding-left: 35px;
 }
 
@@ -538,7 +536,8 @@ h3 {
     margin-top: 20px;
   }
 
-  .registration_form input[type="text"], .registration_form input[type="password"] {
+  .registration_form input[type="text"], 
+  .registration_form input[type="password"] {
     padding-left: 35px;
 }
 
