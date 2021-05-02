@@ -29,7 +29,10 @@ class TrickController extends AbstractController
     private $trickService;  
     private $formFactory;
 
-    public function __construct(TrickServiceInterface $trickService, AppFormFactory $formFactory) {
+    public function __construct(
+        TrickServiceInterface $trickService, 
+        AppFormFactory $formFactory) 
+        {
         $this->trickService = $trickService; 
         $this->formFactory = $formFactory; 
     }
@@ -164,4 +167,5 @@ class TrickController extends AbstractController
 
         return new JsonResponse($arrayCollection); 
     }
+
 }

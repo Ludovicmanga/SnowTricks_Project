@@ -64,7 +64,6 @@ class Trick
 
     /**
      * @ORM\ManyToOne(targetEntity=TrickGroup::class, inversedBy="Trick")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $trickGroup;
 
