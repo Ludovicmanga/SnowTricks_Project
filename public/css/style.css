@@ -24,11 +24,10 @@
   font-family: Arial, sans-serif;
   text-align: center;
   font-size: 14px;
-
 }
 
 #mainNavBar a:hover {
-  background: rgb(168,0,0);
+  background: rgb(168, 0, 0);
 }
 
 #homeHero {
@@ -64,7 +63,6 @@
 }
 
 .trick img {
-  height: 180px;
   width: 100%;
   border: solid black 0.5px;
 }
@@ -107,8 +105,8 @@
 }
 
 #loadMoreButtonContainer button:hover {
-  background:rgb(35,104,26);
-  color: rgb(217,217,217);
+  background:rgb(35, 104, 26);
+  color: rgb(217, 217, 217);
 }
 
 #downArrow {
@@ -120,7 +118,7 @@
 /* Show page  */
 
 #trick_title {
-  text-align: center;  
+  text-align: center;
   font-size: 3em;
 }
 
@@ -130,7 +128,7 @@
 }
 
 #updateButton {
-  background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
   border: solid black 1px;
   border-radius: 10px;
   color: white;
@@ -154,7 +152,7 @@
 }
 
 #update_form_submit_button {
-  background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
   border: solid black 1px;
   border-radius: 10px;
   color: white;
@@ -186,11 +184,11 @@
 
 #update_form_delete_button a {
   text-decoration: none;
-  color : white; 
+  color: white;
 }
 
 #update_form_delete_button a:hover, #update_form_submit_button a:hover {
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .ContainerIconContainer {
@@ -217,7 +215,7 @@
 }
 
 .media img {
-  height: 100%; 
+  height: 100%;
   width: 100%;
   border: solid black 1px;
 }
@@ -234,9 +232,9 @@ iframe {
 }
 
 #commentSection {
-  border : solid black 1px;
+  border: solid black 1px;
   width: 70%;
-  margin-right : auto;
+  margin-right: auto;
   margin-top: 20px;
   padding: 30px;
   border-radius: 15px;
@@ -270,8 +268,8 @@ iframe {
 
 #trick_infos, #trick_description {
   width: 90%;
-  margin: 15px auto 15px 10px;  
-  border: solid black 1px; 
+  margin: 15px auto 15px 10px;
+  border: solid black 1px;
   background-color: rgb(240, 240, 240);
   padding: 15px;
   border-radius: 10px;
@@ -281,11 +279,40 @@ h3 {
   font-size: 1em;
 }
 
+#comments_header {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.comment_form label {
+  margin-left: 130px;
+  margin-bottom: 100px;
+}
+
+.comment_form textarea {
+  width: 80%;
+  height: 150px;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-radius: 15px;
+}
+
+.comment_form textarea{
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+#comment_form_button {
+  width: 20%;
+  font-size: 1.5em;
+  margin: 10px 40% 35px 40%;
+}
+
 /* update page */
 
 #update_form {
-  background: rgb(241,241,241);
-  border: solid black 1px; 
+  background: rgb(241, 241, 241);
+  border: solid black 1px;
   border-radius: 10px;
   padding: 40px;
   width: 70%;
@@ -328,8 +355,8 @@ h3 {
 /* registration form */
 
 .registration_form {
-  background: rgba(255,0,0,0.4);
-  padding: 30px; 
+  background: rgba(255, 0, 0, 0.4);
+  padding: 30px;
   width: 60%;
   border-radius: 5px;
   border: solid black 1px;
@@ -346,11 +373,191 @@ h3 {
 }
 
 .login_form {
-  background: rgba(255,0,0,0.4);
-  padding: 30px; 
+  background: rgba(255, 0, 0, 0.4);
+  padding: 30px;
   width: 60%;
   border-radius: 5px;
   border: solid black 1px;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media (max-width: 1000px){
+
+    /* navbar */
+
+  #mainNavBar a {
+    font-size: 2em;
+  } 
+
+  #mainNavBar li {
+    width: 25%;
+  }
+
+    /* home page */
+
+    #header_title {
+    font-size: 4.5em;
+    text-align: center;
+    vertical-align: center;
+    margin-top: 150px;
+  }
+
+  .trick {
+    width: 93%;
+    margin-left: 3%;
+    margin-right: auto;
+  }
+
+    #loadMoreButtonContainer button {
+      height: 150px;
+      width: 35%;
+      font-size: 2.5em;
+  }
+
+  .fas {
+    font-size: 3em;
+  }
+
+  .titleContainer h2 {
+    font-size: 3.5em;
+  }
+
+  .iconContainer {
+    padding-top: 50px;
+}
+
+  /* footer */
+  footer {
+    font-size: 2.5em;
+  }
+
+  /* Trick show page */
+
+  .mediaContainer {
+    width: 100%;
+  }
+
+  .mediaContainer img {
+    height: auto;
+  }
+
+  iframe {
+    width: 100%;
+    height: 800px;
+  }
+
+  #trick_infos, #trick_description {
+    width: 92%;
+    margin: 25px 2% 15px 2%;
+  }
+
+  .comment_form textarea {
+    width: 80%;
+    height: 150px;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 15px;
+  }
+
+  #comment_form_button {
+    width: 60%;
+    font-size: 3em;
+    margin: 35px 20% 35px 20%;
+  }
+
+  /* Trick update page */
+
+  #updateButton {
+    width: 60%;
+    font-size: 3em;
+    margin: 35px 20% 35px 20%;
+  }
+
+  /* login page */
+
+  #login_header {
+    margin-top: 150px;
+    font-size: 5em;
+  }
+
+  .login_form {
+    margin-top: 150px;
+    height: 600px;
+    width: 80%;
+  }
+
+  .login_form input[type="text"], .login_form input[type="password"] {
+    padding-left: 35px;
+}
+
+  .login_form input {
+    width: 90%;
+    height: 100px;
+    margin-top: 15px;
+    border-radius: 10px;
+    font-size: 4em;
+  }
+
+  .login_form button {
+    margin-top: 20px;
+    width: 60%;
+    font-size: 4.5em;
+    border-radius: 15px;
+  }
+
+  #login_button_container {
+    text-align: center;
+  }
+
+  #login_form_forgot_link_container {
+    margin-top: 25px;
+    text-align: center;
+  }
+
+  #login_form_forgot_link {
+    font-size: 4em;
+    text-decoration: none;
+  }
+
+  /* registration page */
+
+  #registration_header {
+    margin-top: 150px;
+    font-size: 5em;
+  }
+
+  .registration_form {
+    margin-top: 150px;
+    height: 1200px;
+    width: 80%;
+  }
+
+  .registration_form label {
+    font-size: 4em;
+    margin-top: 20px;
+  }
+
+  .registration_form input[type="text"], .registration_form input[type="password"] {
+    padding-left: 35px;
+}
+
+  .registration_form input {
+    width: 90%;
+    height: 100px;
+    margin-top: 15px;
+    border-radius: 10px;
+    font-size: 4em;
+  }
+
+  .registration_form button {
+    margin-top: 20px;
+    width: 60%;
+    font-size: 4.5em;
+    border-radius: 15px;
+  }
+
+  #registration_button_container {
+    text-align: center;
+  }
 }

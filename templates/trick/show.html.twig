@@ -52,7 +52,7 @@
 
     {# We display the comment form #}
 
-    <h2>Espace commentaires</h2>
+    <h2 id="comments_header">Espace commentaires</h2>
 
     {% for message in app.flashes('message') %}
             <div class="flash-message" id="comment_flash_message">
@@ -62,10 +62,10 @@
 
     {% if app.user %}
 
-    {{ form_start(commentForm) }}
-    <label>Ecrivez votre commentaire</label><br>
-    {{ form_row(commentForm.commentContent) }}
-    <button type="submit">Créer le commentaire</button>
+    {{ form_start(commentForm, {'attr' : {'class' : 'comment_form'}}) }}
+    <label>Ecrire un commentaire</label><br>
+    {{ form_row(commentForm.commentContent, {'attr' : {'placeholder' : 'Votre commentaire...'}}) }}
+    <button id="comment_form_button" type="submit">Créer le commentaire</button>
     {{ form_end(commentForm) }}
 
     {% endif %}
