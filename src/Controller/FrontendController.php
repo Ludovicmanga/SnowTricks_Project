@@ -15,7 +15,7 @@ class FrontendController extends AbstractController
      *     name="home", 
      *     methods={"HEAD", "GET", "POST"})
      */
-    public function home(): Response
+    public function displayHomePage(): Response
     {
         $tricks = $this->getDoctrine()->getRepository(Trick::class)->findAll(); 
 

@@ -12,19 +12,11 @@
 
 {% block body %}
     <div id="trickHero">
-        <div class="ContainerIconContainer">
-            <div class="iconContainer">
-                <div class="trashIcon icon">
-                    <a onclick="return confirm('attention, cela va supprimer l'image')" href=" {{ path('trick_delete', {"id": trick.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
-                </div>
-                <div class="penIcon icon">
-                    <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
-                </div>
-            </div>
-        </div> 
     </div>
     <h1> {{ trick.name }} </h1>
     <div id="mediaSection">
+
+    {# We display the trick medias #}
 
         {% for video in trick.videos %}
             <div class="mediaContainer">
@@ -50,6 +42,8 @@
             </div>       
         {% endfor %}
     </div>
+
+    {# We display the form allowing to update the trick #}
 
     <p>
         {{ form_start(form, {'attr' : {'id' : 'update_form'}}) }}

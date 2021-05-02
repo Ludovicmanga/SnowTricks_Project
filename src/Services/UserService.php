@@ -53,15 +53,13 @@ class UserService implements UserServiceInterface
 
     public function register($user, $form)
     {
-        // enregistrement de l'utilisateur
         $hash = $this->encoder->encodePassword($user, $user->getPassword()); 
         $user->setPassword($hash); 
         $user->setActivationToken(md5(uniqid()));
 
-        // We get the profile picture from the user registration form
+        //We get the profile picture from the form and put it in the database
         $pictures = $form->get('profile_picture')->getData(); 
 
-        // We make a loop to get the profile picture
         foreach($pictures as $picture) {
             // We generate the image file name
             $pictureFile = md5(uniqid()).'.'.$picture->guessExtension();                 
@@ -72,7 +70,6 @@ class UserService implements UserServiceInterface
                 $pictureFile
             ); 
 
-            // We put the image in the database
             $user->setProfilePictureName($pictureFile);
             $user->setProfilePicturePath('uploads/'.$user->getProfilePictureName()); 
         }
@@ -80,20 +77,22 @@ class UserService implements UserServiceInterface
         $this->em->persist($user); 
         $this->em->flush();
 
-        // We create a flash message to indicate the account creation worked 
         $this->session->getFlashBag()->add('message', 'Le compte a bien été créé!');
-        
-        //After the user is created, we send it an activation link by e-mail
-        $this->mailerService->sendActivationToken($user);
+        $this->mailerService->sendUserActivationToken($user); 
     }
 
+    /**
+     * We activate the user account by deleting the token
+     */
     public function activate($user){  
-        //We delete the token
         $user->setActivationToken(null); 
         $this->em->persist($user); 
         $this->em->flush(); 
     }
 
+    /**
+     * We send a reset token by email to the user
+    */
     public function createResetToken($form)
     {
         // We identify the user thanks to the form input
@@ -120,21 +119,18 @@ class UserService implements UserServiceInterface
         // we generate the password reset URL
         $url = $this->urlGenerator->generate('app_reset_password', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL); 
 
-        // we send the message
         $this->mailerService->resetPassword($url); 
-
-        // we write the flash message
         $this->session->getFlashBag()->add('message', 'un e-mail de confirmation vous a bien été renvoyé'); 
         return new RedirectResponse($this->router->generate('security_login'));
     }
 
+    /**
+     * We set the new password after the reset password form was filled 
+     */
     public function resetPassword($token, $request, $user)
     {
-        // We delete the token
-        
+        // We delete the token and set the new password
         $user->setResetToken(null); 
-        
-        // We encrypt the password
         $user->setPassword($this->encoder->encodePassword($user, $request->request->get('password')));
         $this->em->persist($user); 
         $this->em->flush();  

@@ -47,11 +47,6 @@
         </p>
     </div>
 
-
-{# comment system #}
-
-    {# We display the comment form #}
-
     <h2 id="comments_header">Espace commentaires</h2>
 
     {% for message in app.flashes('message') %}
@@ -59,6 +54,8 @@
                 {{ message }}
             </div>
     {% endfor %}
+
+    {# We display the comment form for logged in users #}
 
     {% if app.user %}
 
@@ -69,7 +66,6 @@
     {{ form_end(commentForm) }}
 
     {% endif %}
-
 
     {# We display the comments related with the trick #}
     {% if totalComments > 0 %}
