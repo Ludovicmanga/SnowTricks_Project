@@ -3,10 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
+use App\Services\TrickServiceInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FrontendController extends AbstractController
 {
@@ -15,13 +16,16 @@ class FrontendController extends AbstractController
      *     name="home", 
      *     methods={"HEAD", "GET", "POST"})
      */
-    public function displayHomePage(): Response
+    public function displayHomePage(TrickServiceInterface $trickService): Response
     {
-        $tricks = $this->getDoctrine()->getRepository(Trick::class)->findAll(); 
+        $tricks = $this->getDoctrine()->getRepository(Trick::class)->findAll();
+
+        $fourLastTricksOffset = $trickService->findFourLastTricksOffset(); 
 
         return $this->render('frontend/home.html.twig', [
             'tricks' => $tricks,
-            'controller_name' => 'FrontendController'
+            'controller_name' => 'FrontendController', 
+            'fourLastTricksOffset' => $fourLastTricksOffset
         ]);
     }
 }

@@ -14,4 +14,6 @@ interface TrickServiceInterface
 
     public function findNextTricks($offset, $quantity);
 
+    public function findFourLastTricksOffset(); 
+
 }

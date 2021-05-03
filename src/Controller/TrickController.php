@@ -43,31 +43,21 @@ class TrickController extends AbstractController
      *     methods={"HEAD", "GET", "POST"}), 
      *     @Entity("trick", expr="repository.findOneById(id)")
      */
-    public function show(Trick $trick, Request $request, CommentServiceInterface $commentService, CommentRepository $commentRepo): Response
+    public function show(Trick $trick, Request $request, CommentServiceInterface $commentService): Response
     {
-        //creation of the form
         $comment = New Comment(); 
         $commentForm = $this->formFactory->create('trick-comment', $comment); 
         
+        //We set the number of comments to show on each page and display them
         $limit = 5; 
-
-        // We get the page number
         $page = (int)$request->query->get("page", 1);
+        $paginatedComments = $commentService->getPaginatedComments($page, $limit, $trick); 
+        $totalComments = $commentService->getTotalComments($trick); 
 
-        // We get the comments of the page
-        $paginatedComments = $commentRepo->getPaginatedComments($page, $limit, $trick); 
-
-        // We get the total number of comments
-        $totalComments = $commentRepo->getTotalComments($trick); 
-
-        //handling of the form
         $commentForm->handleRequest($request); 
+
         if($commentForm->isSubmitted() && $commentForm->isValid()) {
-
-            //We assign the user id to the comment author
             $comment->setUser($this->getUser());
-
-            //We add the comment content and the trick to the trick comment
             $commentService->add($comment, $trick);
             $this->addFlash('message', 'Votre commentaire a bien été ajouté!'); 
         }
@@ -93,7 +83,6 @@ class TrickController extends AbstractController
         $form = $this->formFactory->create('trick-create', $trick); 
         $form->handleRequest($request); 
 
-        //if the form is submitted, we hydrate the trick and send it to the DB
         if($form->isSubmitted() && $form->isValid()) {
                 $this->trickService->add($trick, $form); 
             
@@ -117,11 +106,9 @@ class TrickController extends AbstractController
         $form = $this->formFactory->create('trick-update', $trick); 
         $form->handleRequest($request); 
 
-        //if the form is submitted, we hydrate the trick and send it to the DB by using the service
         if($form->isSubmitted() && $form->isValid()) {                 
             $this->trickService->update($trick, $form); 
             
-            //We then return the updated trick
             return $this->redirectToRoute('trick_show', [
                 'id' => $trick->getId()
             ]); 
@@ -149,6 +136,8 @@ class TrickController extends AbstractController
      * @Route("/loadMoreTricks/{offset}/{quantity}", 
      *     name="load_more_tricks", 
      *     methods={"HEAD", "GET", "POST"}) 
+     * 
+     * Allow to load the next tricks after the button "load more" is clicked on the home page
      */
     public function loadMore(Request $request, $offset, $quantity = 4) 
     {

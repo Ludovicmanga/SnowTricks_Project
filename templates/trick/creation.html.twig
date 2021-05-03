@@ -1,27 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-<h1>Création d'une figure</h1>
-
-{{ form_start(formTrickCreation) }}
-
-{{ form_row(formTrickCreation.name, { 'attr' : {'placeholder' : " Nom de la figure"} })}}
-{{ form_row(formTrickCreation.description, { 'attr' : {'placeholder' : " Description de la figure"} })}}
-{{ form_row(formTrickCreation.coverImage, { 'attr' : {'placeholder' : " Image de couverture"} })}}
-{{ form_row(formTrickCreation.trickGroup, { 'attr' : {'placeholder' : " Groupe de la figure"} })}}
-{{ form_row(formTrickCreation.images) }}
-<ul class="videos" data-prototype="{{ form_widget(formTrickCreation.videos.vars.prototype)|e('html_attr') }}">
-    {% for video in formTrickCreation.videos %} 
-        <li>{{ form_row(video.path) }}</li>
-    {% endfor %}
-</ul>
-<button type="button" class="add_item_link" data-collection-holder-class="videos">Ajouter une vidéo</button>
-
-<button type="submit">Créer l'article</button>
-
-{{ form_end(formTrickCreation)}}
-
+    <h1 id="registration_header">Création d'une figure</h1>
+    {{ form_start(formTrickCreation, {'attr' : {'class' : 'creation_form'}}) }}
+        {{ form_row(formTrickCreation.name, { 'attr' : {'placeholder' : " Nom de la figure"} })}}
+        {{ form_row(formTrickCreation.description, { 'attr' : {'placeholder' : " Description de la figure"} })}}
+        <label>Groupe de la figure</label>
+        {{ form_row(formTrickCreation.trickGroup, { 'attr' : {'placeholder' : " Groupe de la figure"} })}}
+        <label>Ajouter la photo principale de la figure</label>
+        {{ form_row(formTrickCreation.coverImage, { 'attr' : {'placeholder' : " Image de couverture"} })}}
+        <label>Ajouter d'autres photos</label>
+        {{ form_row(formTrickCreation.images) }}
+        <ul class="videos" data-prototype="{{ form_widget(formTrickCreation.videos.vars.prototype)|e('html_attr') }}">
+            {% for video in formTrickCreation.videos %} 
+                <li>{{ form_row(video.path) }}</li>
+            {% endfor %}
+        </ul>
+        <label>Ajouter une ou des vidéos</label><br>
+        <button type="button" class="add_item_link" data-collection-holder-class="videos">
+            <i class="far fa-plus-square"></i>
+        </button><br>
+        <div id="creation_button_container">
+            <button id="submit_button" type="submit">Créer la figure</button>
+        </div>
+    {{ form_end(formTrickCreation)}}
 {% endblock %}
 
 
