@@ -2,6 +2,11 @@
   font-family: 'Abel';
 }
 
+button {
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
 #mainNavBar ul {
   list-style: none;
   background: #bd1e43;
@@ -45,12 +50,6 @@
 
 #body_container {
   margin-top: 30px;
-}
-
-.row {
-  display: flex;
-  margin: 50 px 200px 10px 50px;
-  width: 60%;
 }
 
 .trick {
@@ -98,10 +97,8 @@
   height: 80px;
   width: 120px;
   border-radius: 20px;
-  cursor: pointer;
-  background: green;
-  transition-duration: 0.4s;
   color: white;
+  background: green;
 }
 
 #loadMoreButtonContainer button:hover {
@@ -138,8 +135,6 @@
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
 }
 
 #updateButton a {
@@ -162,8 +157,6 @@
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
   width: 20%;
 }
 
@@ -177,8 +170,6 @@
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
   width: 20%;
 }
 
@@ -202,8 +193,7 @@
 }
 
 .mediaContainer {
-  display: flex inline-block;
-  flex-direction: column;
+  display: inline-block;
   width: 30%;
   margin-bottom: 10px;
 }
@@ -350,7 +340,12 @@ h3 {
   text-align: center;
 }
 
-/* registration form */
+/* registration page */
+
+#registration_header {
+  text-align: center;
+  font-size: 2em;
+}
 
 .registration_form {
   background: rgba(255, 0, 0, 0.4);
@@ -360,14 +355,42 @@ h3 {
   border: solid black 1px;
   margin-left: auto;
   margin-right: auto;
+  height: 580px;
+  width: 80%;
 }
 
-#registration_header {
+.registration_form label {
+  font-size: 1.5em;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.registration_form input {
+  width: 90%;
+  height: 60px;
+  margin-top: 15px;
+  border-radius: 10px;
+  font-size: 1em;
+  padding-left: 35px;
+}
+
+.registration_form button {
+  margin-top: 20px;
+  width: 30%;
+  height: 50px;
+  font-size: 1em;
+  border-radius: 15px;
+}
+
+#registration_button_container {
   text-align: center;
 }
+
+  /* login page */
 
 #login_header {
   text-align: center;
+  font-size: 2em;
 }
 
 .login_form {
@@ -378,6 +401,45 @@ h3 {
   border: solid black 1px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.login_form {
+  height: 350px;
+  width: 80%;
+}
+
+.login_form input {
+  width: 90%;
+  height: 60px;
+  margin-top: 15px;
+  border-radius: 10px;
+  font-size: 1em;
+  padding-left: 35px;
+}
+
+.login_form button {
+  margin-top: 20px;
+  width: 30%;
+  font-size: 1.5em;
+  border-radius: 15px;
+}
+
+#login_button_container {
+  text-align: center;
+}
+
+#login_form_forgot_link_container {
+  margin-top: 25px;
+  text-align: center;
+}
+
+#login_form_forgot_link {
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+#login_form_forgot_link:hover {
+  color: red;
 }
 
 @media (max-width: 1000px) {
@@ -434,16 +496,13 @@ h3 {
     width: 100%;
   }
 
-  .mediaContainer img {
-    height: auto;
-  }
-
   iframe {
     width: 100%;
     height: 800px;
   }
 
-  #trick_infos, #trick_description {
+  #trick_infos,
+  #trick_description {
     width: 92%;
     margin: 25px 2% 15px 2%;
   }
@@ -469,6 +528,10 @@ h3 {
     font-size: 3em;
     margin: 35px 20% 35px 20%;
   }
+  
+  .media {
+    height: 740px;
+  }
 
   /* login page */
 
@@ -486,7 +549,7 @@ h3 {
   .login_form input[type="text"],
   .login_form input[type="password"] {
     padding-left: 35px;
-}
+  }
 
   .login_form input {
     width: 90%;
@@ -531,25 +594,21 @@ h3 {
   }
 
   .registration_form label {
-    font-size: 4em;
-    margin-top: 20px;
+    font-size: 3.5em;
   }
-
-  .registration_form input[type="text"],
-  .registration_form input[type="password"] {
-    padding-left: 35px;
-}
 
   .registration_form input {
     width: 90%;
     height: 100px;
     margin-top: 15px;
     border-radius: 10px;
-    font-size: 4em;
+    font-size: 3.6em;
+    padding-left: 35px;
   }
 
   .registration_form button {
     margin-top: 20px;
+    height: 100px;
     width: 60%;
     font-size: 4.5em;
     border-radius: 15px;

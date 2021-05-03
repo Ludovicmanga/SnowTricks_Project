@@ -17,6 +17,8 @@
     <button id="updateButton"><a href="{{ path("trick_update", {"id": trick.id}) }}">Modifier la figure<a/></button>
     {% endif %}
 
+    {# We display the trick medias #}
+
     <div id="mediaSection">
         {% for video in trick.videos %}
             <div class="mediaContainer">

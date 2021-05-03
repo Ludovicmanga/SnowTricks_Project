@@ -72,6 +72,7 @@ class UserService implements UserServiceInterface
 
             $user->setProfilePictureName($pictureFile);
             $user->setProfilePicturePath('uploads/'.$user->getProfilePictureName()); 
+            //$user->setProfilePicturePath('); 
         }
 
         $this->em->persist($user); 
