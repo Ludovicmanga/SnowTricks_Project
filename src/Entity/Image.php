@@ -13,7 +13,7 @@ class Image
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="smallint")
      */
     private $id;
 
