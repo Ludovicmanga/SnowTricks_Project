@@ -60,6 +60,17 @@ class TrickRepository extends ServiceEntityRepository
             ->setMaxResults($quantity)
         ;
         return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Returns total number of comments for a trick
+     * @return void
+     */
+    public function getTotalTricks(){
+        $query = $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+        ;
+        return $query->getQuery()->getSingleScalarResult();
     }  
 
 }

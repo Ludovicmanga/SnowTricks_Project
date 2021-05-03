@@ -19,25 +19,31 @@ class TrickCreateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
+            ->add('name', TextType::class, [
+                'label' => false
+            ])
+            ->add('description', TextType::class, [
+                'label' => false
+            ])
             ->add('coverImage', FileType::class, [
-                'label' => 'Photo principale de la figure',
+                'label' => false,
                 'multiple' => true,
                 'mapped' => false, 
                 'required' => true
             ])
             ->add('trickGroup', EntityType::class, [
                 'class' => TrickGroup::class, 
-                'choice_label' => 'name'
+                'choice_label' => 'name', 
+                'label' => false
             ])
             ->add('images', FileType::class, [
-                'label' => 'Photo(s) de présentation de la figure',
+                'label' => false,
                 'multiple' => true,
                 'mapped' => false, 
                 'required' => true
             ])
             ->add('videos', CollectionType::class, [
+                'label' => false,
                 'entry_type' => VideoType::class, 
                 'entry_options' => ['label' => false], 
                 'allow_add' => true,

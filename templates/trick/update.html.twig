@@ -41,6 +41,7 @@
                 </div>
             </div>       
         {% endfor %}
+
     </div>
 
     {# We display the form allowing to update the trick #}
@@ -63,7 +64,9 @@
                 <label>Ajouter une ou des images</label><br>
             </div>
             {{ form_row(form.images, {'attr' : {'id' : 'update_form_images'}}) }}
-            <h2>Modifier ou ajouter des vidéos</h2>
+            <div class="label_container">
+                <label>Modifier ou ajouter des vidéos</label>
+            </div>
             <ul class="videos" data-prototype="{{ form_widget(form.videos.vars.prototype)|e('html_attr') }}">
                 {% for video in form.videos %} 
                     <li>{{ form_row(video.path) }}</li>
@@ -78,5 +81,4 @@
             </button>
         {{ form_end(form) }}
     </p>
-
 {% endblock %}

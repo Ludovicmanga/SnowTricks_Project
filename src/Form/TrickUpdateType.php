@@ -40,6 +40,7 @@ class TrickUpdateType extends AbstractType
                 'entry_type' => VideoType::class, 
                 'entry_options' => ['label' => false], 
                 'allow_add' => true,
+                'label' => false
             ])
         ;
     }

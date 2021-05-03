@@ -26,13 +26,9 @@ class TrickService implements TrickServiceInterface
     }   
 
     public function add(Trick $trick, $form) {        
-        //We get the images from the trick creation form
         $images = $form->get('images')->getData(); 
-
-        //We get the cover image from the trick creation form
         $coverImages = $form->get('coverImage')->getData(); 
 
-        // we make a loop to get the images
         foreach($images as $image) {
             // We generate the image file name
             $imageFile = md5(uniqid()).'.'.$image->guessExtension();                 
@@ -71,11 +67,6 @@ class TrickService implements TrickServiceInterface
             $this->em->persist($video);
             }
 
-        //foreach ($form->get('images')->getData() as $adv) {
-        // $adv->setAdvert($advert);
-        // $em->persist($adv);
-        //}
-
         $trick->setCreationDate(new DateTime());
         $this->em->persist($trick); 
         $this->em->flush();
@@ -83,10 +74,8 @@ class TrickService implements TrickServiceInterface
 
     public function update(Trick $trick, $form) 
     {   
-         //We get the images from the trick creation form
          $images = $form->get('images')->getData(); 
- 
-         // we make a loop to get the images
+
          foreach($images as $image) {
              // We generate the image file name
              $imageFile = md5(uniqid()).'.'.$image->guessExtension();                 
@@ -115,13 +104,21 @@ class TrickService implements TrickServiceInterface
         $this->em->flush();
     }   
 
-    // The offset and quantity are limited to 50
+    /**
+     * Used with the "load more button" in the home page, allows to get new tricks dynamically
+     */
     public function findNextTricks($offset, $quantity)
     {
+        // We make sure the number of tricks loaded isn't too big
         $offset = $offset > 50 ? 50 : $offset ; 
         $quantity = $quantity > 50 ? 50 : $quantity ; 
         
         return $this->repository->findNextTricks($offset, $quantity);   
+    }
+
+    public function findFourLastTricksOffset(){
+        $allTricks = $this->repository->getTotalTricks();
+        return $allTricks - 4;  
     }
 
     public function remove($trick)

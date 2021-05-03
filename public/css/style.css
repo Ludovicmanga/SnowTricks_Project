@@ -64,6 +64,7 @@ button {
 .trick img {
   width: 100%;
   border: solid black 0.5px;
+  height: 200px;
 }
 
 .trickContentContainer {
@@ -156,7 +157,7 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 50px 40% 4px 40%;
   width: 20%;
 }
 
@@ -169,7 +170,7 @@ button {
   text-align: center;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 4px 40%;
   width: 20%;
 }
 
@@ -310,23 +311,40 @@ h3 {
 
 #trick_update_name {
   margin-left: 50px;
-  width: 70%;
+  width: 90%;
+  font-size: 1.5em;
+  padding-left: 1%;
 }
 
 #trick_update_description {
   margin-left: 49px;
   margin-top: 15px;
   margin-bottom: 15px;
-  width: 70%;
+  width: 90%;
   height: 200px;
+  font-size: 1.5em;
+  padding-left: 1%;
 }
 
 #trick_update_trickGroup {
   margin-left: 48px;
+  width: 90%;
+  font-size: 1.5em;
+  padding-left: 1%;
 }
 
 #trick_update_images {
   margin-top: 10px;
+  margin-left: 40%;
+}
+
+.videos input {
+  width: 90%;
+  height: 50px;
+}
+
+#update_form .add_item_link {
+  margin-left: 40%;
 }
 
 #description_container {
@@ -338,6 +356,10 @@ h3 {
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
+}
+
+#update_form label {
+  font-weight: bold;
 }
 
 /* registration page */
@@ -403,11 +425,6 @@ h3 {
   margin-right: auto;
 }
 
-.login_form {
-  height: 350px;
-  width: 80%;
-}
-
 .login_form input {
   width: 90%;
   height: 60px;
@@ -442,6 +459,70 @@ h3 {
   color: red;
 }
 
+/* Trick creation */
+
+#creation_header {
+  text-align: center;
+  font-size: 2em;
+}
+
+.creation_form {
+  background: rgba(255, 0, 0, 0.4);
+  padding: 30px;
+  width: 60%;
+  border-radius: 5px;
+  border: solid black 1px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.creation_form label {
+  font-size: 1em;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.creation_form input {
+  width: 90%;
+  height: 60px;
+  margin-top: 15px;
+  border-radius: 10px;
+  font-size: 1em;
+  padding-left: 35px;
+}
+
+#trick_create_trickGroup {
+  height: 60px;
+  border-radius: 8px;
+  width: 97%;
+  padding-left: 50px;
+  margin-top: 10px;
+}
+
+#trick_create_coverImage,
+#trick_create_images {
+  height: 30px;
+}
+
+.creation_form .add_item_link {
+  margin-top: 5px;
+  margin-left: 60px;
+  width: 5%;
+}
+
+.creation_form #submit_button {
+  margin-top: 20px;
+  width: 30%;
+  font-size: 1.5em;
+  border-radius: 15px;
+  color: white;
+  background: green;
+}
+
+#creation_button_container {
+  text-align: center;
+}
+
 @media (max-width: 1000px) {
     /* navbar */
 
@@ -465,6 +546,10 @@ h3 {
     width: 93%;
     margin-left: 3%;
     margin-right: auto;
+  }
+
+  .trick img {
+    height: 500px;
   }
 
   #loadMoreButtonContainer button {
@@ -515,6 +600,19 @@ h3 {
     border-radius: 15px;
   }
 
+  #commentSection {
+    font-size: 3em;
+  }
+
+  .commentContent {
+    margin-left: 35px;
+    overflow-wrap: anywhere;
+}
+
+  .commentPicture img {
+    height: 180px;
+}
+
   #comment_form_button {
     width: 60%;
     font-size: 3em;
@@ -523,10 +621,42 @@ h3 {
 
   /* Trick update page */
 
+  #update_form {
+    font-size: 2.5em;
+  }
+
   #updateButton {
     width: 60%;
     font-size: 3em;
     margin: 35px 20% 35px 20%;
+  }
+
+  #trick_update_images {
+    margin-left: 0%;
+    font-size: 1.2em;
+}
+
+  #update_form .add_item_link {
+    margin-left: 20%;
+    font-size: 1.2em;
+  }
+
+  #update_form_delete_button {
+    width: 50%;
+    font-size: 1.5em;
+    margin: 4px 30%;
+  }
+
+  #update_form_submit_button {
+    width: 50%;
+    font-size: 1.5em;
+    margin: 40px 30% 4px 30%;
+  }
+
+  .videos input {
+    width: 90%;
+    height: 50px;
+    font-size: 1em;
   }
   
   .media {
@@ -615,6 +745,68 @@ h3 {
   }
 
   #registration_button_container {
+    text-align: center;
+  }
+
+  /* creation page */
+
+  #creation_header {
+    margin-top: 150px;
+    font-size: 5em;
+  }
+
+  .creation_form {
+    margin-top: 150px;
+    height: 1500px;
+    width: 80%;
+  }
+
+  .creation_form label {
+    font-size: 3.5em;
+  }
+
+  .creation_form input {
+    width: 90%;
+    height: 100px;
+    margin-top: 15px;
+    border-radius: 10px;
+    font-size: 3.6em;
+    padding-left: 35px;
+  }
+
+  #trick_create_coverImage,
+  #trick_create_images {
+    height: 90px;
+  }
+
+  #trick_create_trickGroup {
+    height: 90px;
+    font-size: 3.6em;
+    border-radius: 8px;
+  }
+
+  .creation_form .add_item_link {
+    margin-left: 10%;
+    width: 20%;
+}
+
+  .creation_form button {
+    margin-top: 20px;
+    height: 100px;
+    width: 60%;
+    font-size: 4.5em;
+    border-radius: 15px;
+  }
+
+  .creation_form #submit_button {
+    margin-top: 50px;
+    font-size: 3.5em;
+    width: 60%;
+    border-radius: 15px;
+    height: 120px;
+}
+
+  #creation_button_container {
     text-align: center;
   }
 }
