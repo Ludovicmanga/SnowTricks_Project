@@ -297,6 +297,12 @@ h3 {
   margin: 10px 40% 35px 40%;
 }
 
+#noCommentsText {
+  font-weight: bold;
+  font-style: italic;
+  margin-left: 35%;
+}
+
 /* update page */
 
 #update_form {
@@ -617,6 +623,10 @@ h3 {
     width: 60%;
     font-size: 3em;
     margin: 35px 20% 35px 20%;
+  }
+
+  #noCommentsText {
+    margin-left: 10%;
   }
 
   /* Trick update page */
