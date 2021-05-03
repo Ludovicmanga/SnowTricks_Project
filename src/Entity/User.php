@@ -61,14 +61,14 @@ class User Implements UserInterface
     private $profile_picture_path;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $activationToken;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $profile_picture_name;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $activationToken;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -166,19 +166,7 @@ class User Implements UserInterface
 
     public function setProfilePicturePath(string $profile_picture_path): self
     {
-        $this->profilePicture = $profile_picture_path;
-
-        return $this;
-    }
-
-    public function getActivationToken(): ?string
-    {
-        return $this->activationToken;
-    }
-
-    public function setActivationToken(?string $activationToken): self
-    {
-        $this->activationToken = $activationToken;
+        $this->profile_picture_path = $profile_picture_path;
 
         return $this;
     }
@@ -191,6 +179,18 @@ class User Implements UserInterface
     public function setProfilePictureName(string $profile_picture_name): self
     {
         $this->profile_picture_name = $profile_picture_name;
+
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activationToken;
+    }
+
+    public function setActivationToken(?string $activationToken): self
+    {
+        $this->activationToken = $activationToken;
 
         return $this;
     }

@@ -167,5 +167,4 @@ class TrickController extends AbstractController
 
         return new JsonResponse($arrayCollection); 
     }
-
 }

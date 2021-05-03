@@ -63,6 +63,8 @@ class SecurityController extends AbstractController
      *     name="activation"), 
      * @Entity("user", 
      *     expr="repository.findOneByActivationToken(token)")
+     * 
+     * We activate the user account by deleting the activation token
      */
     public function activation(User $user)
     {
@@ -111,5 +113,15 @@ class SecurityController extends AbstractController
                 'token' => $token
             ]);
         }
+    }
+
+    /**
+     * @Route("/test", name="test")
+     */
+
+    public function test(){
+        $user = new User; 
+        $user->setProfilePicturePath('ludo'); 
+        dd($user); 
     }
 }
