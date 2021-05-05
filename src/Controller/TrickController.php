@@ -9,7 +9,6 @@ use App\Entity\Trick;
 use App\Entity\Video;
 use App\Entity\Comment;
 use App\Form\AppFormFactory;
-use App\Repository\CommentRepository;
 use App\Services\TrickServiceInterface; 
 use App\Services\CommentServiceInterface;
 use App\Services\VideoServiceInterface;

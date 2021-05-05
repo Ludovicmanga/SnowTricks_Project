@@ -114,14 +114,4 @@ class SecurityController extends AbstractController
             ]);
         }
     }
-
-    /**
-     * @Route("/test", name="test")
-     */
-
-    public function test(){
-        $user = new User; 
-        $user->setProfilePicturePath('ludo'); 
-        dd($user); 
-    }
 }
