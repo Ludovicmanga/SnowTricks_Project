@@ -8,9 +8,14 @@ use App\Repository\TrickRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert; 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=TrickRepository::class)
+ * @UniqueEntity(
+ *     fields={"name"},
+ *     message="Une figure du même nom existe déjà. Veuillez choisir un nom différent"
+ * )
  */
 class Trick
 {
@@ -71,6 +76,11 @@ class Trick
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updateDate;
+
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -254,6 +264,18 @@ class Trick
     public function setUpdateDate(?\DateTimeInterface $updateDate): self
     {
         $this->updateDate = $updateDate;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

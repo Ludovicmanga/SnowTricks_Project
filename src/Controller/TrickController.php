@@ -37,10 +37,10 @@ class TrickController extends AbstractController
     }
 
      /**
-     * @Route("show/trick/{id}", 
+     * @Route("show/trick/{slug}", 
      *     name="trick_show", 
      *     methods={"HEAD", "GET", "POST"}), 
-     *     @Entity("trick", expr="repository.findOneById(id)")
+     *     @Entity("trick", expr="repository.findOneBySlug(slug)")
      */
     public function show(Trick $trick, Request $request, CommentServiceInterface $commentService): Response
     {
@@ -77,7 +77,8 @@ class TrickController extends AbstractController
      *     methods={"HEAD", "GET", "POST"})
      */
     public function create(Request $request)
-     {   
+     {  
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY'); 
         $trick = New Trick(); 
         $form = $this->formFactory->create('trick-create', $trick); 
         $form->handleRequest($request); 
@@ -96,7 +97,7 @@ class TrickController extends AbstractController
      }
 
     /**
-    * @Route("/update/trick/{id}", 
+    * @Route("/update/trick/{slug}", 
     *     name="trick_update", 
     *     methods={"HEAD", "GET", "POST"})
     */
@@ -109,7 +110,7 @@ class TrickController extends AbstractController
             $this->trickService->update($trick, $form); 
             
             return $this->redirectToRoute('trick_show', [
-                'id' => $trick->getId()
+                'slug' => $trick->getSlug()
             ]); 
         } 
         
@@ -121,7 +122,7 @@ class TrickController extends AbstractController
      }
 
     /**
-    * @Route("/delete/trick/{id}", 
+    * @Route("/delete/trick/{slug}", 
     *     name="trick_delete", 
     *     methods={"HEAD", "GET", "POST"})
     */
@@ -148,6 +149,7 @@ class TrickController extends AbstractController
             $arrayCollection[] = array(
                 'id' => $trick->getId(), 
                 'name' => $trick->getName(),
+                'slug' => $trick->getSlug(),
                 'description' => $trick->getDescription(), 
                 'coverImagePath' => $trick->getCoverImagePath()
             );

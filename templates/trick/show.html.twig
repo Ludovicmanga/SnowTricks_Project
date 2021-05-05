@@ -14,7 +14,7 @@
     <div id="trickHero">   
     </div>
     {% if app.user %}
-    <button id="updateButton"><a href="{{ path("trick_update", {"id": trick.id}) }}">Modifier la figure<a/></button>
+    <button id="updateButton"><a href="{{ path("trick_update", {"slug": trick.slug}) }}">Modifier la figure<a/></button>
     {% endif %}
 
     {# We display the trick medias #}

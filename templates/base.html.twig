@@ -26,8 +26,8 @@
                     <li><a href=" {{ path('security_login') }}">Se connecter</a></li>    
                 
                 {% else %}
+                    <li><a href="{{ path('trick_create') }}">Créer une figure</a></li>
                     <li><a href=" {{ path('security_logout') }}">Se déconnecter</a></li>
-
                 {% endif %}
             </ul>
         </nav>

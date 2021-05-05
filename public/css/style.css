@@ -322,6 +322,13 @@ h3 {
   padding-left: 1%;
 }
 
+#trick_update_slug {
+  margin-left: 50px;
+  width: 90%;
+  font-size: 1.5em;
+  padding-left: 1%;
+}
+
 #trick_update_description {
   margin-left: 49px;
   margin-top: 15px;
@@ -500,7 +507,7 @@ h3 {
 #trick_create_trickGroup {
   height: 60px;
   border-radius: 8px;
-  width: 97%;
+  width: 95%;
   padding-left: 50px;
   margin-top: 10px;
 }
