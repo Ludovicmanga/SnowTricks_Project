@@ -81,7 +81,7 @@
             </button></br>
             <button id="update_form_submit_button" type="submit">Mettre à jour la figure</button></br>
             <button id="update_form_delete_button">
-                <a onclick="return confirm('attention, cela va supprimer la figure')" href=" {{ path('trick_delete', {"id": trick.id}) }}">Supprimer la figure</a>
+                <a onclick="return confirm('attention, cela va supprimer la figure')" href=" {{ path('trick_delete', {"slug": trick.slug}) }}">Supprimer la figure</a>
             </button>
         {{ form_end(form) }}
     </p>
