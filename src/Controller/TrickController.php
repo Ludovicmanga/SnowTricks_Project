@@ -77,7 +77,8 @@ class TrickController extends AbstractController
      *     methods={"HEAD", "GET", "POST"})
      */
     public function create(Request $request)
-     {   
+     {  
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY'); 
         $trick = New Trick(); 
         $form = $this->formFactory->create('trick-create', $trick); 
         $form->handleRequest($request); 
