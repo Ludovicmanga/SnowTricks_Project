@@ -72,7 +72,6 @@ class UserService implements UserServiceInterface
 
             $user->setProfilePictureName($pictureFile);
             $user->setProfilePicturePath('uploads/'.$user->getProfilePictureName()); 
-            //$user->setProfilePicturePath('); 
         }
 
         $this->em->persist($user); 
@@ -120,7 +119,7 @@ class UserService implements UserServiceInterface
         // we generate the password reset URL
         $url = $this->urlGenerator->generate('app_reset_password', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL); 
 
-        $this->mailerService->resetPassword($url); 
+        $this->mailerService->sendResetPassword($url); 
         $this->session->getFlashBag()->add('message', 'un e-mail de confirmation vous a bien été renvoyé'); 
         return new RedirectResponse($this->router->generate('security_login'));
     }
