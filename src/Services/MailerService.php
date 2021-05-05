@@ -32,7 +32,7 @@ class MailerService implements MailerServiceInterface
     /**
      * We send the email allowing the user to reset his password
      */
-    public function sendResetPassword($url)
+    public function sendResetToken($url)
     {
         $message = (new TemplatedEmail())
             ->from('ludovic.mangaj@gmail.com')
