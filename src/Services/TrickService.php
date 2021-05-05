@@ -27,7 +27,6 @@ class TrickService implements TrickServiceInterface
 
     public function add(Trick $trick, $form) {        
         $images = $form->get('images')->getData(); 
-        $coverImages = $form->get('coverImage')->getData(); 
 
         foreach($images as $image) {
             // We generate the image file name
@@ -46,21 +45,20 @@ class TrickService implements TrickServiceInterface
             $trick->addImage($img); 
         }
 
-        // we make a loop to get the cover image
-        foreach($coverImages as $coverImage) {
-            // We generate the image file name
-            $coverImageFile = md5(uniqid()).'.'.$coverImage->guessExtension();                 
-            
-            // We copy the file in upload folder
-            $coverImage->move(
-                $this->params->get('images_directory'), 
-                $coverImageFile
-            ); 
+        $coverImage = $form->get('coverImage')->getData(); 
+        
+        // We generate the image file name
+        $coverImageFile = md5(uniqid()).'.'.$coverImage->guessExtension();                 
+        
+        // We copy the file in upload folder
+        $coverImage->move(
+            $this->params->get('images_directory'), 
+            $coverImageFile
+        ); 
 
-            // We put the image in the database
-            $trick->setCoverImageName($coverImageFile);
-            $trick->setCoverImagePath('uploads/'.$trick->getCoverImageName()); 
-        }
+        // We put the image in the database
+        $trick->setCoverImageName($coverImageFile);
+        $trick->setCoverImagePath('uploads/'.$trick->getCoverImageName()); 
 
         foreach ($form->get('videos')->getData() as $video) {
             $video->setTrick($trick);

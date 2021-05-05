@@ -58,9 +58,8 @@ class UserService implements UserServiceInterface
         $user->setActivationToken(md5(uniqid()));
 
         //We get the profile picture from the form and put it in the database
-        $pictures = $form->get('profile_picture')->getData(); 
+        $picture = $form->get('profile_picture')->getData(); 
 
-        foreach($pictures as $picture) {
             // We generate the image file name
             $pictureFile = md5(uniqid()).'.'.$picture->guessExtension();                 
             
@@ -72,7 +71,6 @@ class UserService implements UserServiceInterface
 
             $user->setProfilePictureName($pictureFile);
             $user->setProfilePicturePath('uploads/'.$user->getProfilePictureName()); 
-        }
 
         $this->em->persist($user); 
         $this->em->flush();

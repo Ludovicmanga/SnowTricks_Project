@@ -30,7 +30,7 @@ class TrickCreateType extends AbstractType
             ])
             ->add('coverImage', FileType::class, [
                 'label' => false,
-                'multiple' => true,
+                'multiple' => false,
                 'mapped' => false, 
                 'required' => true
             ])

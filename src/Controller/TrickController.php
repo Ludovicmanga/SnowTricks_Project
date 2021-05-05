@@ -87,7 +87,7 @@ class TrickController extends AbstractController
                 $this->trickService->add($trick, $form); 
             
                 return $this->redirectToRoute('trick_show', [
-                    'id' => $trick->getId()
+                    'slug' => $trick->getSlug()
             ]); 
         } 
      

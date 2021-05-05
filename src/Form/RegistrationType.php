@@ -30,7 +30,7 @@ class RegistrationType extends AbstractType
             ])
             ->add('profile_picture', FileType::class, [
                 'label' => false,
-                'multiple' => true,
+                'multiple' => false,
                 'mapped' => false, 
                 'required' => true
             ])
