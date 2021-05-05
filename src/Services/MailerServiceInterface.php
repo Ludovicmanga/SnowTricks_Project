@@ -6,6 +6,6 @@ interface MailerServiceInterface
 {
     public function sendUserActivationToken($user);
 
-    public function sendResetPassword($url);
+    public function sendResetToken($url);
 
 }
