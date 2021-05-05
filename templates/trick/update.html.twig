@@ -52,6 +52,10 @@
                 <label>Titre de la figure</label><br>
             </div>
             {{ form_row(form.name , {'attr' : {'class' : 'update_form_name'}}) }}
+            <div id="update_title_label_container" class="label_container">
+                <label>Slug</label><br>
+            </div>
+            {{ form_row(form.slug , {'attr' : {'class' : 'update_form_slug'}}) }}
             <div id="update_description_label_container" class="label_container">
                 <label>Description</label><br>
             </div>

@@ -25,6 +25,9 @@ class TrickUpdateType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => false
             ])
+            ->add('slug', TextType::class, [
+                'label' => false
+            ])
             ->add('trickGroup', EntityType::class, [
                 'class' => TrickGroup::class, 
                 'choice_label' => 'name', 

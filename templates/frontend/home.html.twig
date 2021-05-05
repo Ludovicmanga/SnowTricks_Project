@@ -20,7 +20,7 @@
 <div id="body_container">
     {% for trick in tricks|slice(fourLastTricksOffset, 4) %} 
         <div class="trick" id="trickHome">
-            <a href=" {{ path('trick_show', {"id": trick.id}) }}"><img src="{{ trick.coverImagePath }}" ></a>
+            <a href=" {{ path('trick_show', {"slug": trick.slug}) }}"><img src="{{ trick.coverImagePath }}" ></a>
             <div class="trickContentContainer">
                 <div class="titleContainer">
                     <h2>{{ trick.name }}</h2>
@@ -28,10 +28,10 @@
                 {% if app.user %}
                     <div class="iconContainer">
                         <div class="trashIcon icon">
-                            <a onclick="return confirm('attention, cela va supprimer la figure')" href=" {{ path('trick_delete', {"id": trick.id}) }}" class="delete"><i class="fas fa-trash"></i></a>
+                            <a onclick="return confirm('attention, cela va supprimer la figure')" href=" {{ path('trick_delete', {"slug": trick.slug}) }}" class="delete"><i class="fas fa-trash"></i></a>
                         </div>
                         <div class="penIcon icon">
-                            <a href=" {{ path('trick_update', {"id": trick.id}) }}"><i class="fas fa-pen"></i></a>
+                            <a href=" {{ path('trick_update', {"slug": trick.slug}) }}"><i class="fas fa-pen"></i></a>
                         </div>
                     </div>
                 {% endif %}
@@ -74,7 +74,7 @@
 
                     for(var i in tricks){
                         output = 
-                            '<a href=" {{ path("trick_show", {"id": "trickid"}) }}"><img src="{{"trickcoverImagePath"}}"></a>'+
+                            '<a href=" {{ path("trick_show", {"slug": "trickslug"}) }}"><img src="{{"trickcoverImagePath"}}"></a>'+
                             '<div class="trickContentContainer">'+
                                 '<div class="titleContainer">'+
                                     '<h2>{{"trickname"}}</h2>'+
@@ -82,17 +82,17 @@
                                 '{% if app.user %}'+
                                     '<div class="iconContainer">'+
                                         '<div class="trashIcon icon">'+
-                                            '<a onclick="return confirm("attention, cela va supprimer la figure")" href=" {{ path("trick_delete", {"id": "trickid"}) }}" class="delete"><i class="fas fa-trash"></i></a>'+
+                                            '<a onclick="return confirm("attention, cela va supprimer la figure")" href=" {{ path("trick_delete", {"slug": "trickslug"}) }}" class="delete"><i class="fas fa-trash"></i></a>'+
                                         '</div>'+
                                         '<div class="penIcon icon">'+
-                                            '<a href=" {{ path("trick_update", {"id": "trickid"}) }}"><i class="fas fa-pen"></i></a>'+
+                                            '<a href=" {{ path("trick_update", {"slug": "trickslug"}) }}"><i class="fas fa-pen"></i></a>'+
                                         '</div>'+
                                     '</div>'+
                                 '{% endif %}'+
                             '</div>';
 
                         //We replace the variables in the twig path with the actual values
-                        output = output.replace(/trickid/g, tricks[i].id); 
+                        output = output.replace(/trickslug/g, tricks[i].slug); 
                         output = output.replace(/trickname/g, tricks[i].name); 
                         output = output.replace(/trickcoverImagePath/g, tricks[i].coverImagePath); 
                         

@@ -5,6 +5,7 @@
     {{ form_start(formTrickCreation, {'attr' : {'class' : 'creation_form'}}) }}
         {{ form_row(formTrickCreation.name, { 'attr' : {'placeholder' : " Nom de la figure"} })}}
         {{ form_row(formTrickCreation.description, { 'attr' : {'placeholder' : " Description de la figure"} })}}
+        {{ form_row(formTrickCreation.slug, { 'attr' : {'placeholder' : " Slug"} })}}
         <label>Groupe de la figure</label>
         {{ form_row(formTrickCreation.trickGroup, { 'attr' : {'placeholder' : " Groupe de la figure"} })}}
         <label>Ajouter la photo principale de la figure</label>

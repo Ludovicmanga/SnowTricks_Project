@@ -21,6 +21,7 @@ class TrickFixtures extends Fixture
 
             $trick
                 ->setName('Trick'.$i)
+                ->setSlug('Trick'.$i)
                 ->setDescription('Le snowboard freestyle (anglicisme) ou la planche acrobatique de neige1 (ou artistique) est la pratique de la planche à neige de figures, apparue dans les années 1980 et héritière du skateboard. 
                  Cette discipline de planche acrobatique consiste pour ses pratiquants à exécuter des figures libres lors de sauts pratiqués à l\'aide de structures diverses utilisées comme tremplin. 
                  Elle a principalement lieu dans des zones spéciales dédiées comme les snowparks ou en milieu urbain. Elle peut aussi être pratiquée en hors-piste (backcountry en anglais). 

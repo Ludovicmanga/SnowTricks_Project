@@ -25,6 +25,9 @@ class TrickCreateType extends AbstractType
             ->add('description', TextType::class, [
                 'label' => false
             ])
+            ->add('slug', TextType::class, [
+                'label' => false
+            ])
             ->add('coverImage', FileType::class, [
                 'label' => false,
                 'multiple' => true,
