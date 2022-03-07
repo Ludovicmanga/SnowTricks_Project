@@ -1,6 +1,7 @@
 # SnowTricks Website
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff8245a076284f2e852bb1e422332219)](https://app.codacy.com/gh/Ludovicmanga/projetSnowTricks?utm_source=github.com&utm_medium=referral&utm_content=Ludovicmanga/projetSnowTricks&utm_campaign=Badge_Grade_Settings)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff8245a076284f2e852bb1e422332219)](https://app.codacy.com/gh/Ludovicmanga/projetSnowTricks?utm_source=github.com&utm_medium=referral&utm_content=Ludovicmanga/projetSnowTricks&utm_campaign=Badge_Grade_Settings).
+The details of the project instructions is in the root of the project, and is named "project_instructions.pdf"
 
 **Version 1.0.0** 
 
